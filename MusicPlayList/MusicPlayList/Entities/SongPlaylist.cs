@@ -8,5 +8,6 @@ namespace MusicPlayList.Entities
 {
     class SongPlaylist
     {
+        private String type;
     }
 }
