@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace MusicPlayList.View
 {
     /// <summary>
-    /// Interaction logic for WelcomeScreen.xaml
+    /// Interaction logic for PlayListEditor.xaml
     /// </summary>
-    public partial class WelcomeScreen : Window
+    public partial class PlayListEditor : Window
     {
-        public WelcomeScreen()
+        public PlayListEditor()
         {
             InitializeComponent();
         }

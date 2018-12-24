@@ -1,27 +1,26 @@
 ﻿<Window x:Class="MusicPlayList.View.Registration"
 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"  
        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
-            Title="Login" Height="707" Width="689" FontSize="20" Background="#04c582">
+            Title="Welcome to MusiLocation" Height="642" Width="689" FontSize="20" Background="#04c582">
     <Border Background="#2e3137" CornerRadius="20" Margin="30">
         <StackPanel Margin="20">
-            <Label Content="Login" Foreground="White" FontSize="35" HorizontalAlignment="Center"/>
-            <Separator></Separator>
+            <Label Content="Welcome to MusicaLocation" Foreground="White" FontStyle="Italic" FontSize="40" HorizontalAlignment="Center" RenderTransformOrigin="0.499,0.714"/>
+            <Separator Height="55" ></Separator>
             <Label Content="Username" Foreground="White"/>
             <TextBox Name="txtUsername" Background="#545d6a" Foreground="White" FontSize="18"/>
             <Label Content="Password" Foreground="White"/>
             <PasswordBox Name="txtPassword" Background="#545d6a" Foreground="White" FontSize="18"/>
             <Button Name="btnSubmit" Click="btnSubmit_Click" Content="Submit" Margin="180 40" Background="#545d6a" Foreground="White" FontSize="20"/>
-            <!--Button as a Link button using style-->
-            <Button Content="SignUp" Cursor="Hand" Click="SignUp_Click" HorizontalAlignment="Center">
+            <Button Content="SignUp" Cursor="Hand" Click="BtnSignUp_Click" HorizontalAlignment="Center" Margin="258,0,259,0">
                 <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <TextBlock TextDecorations="Underline">  
-                    <ContentPresenter />
-                        </TextBlock>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <TextBlock TextDecorations="Underline"><InlineUIContainer>  
+                                <ContentPresenter />
+                            </InlineUIContainer></TextBlock>
                     </ControlTemplate>
                 </Button.Template>
                 <Button.Style>
-                    <Style TargetType="Button">
+                    <Style TargetType="{x:Type Button}">
                         <Setter Property="Foreground" Value="Navy" />
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="true">
@@ -31,6 +30,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     </Style>
                 </Button.Style>
             </Button>
+            <!--Button as a Link button using style-->
             <!--end Button as a Link button using style-->
         </StackPanel>
     </Border>

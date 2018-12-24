@@ -23,5 +23,22 @@ namespace MusicPlayList.View
         {
             InitializeComponent();
         }
+
+        private void SubmitBtn_Click(object sender, RoutedEventArgs e)
+        {
+            // TODO: need to check if the user and password exist and connect him if it does else error message
+            PlayList playList = (PlayList)Application.Current.MainWindow;
+            playList.Show();
+            this.Close();
+
+        }
+
+        private void BtnSignUp_Click(object sender, RoutedEventArgs e)
+        {            Registration registration = (Registration)Application.Current.MainWindow;
+            registration.Show();
+            this.Close();
+        }
+
+
     }
 }
