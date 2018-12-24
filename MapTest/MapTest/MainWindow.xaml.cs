@@ -36,7 +36,7 @@ namespace MapTest
 
        public void OnMapClick(object sender, MouseEventArgs e)
         {
-            //calculate map statring point
+            //calculate map statring   point
             double mapminHeight = worldMap.Margin.Top;
             double mapminWidth = worldMap.Margin.Left;
 
