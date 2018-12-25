@@ -34,7 +34,8 @@ namespace MusicPlayList.View
         }
 
         private void BtnSignUp_Click(object sender, RoutedEventArgs e)
-        {            Registration registration = (Registration)Application.Current.MainWindow;
+        {
+            Registration registration = (Registration)Application.Current.MainWindow;
             registration.Show();
             this.Close();
         }

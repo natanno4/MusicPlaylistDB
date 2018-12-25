@@ -6,7 +6,26 @@
         xmlns:local="clr-namespace:MusicPlayList.View"
         mc:Ignorable="d"
         Title="PlayListEditor" Height="450" Width="800">
-    <Grid>
-        
+    <Grid TextBlock.FontSize="14">
+        <Grid Margin="285,0,0,69">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="103*"/>
+                <RowDefinition Height="96*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock  Padding="3" Margin="129,3,172,0" HorizontalAlignment="Center"
+                            FontSize="20"  Text="Songs in your area" VerticalAlignment="Top" Grid.Column="1" Width="206"/>
+            <Button  x:Name="RemoveBtn" Content="Remove" Grid.Row="5" Grid.ColumnSpan="2" Click="RemoveBtn_Click" IsEnabled="{Binding SelectedItems.Count, ElementName=lstBox}" />
+            <ListBox x:Name="lstBox" Grid.Row="6" Grid.ColumnSpan="2" ItemsSource="{Binding VM_Handlers}" Margin="0,0,0,10" Grid.RowSpan="2" />
+        </Grid>
     </Grid>
 </Window>

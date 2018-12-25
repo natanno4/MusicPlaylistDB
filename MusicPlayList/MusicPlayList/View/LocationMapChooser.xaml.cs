@@ -15,20 +15,13 @@ using System.Windows.Shapes;
 namespace MusicPlayList.View
 {
     /// <summary>
-    /// Interaction logic for PlayListEditor.xaml
+    /// Interaction logic for LocationMapChooser.xaml
     /// </summary>
-    public partial class PlayListEditor : Window
+    public partial class LocationMapChooser : Window
     {
-        public PlayListEditor()
+        public LocationMapChooser()
         {
             InitializeComponent();
-            //vm = new SettingsViewModel(new SettingsModel());
-            //DataContext = vm;
-        }
-
-        private void RemoveBtn_Click(object sender, RoutedEventArgs e)
-        {
-            //vm.VM_HandlerClose((string)lstBox.SelectedItem);
         }
     }
 }
