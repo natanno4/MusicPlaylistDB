@@ -135,6 +135,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DataBase\DB_Executer.cs" />
     <Compile Include="View\LocationMapChooser.xaml.cs">
       <DependentUpon>LocationMapChooser.xaml</DependentUpon>
     </Compile>

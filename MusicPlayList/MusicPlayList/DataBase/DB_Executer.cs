@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MusicPlayList.Model
 {
-    class DB_Handler
+    class DB_Executer
     {
     }
 }
