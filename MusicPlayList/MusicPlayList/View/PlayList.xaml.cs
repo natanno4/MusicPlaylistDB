@@ -23,5 +23,19 @@ namespace MusicPlayList.View
         {
             InitializeComponent();
         }
+
+        private void BtmEdit_Click(object sender, RoutedEventArgs e)
+        {
+            PlayListEditor editor = (PlayListEditor)Application.Current.MainWindow;
+            editor.Show();
+            this.Close();
+        }
+
+        private void BtmExit_Click(object sender, RoutedEventArgs e)
+        {
+            Login login = (Login)Application.Current.MainWindow;
+            login.Show();
+            this.Close();
+        }
     }
 }

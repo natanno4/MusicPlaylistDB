@@ -22,6 +22,7 @@ namespace MusicPlayList.View
         public PlayListEditor()
         {
             InitializeComponent();
+            //this.DataContext = new PlayListEditorViewModel();
             //vm = new SettingsViewModel(new SettingsModel());
             //DataContext = vm;
         }

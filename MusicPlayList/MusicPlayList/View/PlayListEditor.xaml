@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="PlayListEditor" Height="450" Width="800">
     <Grid TextBlock.FontSize="14">
-        <Grid Margin="285,0,0,69">
+        <Grid Margin="285,55,30,40">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -22,10 +22,19 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock  Padding="3" Margin="129,3,172,0" HorizontalAlignment="Center"
-                            FontSize="20"  Text="Songs in your area" VerticalAlignment="Top" Grid.Column="1" Width="206"/>
-            <Button  x:Name="RemoveBtn" Content="Remove" Grid.Row="5" Grid.ColumnSpan="2" Click="RemoveBtn_Click" IsEnabled="{Binding SelectedItems.Count, ElementName=lstBox}" />
-            <ListBox x:Name="lstBox" Grid.Row="6" Grid.ColumnSpan="2" ItemsSource="{Binding VM_Handlers}" Margin="0,0,0,10" Grid.RowSpan="2" />
+            <TextBlock  Padding="3" Margin="145,-50,146,0" HorizontalAlignment="Center" 
+                            FontSize="20"  Text="Songs in your area" VerticalAlignment="Top" Width="176"/>
+            <DataGrid ItemsSource="{Binding VM_Playlist.Songs}" AutoGenerateColumns="False" CanUserAddRows="False" VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" Width="467" Height="300">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Song" Width="*" IsReadOnly="True" Binding="{Binding Song}" />
+                    <DataGridTextColumn Header="Artist" Width="*" IsReadOnly="True" Binding="{Binding Artist}"/>
+                    <DataGridTextColumn Header="Album" Width="*" IsReadOnly="True" Binding="{Binding Album}"/>
+                    <DataGridTextColumn Header="Genre" Width="*" IsReadOnly="True" Binding="{Binding Genre}"/>
+                    <DataGridTextColumn Header="Hotness" Width="*" IsReadOnly="True" Binding="{Binding Hotness}"/>
+                    <DataGridTextColumn Header="Duration" Width="*" IsReadOnly="True" Binding="{Binding Duration}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button  x:Name="RemoveBtn" Content="Remove" Grid.Row="5" Click="RemoveBtn_Click" IsEnabled="{Binding SelectedItems.Count, ElementName=lstBox}" />
         </Grid>
     </Grid>
 </Window>

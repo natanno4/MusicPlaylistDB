@@ -21,7 +21,7 @@ namespace MusicPlayList.View
     {
         public Login()
         {
-            InitializeComponent();
+            //InitializeComponent();
         }
 
         private void SubmitBtn_Click(object sender, RoutedEventArgs e)

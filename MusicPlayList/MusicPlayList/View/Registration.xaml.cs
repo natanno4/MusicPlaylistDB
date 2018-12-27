@@ -21,7 +21,7 @@ namespace MusicPlayList.View
     {
         public Registration()
         {
-            InitializeComponent();
+            //InitializeComponent();
         }
 
         private void CancelBtn_Click(object sender, RoutedEventArgs e)
