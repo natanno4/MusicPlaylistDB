@@ -8,10 +8,11 @@ namespace MusicPlayList.DataBase
     {
         private string databaseName =  string.Empty;
         private MySqlConnection connection = null;
-        private static DataBaseConnection instance = null;
+        public static DataBaseConnection instance { get; } = new DataBaseConnection();
 
         private DataBaseConnection()
         {
+            connection = new MySqlConnection();
         }
 
         public string DatabaseName
@@ -27,15 +28,7 @@ namespace MusicPlayList.DataBase
             get { return connection; }
         }
 
-        public bool isConnected()
-        {
-            if (connection == null)
-            {
-                return false;
-            }
-            return true;
-        }
-
+   
         public bool connect()
         {
             if (String.IsNullOrEmpty(databaseName))
@@ -58,7 +51,13 @@ namespace MusicPlayList.DataBase
 
         public void Close()
         {
-            connection.Close();
+            try
+            {
+                connection.Close();
+            } catch (MySqlException e)
+            {
+                // the connection was faild to close
+            }
         }
 
 
