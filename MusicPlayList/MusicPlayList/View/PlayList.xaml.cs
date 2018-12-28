@@ -17,7 +17,7 @@ namespace MusicPlayList.View
     /// <summary>
     /// Interaction logic for PlayList.xaml
     /// </summary>
-    public partial class PlayList : Window
+    public class PlayList : Window
     {
         public PlayList()
         {

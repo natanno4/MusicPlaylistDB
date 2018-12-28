@@ -64,7 +64,7 @@ namespace MusicPlayList.DataBase
                     return null; 
 
                 }
-            return null
+            return null;
         }
         // function that might be, for now leave it
         public int ExecuteAgger()

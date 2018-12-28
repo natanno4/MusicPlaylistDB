@@ -117,6 +117,7 @@
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Management" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -136,6 +137,18 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DataBase\DB_Executer.cs" />
+    <Compile Include="Model\LocationMapChooserModel.cs" />
+    <Compile Include="Model\LoginModel.cs" />
+    <Compile Include="Model\MainWindowModel.cs" />
+    <Compile Include="Model\PlayListEditorModel.cs" />
+    <Compile Include="Model\PlayListModel.cs" />
+    <Compile Include="Model\RegistrationModel.cs" />
+    <Compile Include="ViewModel\LocationMapChooserVM.cs" />
+    <Compile Include="ViewModel\LoginVM.cs" />
+    <Compile Include="ViewModel\MainWindowVM.cs" />
+    <Compile Include="ViewModel\PlayListEditorVM.cs" />
+    <Compile Include="ViewModel\PlayListVM.cs" />
+    <Compile Include="ViewModel\RegistrationVM.cs" />
     <Compile Include="View\LocationMapChooser.xaml.cs">
       <DependentUpon>LocationMapChooser.xaml</DependentUpon>
     </Compile>
@@ -214,10 +227,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
-    <Folder Include="ViewModel\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
