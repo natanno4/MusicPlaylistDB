@@ -49,8 +49,7 @@ namespace MusicPlayList.DataBase
                         JObject row = new JObject();
                         int numberOfCols = reader.FieldCount;
                         for (int i = 0; i < numberOfCols; i++)
-                        {
-                        
+                        {                        
                             row[reader.GetName(i).ToString()] = reader[i].ToString();
                         }
                         resultTable.Add(row);

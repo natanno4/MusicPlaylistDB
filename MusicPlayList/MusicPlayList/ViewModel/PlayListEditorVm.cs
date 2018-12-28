@@ -12,6 +12,7 @@ namespace MusicPlayList.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private PlayListEditorModel model;
+        private int vm_user_id;
         /// <summary>
         /// Initializes a new instance of the <see cref="PlayListEditorVM"/> class.
         /// </summary>
@@ -19,10 +20,14 @@ namespace MusicPlayList.ViewModel
         public PlayListEditorVM(PlayListEditorModel model)
         {
             this.model = model;
-            this.model.PropertyChanged +=
-                delegate (Object sender, PropertyChangedEventArgs e) {
-                    this.PropertyChanged?.Invoke(this, e);
-                };
+        }
+        public int UserID
+        {
+            get { return vm_user_id; }
+            set
+            {
+                vm_user_id = value;
+            }
         }
     }
 }

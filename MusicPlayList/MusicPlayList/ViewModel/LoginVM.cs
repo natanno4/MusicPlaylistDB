@@ -45,11 +45,9 @@ namespace MusicPlayList.ViewModel
         }
 
         public int Confirm()
-        {            
+        {
             int userID = model.FindUser(User, Password);
             return userID;
-
-
         }
 
     }
