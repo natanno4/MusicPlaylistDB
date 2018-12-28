@@ -11,14 +11,13 @@ namespace MusicPlayList.Model
 {
     class LoginModel : INotifyPropertyChanged
     {
-        private String m_user;
-        private String m_password;
-        private DB_Executer dataBase;
+        private DB_Executer dataBase = new DB_Executer();
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public JArray FindUser(string name, String password)
+        public User FindUser(string name, String password)
         {
-            JArray user = dataBase.ExecuteCommandWithResults("think of quarry later");
+            String query = "think of query later";
+            User user = dataBase.ExecuteCommandWithResults(query).First.ToObject<User>();
             return user;
         }
     }

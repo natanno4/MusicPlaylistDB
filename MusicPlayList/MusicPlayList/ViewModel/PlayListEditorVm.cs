@@ -1,6 +1,7 @@
 ﻿using MusicPlayList.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,8 @@ namespace MusicPlayList.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private PlayListEditorModel model;
-        private int vm_user_id;
+        private String vm_filter;
+        private String vm_sort;
         /// <summary>
         /// Initializes a new instance of the <see cref="PlayListEditorVM"/> class.
         /// </summary>
@@ -20,13 +22,33 @@ namespace MusicPlayList.ViewModel
         public PlayListEditorVM(PlayListEditorModel model)
         {
             this.model = model;
+            this.model.PropertyChanged +=
+                delegate (Object sender, PropertyChangedEventArgs e) {
+                    this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("VM_" + e.PropertyName));
+                };
         }
-        public int UserID
+
+        public ObservableCollection<String> VM_GetPlayList
         {
-            get { return vm_user_id; }
+            get { return model.GetPlayList(); }
+        }
+
+        public String VM_Filter
+        {
+            set {
+                this.vm_filter = value;
+                String query = "write query here";
+                model.Filter(query);
+            }
+        }
+
+        public String VM_Sort
+        {
             set
             {
-                vm_user_id = value;
+                this.vm_sort = value;
+                String query = "write query here";
+                model.Sort(query);
             }
         }
     }

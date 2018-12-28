@@ -12,7 +12,7 @@ namespace MusicPlayList.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private LoginModel model;
-        private String vm_user;
+        private String m_name;
         private String vm_password;
         /// <summary>
         /// Initializes a new instance of the <see cref="LoginVM"/> class.
@@ -29,10 +29,10 @@ namespace MusicPlayList.ViewModel
 
         public string User
         {
-            get { return vm_user; }
+            get { return m_name; }
             set
             {
-                vm_user = value;
+                m_name = value;
             }
         }
         public string Password
@@ -46,7 +46,7 @@ namespace MusicPlayList.ViewModel
 
         public int Confirm()
         {
-            int userID = model.FindUser(User, Password);
+            int userID = model.FindUser(m_name, Password).UserID;
             return userID;
         }
 
