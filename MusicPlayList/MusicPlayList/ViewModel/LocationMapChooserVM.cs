@@ -32,6 +32,7 @@ namespace MusicPlayList.ViewModel
         public void onChooseSpot(object sender, MouseEventArgs e)
         {
             this.model.CalculateAreaProps(e.X, e.Y);
+            this.model.CheckForClosesCountries();
         }
 
     }
