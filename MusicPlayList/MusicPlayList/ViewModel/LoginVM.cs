@@ -44,14 +44,12 @@ namespace MusicPlayList.ViewModel
             }
         }
 
-        public void Confirm()
-        {
-            int x;
-            if (model.FindUser(User, Password))
-            {
-                x = 5;
-            }
-                
+        public int Confirm()
+        {            
+            int userID = model.FindUser(User, Password);
+            return userID;
+
+
         }
 
     }

@@ -12,12 +12,13 @@ namespace MusicPlayList.Model
     {
         private String m_user;
         private String m_password;
-        private DataBaseConnection dataBase;
+        private DB_Executer dataBase;
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public Boolean FindUser(string user, String password)
+        public int FindUser(string user, String password)
         {
-            return true;
+            dataBase.ExecuteCommandWithResults("think of quarry later");
+            return 1;
         }
     }
 }
