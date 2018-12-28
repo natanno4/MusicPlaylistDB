@@ -12,6 +12,9 @@ namespace MusicPlayList.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private LocationMapChooserModel model;
+
+        private Double lattiude;
+        private Double longttitude;
         /// <summary>
         /// Initializes a new instance of the <see cref="LocationMapChooserVM"/> class.
         /// </summary>
@@ -24,5 +27,6 @@ namespace MusicPlayList.ViewModel
                     this.PropertyChanged?.Invoke(this, e);
                 };
         }
+        
     }
 }
