@@ -1,4 +1,5 @@
 ﻿using MusicPlayList.DataBase;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,10 +16,10 @@ namespace MusicPlayList.Model
         private DB_Executer dataBase;
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public int FindUser(string user, String password)
+        public JArray FindUser(string name, String password)
         {
-            dataBase.ExecuteCommandWithResults("think of quarry later");
-            return 1;
+            JArray user = dataBase.ExecuteCommandWithResults("think of quarry later");
+            return user;
         }
     }
 }
