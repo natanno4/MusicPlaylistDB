@@ -53,7 +53,6 @@ namespace MusicPlayList.DataBase
         {
             try
             {
-                int i = 1;
                 connection.Close();
             } catch (MySqlException e)
             {
