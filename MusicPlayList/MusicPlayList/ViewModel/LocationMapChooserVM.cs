@@ -15,8 +15,6 @@ namespace MusicPlayList.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
         private LocationMapChooserModel model;
 
-        private Double xPixel;
-        private Double yPixel;
         /// <summary>
         /// Initializes a new instance of the <see cref="LocationMapChooserVM"/> class.
         /// </summary>
@@ -29,10 +27,11 @@ namespace MusicPlayList.ViewModel
                     this.PropertyChanged?.Invoke(this, e);
                 };
         }
+        //the function that will do binding when mouse clicked
         public void onChooseSpot(object sender, MouseEventArgs e)
         {
-            this.model.CalculateAreaProps(e.X, e.Y);
-            this.model.CheckForClosesCountries();
+            this.model.CalculateAreaProps(e.X, e.Y, worldMap.Margin.Top, worldMap.Margin.Left);
+            this.model.CheckForClosestCountries();
         }
 
     }

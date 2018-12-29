@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using MusicPlayList.Entities;
 
 namespace MusicPlayList.ViewModel
 {
@@ -35,9 +36,8 @@ namespace MusicPlayList.ViewModel
         private void SubmitBtn_Click(object sender, RoutedEventArgs e)
         {
             Username = username.Text;
-        
             Password = password.Text;
-            if (Username == "" || Password == "")
+            if (Username.Equals("" )|| Password.Equals(""))
             {
                 messageToClient.AppendText("One or More Fields missing");
       
@@ -47,6 +47,7 @@ namespace MusicPlayList.ViewModel
             if (model.SignUp())
             {
                 // so continue to next window
+                User user = model.user;
             } else
             {
                 messageToClient.Clear();
