@@ -137,12 +137,21 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DataBase\DB_Executer.cs" />
+    <Compile Include="Entities\Album.cs" />
+    <Compile Include="Entities\Area.cs" />
+    <Compile Include="Entities\Artist.cs" />
+    <Compile Include="Entities\Map.cs" />
+    <Compile Include="Entities\Song.cs" />
+    <Compile Include="Entities\SongPlaylist.cs" />
+    <Compile Include="Entities\User.cs" />
     <Compile Include="Model\LocationMapChooserModel.cs" />
     <Compile Include="Model\LoginModel.cs" />
     <Compile Include="Model\MainWindowModel.cs" />
     <Compile Include="Model\PlayListEditorModel.cs" />
     <Compile Include="Model\PlayListModel.cs" />
     <Compile Include="Model\RegistrationModel.cs" />
+    <Compile Include="ViewModel\BaseVM.cs" />
+    <Compile Include="ViewModel\IVM.cs" />
     <Compile Include="ViewModel\LocationMapChooserVM.cs" />
     <Compile Include="ViewModel\LoginVM.cs" />
     <Compile Include="ViewModel\MainWindowVM.cs" />
