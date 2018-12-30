@@ -1,4 +1,4 @@
-﻿<Window x:Class="MusicPlayList.View.Registration"
+﻿<Window x:Class="MusicPlayList.View.Login"
 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"  
        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
             Title="Welcome to MusiLocation" Height="642" Width="689" FontSize="20" Background="#04c582">

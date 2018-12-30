@@ -19,6 +19,8 @@ namespace MusicPlayList.View
     /// </summary>
     public partial class Registration : Window
     {
+        private ViewModel.IVM registrationVM = ViewModel.BaseVM.instance._LoginVM;
+
         public Registration()
         {
             //InitializeComponent();
@@ -35,9 +37,15 @@ namespace MusicPlayList.View
         {
             //TODO: cheak if the passwords are matched and add the data to the DB
             //vm.SaveSettings();
-            MainWindow win = (MainWindow)Application.Current.MainWindow;
-            win.Show();
-            this.Close();
+            //MainWindow win = (MainWindow)Application.Current.MainWindow;
+            //win.Show();
+            //this.Close();
+            Boolean resualt = ((ViewModel.RegistrationVM)registrationVM).CheckRegistraion();
+            if (resualt)
+            {
+                Window chooser = new LocationMapChooser();
+                chooser.Show();
+            }
         }
 
         private void ResetBtn_Click(object sender, RoutedEventArgs e)

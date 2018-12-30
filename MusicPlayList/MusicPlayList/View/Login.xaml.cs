@@ -19,25 +19,32 @@ namespace MusicPlayList.View
     /// </summary>
     public partial class Login : Window
     {
+        private ViewModel.IVM loginVM = ViewModel.BaseVM.instance._LoginVM;
+
         public Login()
         {
-            //InitializeComponent();
+            InitializeComponent();
+            this.DataContext = loginVM;
         }
 
         private void SubmitBtn_Click(object sender, RoutedEventArgs e)
         {
             // TODO: need to check if the user and password exist and connect him if it does else error message
-            PlayList playList = (PlayList)Application.Current.MainWindow;
-            playList.Show();
-            this.Close();
-
+            int result = ((ViewModel.LoginVM)loginVM).Confirm();
+            if (result == 1)
+            {
+                //TODO: go to next window
+                Window playList = new PlayList();
+                playList.Show();
+            }
         }
 
         private void BtnSignUp_Click(object sender, RoutedEventArgs e)
         {
-            Registration registration = (Registration)Application.Current.MainWindow;
-            registration.Show();
-            this.Close();
+            //Registration registration = (Registration)Application.Current.MainWindow;
+            //registration.Show();
+            Window reg = new Registration();
+            reg.Show();
         }
 
 

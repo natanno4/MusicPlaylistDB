@@ -35,7 +35,7 @@ namespace MusicPlayList.ViewModel
                 };
         }
 
-        private Boolean CheckRegistraion()
+        public Boolean CheckRegistraion()
         {
             Username = username.Text;
             Password = password.Text;
