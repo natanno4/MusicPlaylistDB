@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="PlayList" Height="450" Width="800">
     <Grid>
-        <Grid TextBlock.FontSize="14">
+        <Grid TextBlock.FontSize="14" Background="#2e3237">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -21,9 +21,9 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Padding="3" Margin="3" HorizontalAlignment="Center" FontSize="35"  Text="Playlist" VerticalAlignment="Top" Grid.ColumnSpan="2" />
+            <TextBlock Padding="3" Margin="3" HorizontalAlignment="Center" Foreground="White" FontSize="35" Text="Playlist" VerticalAlignment="Top" Grid.ColumnSpan="2" />
             <DataGrid
-                Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="2" ItemsSource="{Binding VM_LogsList}"  AutoGenerateColumns="False" Margin="0,0,0,30">
+                Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="2" ItemsSource="{Binding VM_LogsList}"  AutoGenerateColumns="False" Margin="0,0,0,30" Background="#545d6a">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Song" Width="*" IsReadOnly="True" Binding="{Binding Song}" />
                     <DataGridTextColumn Header="Artist" Width="*" IsReadOnly="True" Binding="{Binding Artist}"/>

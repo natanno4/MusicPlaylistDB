@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:MusicPlayList.View"
         mc:Ignorable="d"
         Title="PlayListEditor" Height="450" Width="800">
-    <Grid TextBlock.FontSize="14">
-        <Grid Margin="285,55,30,40">
+    <Grid TextBlock.FontSize="14" Background="#545d6a">
+        <Grid Margin="285,55,30,40" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -22,8 +22,8 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock  Padding="3" Margin="145,-50,146,0" HorizontalAlignment="Center" 
-                            FontSize="20"  Text="Songs in your area" VerticalAlignment="Top" Width="176"/>
+            <TextBlock  Padding="3" Margin="145,-50,146,0" Foreground="White" HorizontalAlignment="Center" 
+                            FontSize="20" FontStyle="Italic" Text="Songs in your area" VerticalAlignment="Top" Width="176"/>
             <DataGrid ItemsSource="{Binding VM_Playlist.Songs}" AutoGenerateColumns="False" CanUserAddRows="False" VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" Width="467" Height="300">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Song" Width="*" IsReadOnly="True" Binding="{Binding Song}" />
