@@ -17,25 +17,33 @@ namespace MusicPlayList.View
     /// <summary>
     /// Interaction logic for PlayList.xaml
     /// </summary>
-    public class PlayList : Window
+    public partial class PlayList : Window
     {
+
+        private ViewModel.IVM playListVM = ViewModel.BaseVM.instance._PlayListVM;
+
         public PlayList()
         {
             InitializeComponent();
+            this.DataContext = playListVM;
         }
 
         private void BtmEdit_Click(object sender, RoutedEventArgs e)
         {
-            PlayListEditor editor = (PlayListEditor)Application.Current.MainWindow;
+            Window editor = new PlayListEditor();
             editor.Show();
-            this.Close();
+            //PlayListEditor editor = (PlayListEditor)Application.Current.MainWindow;
+            //editor.Show();
+            //this.Close();
         }
 
         private void BtmExit_Click(object sender, RoutedEventArgs e)
         {
-            Login login = (Login)Application.Current.MainWindow;
+            Window login = new Login();
             login.Show();
-            this.Close();
+            //Login login = (Login)Application.Current.MainWindow;
+            //login.Show();
+            //this.Close();
         }
     }
 }

@@ -158,6 +158,9 @@
     <Compile Include="ViewModel\PlayListEditorVM.cs" />
     <Compile Include="ViewModel\PlayListVM.cs" />
     <Compile Include="ViewModel\RegistrationVM.cs" />
+    <Compile Include="View\CountryChooser.xaml.cs">
+      <DependentUpon>CountryChooser.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\LocationMapChooser.xaml.cs">
       <DependentUpon>LocationMapChooser.xaml</DependentUpon>
     </Compile>
@@ -186,6 +189,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\CountryChooser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\LocationMapChooser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -17,11 +17,14 @@ namespace MusicPlayList.View
     /// <summary>
     /// Interaction logic for PlayListEditor.xaml
     /// </summary>
-    public partial class PlayListEditor : UserControl
+    public partial class PlayListEditor : Window
     {
+        private ViewModel.IVM editorVM = ViewModel.BaseVM.instance._PlayListEditorVM;
+
         public PlayListEditor()
         {
             InitializeComponent();
+            this.DataContext = editorVM;
             //this.DataContext = new PlayListEditorViewModel();
             //vm = new SettingsViewModel(new SettingsModel());
             //DataContext = vm;

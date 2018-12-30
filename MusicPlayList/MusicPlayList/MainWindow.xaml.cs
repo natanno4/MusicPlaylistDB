@@ -1,4 +1,5 @@
-﻿using MusicPlayList.ViewModel;
+﻿using MusicPlayList.View;
+using MusicPlayList.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,12 @@ namespace MusicPlayList
         {
             InitializeComponent();
             DataContext = new MainWindowVM();
+        }
+
+        private void SubmitBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Window login = new Login();
+            login.Show();
         }
     }
 }

@@ -19,11 +19,12 @@ namespace MusicPlayList.View
     /// </summary>
     public partial class Registration : Window
     {
-        private ViewModel.IVM registrationVM = ViewModel.BaseVM.instance._LoginVM;
+        private ViewModel.IVM registrationVM = ViewModel.BaseVM.instance._RegistrationVM;
 
         public Registration()
         {
-            //InitializeComponent();
+            InitializeComponent();
+            this.DataContext = registrationVM;
         }
 
         private void CancelBtn_Click(object sender, RoutedEventArgs e)
