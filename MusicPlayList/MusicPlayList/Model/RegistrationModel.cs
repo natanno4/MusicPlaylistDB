@@ -35,6 +35,7 @@ namespace MusicPlayList.Model
         {
             JArray arr = new JArray();
             arr[0] = JsonConvert.SerializeObject(this.user);
+            return arr;
         }
         public void ConvertFromJson()
         {
