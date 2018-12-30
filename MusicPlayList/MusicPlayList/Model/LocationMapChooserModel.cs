@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MusicPlayList.Entities;
 using MusicPlayList.DataBase;
+using Newtonsoft.Json.Linq;
 
 namespace MusicPlayList.Model
 {
@@ -16,24 +17,30 @@ namespace MusicPlayList.Model
         public DB_Executer executer;
         private Area area;
 
-        public Boolean CalculateAreaProps(Double xVal, Double yVal)
+        public Boolean CalculateAreaProps(Double xVal, Double yVal, Double mapMinHeight, Double mapMinWidth)
         {
             //from xaml
-            double mapminHeight = worldMap.Margin.Top;
-            double mapminWidth = worldMap.Margin.Left;
-
             double[] dif = map.getMapSizeDiffernce();
-            double x = (xVal - mapminWidth) / dif[0];
-            double y = (yVal - mapminHeight) / dif[1];
+            double x = (xVal - mapMinWidth) / dif[0];
+            double y = (yVal - mapMinHeight) / dif[1];
             map.fromPixelToCoordinates(x, y);
             area.Longtitude = map.CurrentLongitude;
             area.Latitude = map.CurrentLatitude;
+
+            return true;
         }
-        public JArray CheckForClosesCountries()
+        public JArray CheckForClosestCountries()
         {
             // need to be changed later, maybe in sunday
-            String query = "" + area.Latitude + "" + area.Longtitude;
-            JArray set = this.executer.ExecuteCommandWithResults(query);
+            StringBuilder query = null;
+            query.Append("SELECT area.location_name FROM musicareaplaylist.area ");
+            query.Append("WHERE area.latitude != 0 AND area.longitude != 0 ");
+            query.Append("GROUP BY area.location_name ");
+            query.Append("ORDER BY (6371 * acos( cos( radians(area.latitude) ) * cos( radians("+ area.Latitude.ToString()+ ")) * cos( radians("+ area.Longtitude.ToString()+") - radians(area.longitude) ) ");
+            query.Append("+ sin( radians(area.latitude) ) * sin(radians(" + area.Latitude.ToString() + "))))");
+            query.Append("Asc \n LIMIT 10");
+            JArray set = this.executer.ExecuteCommandWithResults(query.ToString());
+            return set;
         }
     }
 }

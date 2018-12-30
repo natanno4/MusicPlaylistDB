@@ -14,7 +14,7 @@ namespace MusicPlayList.Model
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public DB_Executer executer = new DB_Executer();
-        private User user = new User();
+        public User user = new User();
 
 
         public Boolean SignUp()
