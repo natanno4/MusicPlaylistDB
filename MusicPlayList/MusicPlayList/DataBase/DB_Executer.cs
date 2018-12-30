@@ -53,6 +53,7 @@ namespace MusicPlayList.DataBase
                             row[reader.GetName(i).ToString()] = reader[i].ToString();
                         }
                         resultTable.Add(row);
+                        resultTable.Next.
                     }
                     reader.Close();
                     this.connection.Close();

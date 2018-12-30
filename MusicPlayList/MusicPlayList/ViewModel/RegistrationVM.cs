@@ -33,7 +33,7 @@ namespace MusicPlayList.ViewModel
                 };
         }
 
-        private void SubmitBtn_Click(object sender, RoutedEventArgs e)
+        private Boolean CheckRegistraion()
         {
             Username = username.Text;
             Password = password.Text;
@@ -41,21 +41,28 @@ namespace MusicPlayList.ViewModel
             {
                 messageToClient.AppendText("One or More Fields missing");
       
-                return;
+                return false;
             }
             messageToClient.Clear();
             if (model.SignUp())
             {
                 // so continue to next window
                 User user = model.user;
+                
+                // base class send parametres to next view model
+                return true;
             } else
             {
                 messageToClient.Clear();
                 messageToClient.AppendText("Error was occured, please try again");
+                return false;
                 // try again
             }
         }
-
+        public void SendParameters()
+        {
+            BaseVM.instance.SendParam("Reg", "Location");
+        }
         
         public String Username
         {

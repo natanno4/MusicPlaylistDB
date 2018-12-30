@@ -7,9 +7,10 @@ using System.ComponentModel;
 
 namespace MusicPlayList.ViewModel
 {
-    class IVM : INotifyPropertyChanged
+    abstract class IVM : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        private
 
         public void NotifyPropertyChanged(string propname)
         {
@@ -18,5 +19,7 @@ namespace MusicPlayList.ViewModel
                 this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propname));
             }
         }
+        public abstract void SendParametes();
+        
     }
 }
