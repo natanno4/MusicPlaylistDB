@@ -11,7 +11,7 @@ using MusicPlayList.Entities;
 
 namespace MusicPlayList.ViewModel
 {
-    class RegistrationVM : INotifyPropertyChanged
+    class RegistrationVM : IVM
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private RegistrationModel model;
@@ -24,9 +24,9 @@ namespace MusicPlayList.ViewModel
         /// Initializes a new instance of the <see cref="RegistrationVM"/> class.
         /// </summary>
         /// <param name="model">The model.</param>
-        public RegistrationVM(RegistrationModel model)
+        public RegistrationVM()
         {
-            this.model = model;
+            this.model = new RegistrationModel();
             this.model.PropertyChanged +=
                 delegate (Object sender, PropertyChangedEventArgs e) {
                     this.PropertyChanged?.Invoke(this, e);
