@@ -35,21 +35,23 @@ namespace MusicPlayList.ViewModel
         {
             this.model.CalculateAreaProps(e.X, e.Y, worldMap.Margin.Top, worldMap.Margin.Left);
             this.model.CheckForClosestCountries();
+            this.SendParameters();
         }
+        override
         public void SendParameters()
         {
             BaseVM.instance.SendParam(BaseVM.ViewModels.LocationMap, BaseVM.ViewModels.PlayListEditor);
         }
-
+        override
         public JArray GetParameters()
         {
             return model.ConvertToJson();
 
         }
+        override
         public void RecivedParameters(JArray arr)
         {
             model.ConvertFromJson(arr);
-            model.User = JsonConvert.DeserializeObject<User>(arr[0].ToString());
         }
     }
 }

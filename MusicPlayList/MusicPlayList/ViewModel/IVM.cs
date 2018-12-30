@@ -20,7 +20,7 @@ namespace MusicPlayList.ViewModel
                 this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propname));
             }
         }
-        public abstract void SendParametes();
+        public abstract void SendParameters();
 
         public abstract JArray GetParameters();
 

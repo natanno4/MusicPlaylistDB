@@ -8,6 +8,7 @@ using MusicPlayList.Entities;
 using MusicPlayList.DataBase;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using System.Collections.ObjectModel;
 
 namespace MusicPlayList.Model
 {
@@ -18,6 +19,7 @@ namespace MusicPlayList.Model
         public DB_Executer executer;
         private Area area;
         private User user;
+        private ObservableCollection<String> areasName = new ObservableCollection<string>();
 
         public Boolean CalculateAreaProps(Double xVal, Double yVal, Double mapMinHeight, Double mapMinWidth)
         {
@@ -31,7 +33,7 @@ namespace MusicPlayList.Model
 
             return true;
         }
-        public JArray CheckForClosestCountries()
+        public void CheckForClosestCountries()
         {
             // need to be changed later, maybe in sunday
             StringBuilder subQuery = null;
@@ -43,7 +45,13 @@ namespace MusicPlayList.Model
             subQuery.Append("Asc \n LIMIT 10");
             String query = "SELECT area.location_name, COUNT(song_name) FROM (" + subQuery + ") AS country JOIN artist JOIN Songs WHERE Songs.artist_id = artist.id AND artist.location_id = country.location_id GROUP BY country.location_name ORDER BY count(song)";
             JArray set = this.executer.ExecuteCommandWithResults(query);
-            return set;
+            FromJTokenToString(set);
+        }
+        private void FromJTokenToString(JArray arr)
+        {
+            foreach (JToken j in arr) {
+                this.areasName.Add(j.First.ToString());
+            }
         }
         public User User
         {
@@ -67,11 +75,13 @@ namespace MusicPlayList.Model
                 area = value;
             }
         }
-        public JArray ConvertToJson()
+        public JArray ConvertToJson(JArray areas)
         {
             JArray j = new JArray();
             j[0] = JsonConvert.SerializeObject(User);
-            j[1] = JsonConvert.SerializeObject(Area);
+            // for now we send list of countries directly to Editor
+            // j[1] = JsonConvert.SerializeObject(Area);
+            j[2] = JsonConvert.SerializeObject(areasName);
             return j;
         }
         
