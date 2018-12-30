@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MusicPlayList.ViewModel
 {
-    class LoginVM : IVM
+    class LoginVM : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private LoginModel model;
@@ -18,9 +18,9 @@ namespace MusicPlayList.ViewModel
         /// Initializes a new instance of the <see cref="LoginVM"/> class.
         /// </summary>
         /// <param name="model">The model.</param>
-        public LoginVM()
+        public LoginVM(LoginModel model)
         {
-            this.model = new LoginModel();
+            this.model = model;
          //?   this.model.PropertyChanged +=
             //    delegate (Object sender, PropertyChangedEventArgs e) {
               //      this.PropertyChanged?.Invoke(this, e);

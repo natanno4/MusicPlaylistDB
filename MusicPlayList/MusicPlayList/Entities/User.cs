@@ -35,7 +35,7 @@ namespace MusicPlayList.Entities
                 this.password = value;
             }
         }
-        public User() { };
+        public User() { }
         public User(string userName, string email, string password)
         {
             this.name = userName;

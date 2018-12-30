@@ -33,12 +33,13 @@ namespace MusicPlayList.Model
         {
             // need to be changed later, maybe in sunday
             StringBuilder query = null;
-            query.Append("SELECT area.location_name FROM musicareaplaylist.area ");
+            query.Append("SELECT area.location_name, area.location_id FROM musicareaplaylist.area ");
             query.Append("WHERE area.latitude != 0 AND area.longitude != 0 ");
             query.Append("GROUP BY area.location_name ");
             query.Append("ORDER BY (6371 * acos( cos( radians(area.latitude) ) * cos( radians("+ area.Latitude.ToString()+ ")) * cos( radians("+ area.Longtitude.ToString()+") - radians(area.longitude) ) ");
             query.Append("+ sin( radians(area.latitude) ) * sin(radians(" + area.Latitude.ToString() + "))))");
             query.Append("Asc \n LIMIT 10");
+            String q = "SELECT area.location_name, COUNT(song_name) FROM (" + query + ") AS country JOIN artist JOIN Songs WHERE Songs.artist_id = artist.id AND artist.location_id = country.location_id GROUP BY country.location_name ORDER BY count(song)";
             JArray set = this.executer.ExecuteCommandWithResults(query.ToString());
             return set;
         }

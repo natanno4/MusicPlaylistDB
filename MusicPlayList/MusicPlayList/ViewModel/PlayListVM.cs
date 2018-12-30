@@ -8,16 +8,17 @@ using System.Threading.Tasks;
 
 namespace MusicPlayList.ViewModel
 {
-    class PlayListVM : IVM
+    class PlayListVM : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private PlayListModel model;
         /// <summary>
         /// Initializes a new instance of the <see cref="PlayListEditorVM"/> class.
         /// </summary>
-        public PlayListVM()
+        /// <param name="model">The model.</param>
+        public PlayListVM(PlayListModel model)
         {
-            this.model =  new PlayListModel();
+            this.model = model;
             this.model.PropertyChanged +=
                 delegate (Object sender, PropertyChangedEventArgs e) {
                     this.PropertyChanged?.Invoke(this, e);
