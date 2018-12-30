@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace MusicPlayList.ViewModel
 {
-    class LocationMapChooserVM : IVM
+    class LocationMapChooserVM : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private LocationMapChooserModel model;
@@ -18,9 +18,10 @@ namespace MusicPlayList.ViewModel
         /// <summary>
         /// Initializes a new instance of the <see cref="LocationMapChooserVM"/> class.
         /// </summary>
-        public LocationMapChooserVM()
+        /// <param name="model">The model.</param>
+        public LocationMapChooserVM(LocationMapChooserModel model)
         {
-            this.model = new LocationMapChooserModel();
+            this.model = model;
             this.model.PropertyChanged +=
                 delegate (Object sender, PropertyChangedEventArgs e) {
                     this.PropertyChanged?.Invoke(this, e);

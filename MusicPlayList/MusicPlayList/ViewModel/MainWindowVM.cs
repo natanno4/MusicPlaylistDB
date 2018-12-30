@@ -7,7 +7,7 @@ using MusicPlayList.Model;
 
 namespace MusicPlayList.ViewModel
 {
-    class MainWindowVM : IVM
+    class MainWindowVM
     {
         private MainWindowModel model;
         /// <summary>
