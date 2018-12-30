@@ -8,9 +8,19 @@ namespace MusicPlayList.ViewModel
 {
     class BaseVM
     {
+        enum ViewModels { MainWindow, Login, Registration, PlayListEditor, PlayList, LocationMap};
+        private Dictionary<ViewModels, IVM> ViewModelToType = new Dictionary<ViewModels, IVM>();
 
         private BaseVM()
         {
+            ViewModelToType.Add(ViewModels.MainWindow, _MainWindowVM);
+            ViewModelToType.Add(ViewModels.Login, _LoginVM);
+            ViewModelToType.Add(ViewModels.Registration, _RegistrationVM);
+            ViewModelToType.Add(ViewModels.PlayListEditor, _PlayListEditorVM);
+            ViewModelToType.Add(ViewModels.PlayList, _PlayListVM);
+            ViewModelToType.Add(ViewModels.LocationMap, _LocationMapChoosenVM);
+
+
         }
 
         public static BaseVM instance { get; } = new BaseVM();
