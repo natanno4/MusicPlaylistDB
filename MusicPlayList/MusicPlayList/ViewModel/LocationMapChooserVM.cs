@@ -1,4 +1,7 @@
-﻿using MusicPlayList.Model;
+﻿using MusicPlayList.Entities;
+using MusicPlayList.Model;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -33,6 +36,20 @@ namespace MusicPlayList.ViewModel
             this.model.CalculateAreaProps(e.X, e.Y, worldMap.Margin.Top, worldMap.Margin.Left);
             this.model.CheckForClosestCountries();
         }
+        public void SendParameters()
+        {
+            BaseVM.instance.SendParam(BaseVM.ViewModels.LocationMap, BaseVM.ViewModels.PlayListEditor);
+        }
 
+        public JArray GetParameters()
+        {
+            return model.ConvertToJson();
+
+        }
+        public void RecivedParameters(JArray arr)
+        {
+            model.ConvertFromJson(arr);
+            model.User = JsonConvert.DeserializeObject<User>(arr[0].ToString());
+        }
     }
 }

@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using MusicPlayList.Entities;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace MusicPlayList.ViewModel
 {
@@ -61,9 +63,18 @@ namespace MusicPlayList.ViewModel
         }
         public void SendParameters()
         {
-            BaseVM.instance.SendParam("Reg", "Location");
+            BaseVM.instance.SendParam(BaseVM.ViewModels.Registration, BaseVM.ViewModels.LocationMap);
         }
-        
+
+        public JArray GetParameters() 
+        {
+            return model.ConvertToJson();
+            
+        }
+        public void RecivedParameters(JArray a)
+        {
+            ;
+        }
         public String Username
         {
             get

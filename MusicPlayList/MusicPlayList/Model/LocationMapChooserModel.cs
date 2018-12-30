@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using MusicPlayList.Entities;
 using MusicPlayList.DataBase;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace MusicPlayList.Model
 {
@@ -16,6 +17,7 @@ namespace MusicPlayList.Model
         public event PropertyChangedEventHandler PropertyChanged;
         public DB_Executer executer;
         private Area area;
+        private User user;
 
         public Boolean CalculateAreaProps(Double xVal, Double yVal, Double mapMinHeight, Double mapMinWidth)
         {
@@ -32,16 +34,50 @@ namespace MusicPlayList.Model
         public JArray CheckForClosestCountries()
         {
             // need to be changed later, maybe in sunday
-            StringBuilder query = null;
-            query.Append("SELECT area.location_name, area.location_id FROM musicareaplaylist.area ");
-            query.Append("WHERE area.latitude != 0 AND area.longitude != 0 ");
-            query.Append("GROUP BY area.location_name ");
-            query.Append("ORDER BY (6371 * acos( cos( radians(area.latitude) ) * cos( radians("+ area.Latitude.ToString()+ ")) * cos( radians("+ area.Longtitude.ToString()+") - radians(area.longitude) ) ");
-            query.Append("+ sin( radians(area.latitude) ) * sin(radians(" + area.Latitude.ToString() + "))))");
-            query.Append("Asc \n LIMIT 10");
-            String q = "SELECT area.location_name, COUNT(song_name) FROM (" + query + ") AS country JOIN artist JOIN Songs WHERE Songs.artist_id = artist.id AND artist.location_id = country.location_id GROUP BY country.location_name ORDER BY count(song)";
-            JArray set = this.executer.ExecuteCommandWithResults(query.ToString());
+            StringBuilder subQuery = null;
+            subQuery.Append("SELECT area.location_name, area.location_id FROM musicareaplaylist.area ");
+            subQuery.Append("WHERE area.latitude != 0 AND area.longitude != 0 ");
+            subQuery.Append("GROUP BY area.location_name ");
+            subQuery.Append("ORDER BY (6371 * acos( cos( radians(area.latitude) ) * cos( radians("+ area.Latitude.ToString()+ ")) * cos( radians("+ area.Longtitude.ToString()+") - radians(area.longitude) ) ");
+            subQuery.Append("+ sin( radians(area.latitude) ) * sin(radians(" + area.Latitude.ToString() + "))))");
+            subQuery.Append("Asc \n LIMIT 10");
+            String query = "SELECT area.location_name, COUNT(song_name) FROM (" + subQuery + ") AS country JOIN artist JOIN Songs WHERE Songs.artist_id = artist.id AND artist.location_id = country.location_id GROUP BY country.location_name ORDER BY count(song)";
+            JArray set = this.executer.ExecuteCommandWithResults(query);
             return set;
+        }
+        public User User
+        {
+            get
+            {
+                return user;
+            }
+            set
+            {
+                user = value;
+            }
+        }
+        public Area Area
+        {
+            get
+            {
+                return area;
+            }
+            set
+            {
+                area = value;
+            }
+        }
+        public JArray ConvertToJson()
+        {
+            JArray j = new JArray();
+            j[0] = JsonConvert.SerializeObject(User);
+            j[1] = JsonConvert.SerializeObject(Area);
+            return j;
+        }
+        
+        public void ConvertFromJson(JArray j)
+        {
+            User = JsonConvert.DeserializeObject<User>(j[0].ToString());
         }
     }
 }

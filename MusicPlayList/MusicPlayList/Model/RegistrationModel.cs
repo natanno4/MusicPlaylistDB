@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using MusicPlayList.DataBase;
 using MySql.Data.MySqlClient;
 using MusicPlayList.Entities;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace MusicPlayList.Model
 {
@@ -28,6 +30,17 @@ namespace MusicPlayList.Model
             return false;
                 
         }
+
+        public JArray ConvertToJson()
+        {
+            JArray arr = new JArray();
+            arr[0] = JsonConvert.SerializeObject(this.user);
+        }
+        public void ConvertFromJson()
+        {
+            ;
+        }
+
         public String Password
         {
             get
