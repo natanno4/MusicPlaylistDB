@@ -1,4 +1,6 @@
-﻿using MusicPlayList.Model;
+﻿using MusicPlayList.Entities;
+using MusicPlayList.Model;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -44,10 +46,30 @@ namespace MusicPlayList.ViewModel
             }
         }
 
-        public int Confirm()
+        public Boolean Confirm()
         {
-            int userID = model.FindUser(m_name, Password).UserID;
-            return userID;
+            User user = model.FindUser(m_name, Password);
+            this.SendParameters();
+            return user != null;
+        }
+
+        override
+        public void SendParameters()
+        {
+            BaseVM.instance.SendParam(BaseVM.ViewModels.Login, BaseVM.ViewModels.LocationMap);
+        }
+
+        override
+        public JArray GetParameters()
+        {
+            return model.ConvertToJson();
+
+        }
+
+        override
+        public void RecivedParameters(JArray arr)
+        {
+            model.ConvertFromJson(arr);
         }
 
     }

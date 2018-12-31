@@ -12,11 +12,12 @@ namespace MusicPlayList.Model
     class PlayListEditorModel : INotifyPropertyChanged
     {
         private ObservableCollection<String> model_playlist;
-        private DB_Executer dataBase = new DB_Executer();
+        private DB_Executer dataBase;
 
         public PlayListEditorModel()
         {
             model_playlist = new ObservableCollection<string>();
+            dataBase = new DB_Executer()
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
