@@ -11,6 +11,7 @@ namespace MusicPlayList.Entities
         private String areaName;
         private Double lattiude;
         private Double longtitude;
+        private int id;
 
         public String AreaName
         {
@@ -23,6 +24,18 @@ namespace MusicPlayList.Entities
                 this.areaName = value;
             }
         }
+        public int Id
+        {
+            get
+            {
+                return id;
+            }
+            set
+            {
+                this.id = value;
+            }
+        }
+
         public Double Latitude
         {
             get

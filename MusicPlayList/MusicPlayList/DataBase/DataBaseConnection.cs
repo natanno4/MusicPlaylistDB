@@ -37,7 +37,7 @@ namespace MusicPlayList.DataBase
             }
             try
             { 
-                string connstring = string.Format("Server=localhost; database={0}; UID=root; password={1}", databaseName, Password);
+                string connstring = string.Format("Server=localhost;database={0};userid=root;password={1}", databaseName, Password);
                 connection = new MySqlConnection(connstring);
                 connection.Open();
             }

@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using MySql.Data.MySqlClient;
+using System.Data;
 
 namespace MusicPlayList.DataBase
 {
@@ -36,35 +37,40 @@ namespace MusicPlayList.DataBase
             }
             return -1;
         }
-        public JArray ExecuteCommandWithResults(String query)
+        public DataTable ExecuteCommandWithResults(String query)
         {
             MySqlCommand command = ResolveCommand(query);
             if (this.connection.connect())
             try
             {
                     JArray resultTable = new JArray();
-                    MySqlDataReader reader = command.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        JObject row = new JObject();
-                        int numberOfCols = reader.FieldCount;
-                        for (int i = 0; i < numberOfCols; i++)
-                        {                        
-                            row[reader.GetName(i).ToString()] = reader[i].ToString();
-                        }
-                        resultTable.Add(row);
-                        resultTable.Next.
-                    }
-                    reader.Close();
-                    this.connection.Close();
-                    return resultTable; 
-            } catch (MySqlException e)
+                  /* MySqlDataReader reader = command.ExecuteReader();
+                    /*
+                   while (reader.Read())
+                   {
+                       JObject row = new JObject();
+                       int numberOfCols = reader.FieldCount;
+                       for (int i = 0; i < numberOfCols; i++)
+                       {                        
+                           row[reader.GetName(i).ToString()] = reader[i].ToString();
+                       }
+                       resultTable.Add(row);
+                       resultTable.Next
+                   }
+                   reader.Close();
+                   this.connection.Close();
+                   return resultTable;*/
+                }
+                catch (MySqlException e)
                 {
                     // temporary
                     return null; 
 
                 }
-            return null;
+            MySqlDataReader reader = command.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(reader);
+            return dt;
         }
         // function that might be, for now leave it
         public int ExecuteAgger()
