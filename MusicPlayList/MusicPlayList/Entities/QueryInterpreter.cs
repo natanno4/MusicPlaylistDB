@@ -14,13 +14,13 @@ namespace MusicPlayList.Entities
         private QueryInterpreter() { }
         public static QueryInterpreter Instance { get; } = new QueryInterpreter();
         
-        public JObject getQueryEntiteObject(QueryType q, DataTable dt)
+        public JObject getQueryEntitesObject(QueryType q, DataTable dt)
         {
             switch(q)
             {
                 case QueryType.AreaSongsCount:
                     {
-
+                        GetAreaSongsCount(dt);
                         break;
                     }
                 default:
