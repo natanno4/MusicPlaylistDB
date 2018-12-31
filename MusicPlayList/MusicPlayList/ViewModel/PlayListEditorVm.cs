@@ -6,12 +6,13 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
+using MusicPlayList.Entities;
 
 namespace MusicPlayList.ViewModel
 {
     class PlayListEditorVM : IVM
     {
-        public event PropertyChangedEventHandler PropertyChanged;
         private PlayListEditorModel model;
         private String vm_filter;
         private String vm_sort;
@@ -24,11 +25,11 @@ namespace MusicPlayList.ViewModel
             this.model = new PlayListEditorModel();
             this.model.PropertyChanged +=
                 delegate (Object sender, PropertyChangedEventArgs e) {
-                    this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("VM_" + e.PropertyName));
+                    this.NotifyPropertyChanged("VM_" + e.PropertyName);
                 };
         }
 
-        public ObservableCollection<String> VM_GetPlayList
+        public ObservableCollection<Song> VM_GetPlayList
         {
             get { return model.GetPlayList(); }
         }
@@ -37,8 +38,9 @@ namespace MusicPlayList.ViewModel
         {
             set {
                 this.vm_filter = value;
-                String query = "write query here";
-                model.Filter(query);
+                model.Filter(this.vm_filter);
+                //String query = "write query here";
+               // model.Filter(query);
             }
         }
 
@@ -50,6 +52,24 @@ namespace MusicPlayList.ViewModel
                 String query = "write query here";
                 model.Sort(query);
             }
+        }
+
+        override
+        public void SendParameters()
+        {
+            BaseVM.instance.SendParam(BaseVM.ViewModels.PlayListEditor, BaseVM.ViewModels.PlayList);
+        }
+
+        override
+        public JArray GetParameters()
+        {
+            return model.ConvertToJson();
+        }
+
+        override
+        public void RecivedParameters(JArray arr)
+        {
+            model.ConvertFromJson(arr);
         }
     }
 }

@@ -12,7 +12,6 @@ namespace MusicPlayList.ViewModel
 {
     class LoginVM : IVM
     {
-        public event PropertyChangedEventHandler PropertyChanged;
         private LoginModel model;
         private String m_name;
         private String vm_password;
