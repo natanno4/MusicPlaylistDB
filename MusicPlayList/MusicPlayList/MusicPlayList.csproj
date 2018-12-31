@@ -141,6 +141,7 @@
     <Compile Include="Entities\Area.cs" />
     <Compile Include="Entities\Artist.cs" />
     <Compile Include="Entities\Map.cs" />
+    <Compile Include="Entities\QueryInterpreter.cs" />
     <Compile Include="Entities\Song.cs" />
     <Compile Include="Entities\SongPlaylist.cs" />
     <Compile Include="Entities\User.cs" />
