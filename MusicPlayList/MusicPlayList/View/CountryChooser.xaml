@@ -5,18 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MusicPlayList.View"
         mc:Ignorable="d"
-        Title="CountryChooser" Height="450" Width="800">
-    <Grid>
-        <ListBox ItemsSource="{Binding Passages}">
-    <ListBox.ItemTemplate>
-        <DataTemplate>
-            <StackPanel  Orientation="Horizontal">
-                <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" />
-                <TextBlock Text="{Binding Path=Name, StringFormat=Passage: {0}}"
+        Title="Country chooser" Height="450" Width="800" Background="#04c582">
+    <Grid Margin="0,0,0,-21">
+        <ListBox ItemsSource="{Binding Passages}" Margin="22,19,20,36">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel  Orientation="Horizontal">
+                        <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" />
+                        <TextBlock Text="{Binding Path=Name, StringFormat=Passage: {0}}"
                            Foreground="Blue" />
-            </StackPanel>
-        </DataTemplate>
-    </ListBox.ItemTemplate>
-</ListBox>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>

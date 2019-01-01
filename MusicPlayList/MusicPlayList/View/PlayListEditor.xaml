@@ -5,36 +5,41 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MusicPlayList.View"
         mc:Ignorable="d"
-        Title="PlayListEditor" Height="450" Width="800">
-    <Grid TextBlock.FontSize="14" Background="#545d6a">
-        <Grid Margin="285,55,30,40" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="103*"/>
-                <RowDefinition Height="96*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock  Padding="3" Margin="145,-50,146,0" Foreground="White" HorizontalAlignment="Center" 
-                            FontSize="20" FontStyle="Italic" Text="Songs in your area" VerticalAlignment="Top" Width="176"/>
-            <DataGrid ItemsSource="{Binding VM_Playlist.Songs}" AutoGenerateColumns="False" CanUserAddRows="False" VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" Width="467" Height="300">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Song" Width="*" IsReadOnly="True" Binding="{Binding Song}" />
-                    <DataGridTextColumn Header="Artist" Width="*" IsReadOnly="True" Binding="{Binding Artist}"/>
-                    <DataGridTextColumn Header="Album" Width="*" IsReadOnly="True" Binding="{Binding Album}"/>
-                    <DataGridTextColumn Header="Genre" Width="*" IsReadOnly="True" Binding="{Binding Genre}"/>
-                    <DataGridTextColumn Header="Hotness" Width="*" IsReadOnly="True" Binding="{Binding Hotness}"/>
-                    <DataGridTextColumn Header="Duration" Width="*" IsReadOnly="True" Binding="{Binding Duration}"/>
-                </DataGrid.Columns>
-            </DataGrid>
-            <Button  x:Name="RemoveBtn" Content="Remove" Grid.Row="5" Click="RemoveBtn_Click" IsEnabled="{Binding SelectedItems.Count, ElementName=lstBox}" />
+        Title="PlayListEditor" Height="450" Width="800"  Background="#04c582">
+    <Border Background="#2e3137" CornerRadius="20" Margin="15">
+        <Grid TextBlock.FontSize="14">
+            <Grid Margin="272,42,8,18" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="103*"/>
+                    <RowDefinition Height="96*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="280"/>
+                    <ColumnDefinition Width="187"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock  Padding="3" Margin="153,-38,138,0" Foreground="White" HorizontalAlignment="Center" 
+                            FontSize="20" FontStyle="Italic" Text="Songs in your area" VerticalAlignment="Top" Width="176" Grid.ColumnSpan="2"/>
+                <DataGrid ItemsSource="{Binding VM_Playlist.Songs}" AutoGenerateColumns="False" CanUserAddRows="False" VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" Width="467" Height="300" Grid.ColumnSpan="2">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Song" Width="*" IsReadOnly="True" Binding="{Binding Song}" />
+                        <DataGridTextColumn Header="Artist" Width="*" IsReadOnly="True" Binding="{Binding Artist}"/>
+                        <DataGridTextColumn Header="Album" Width="*" IsReadOnly="True" Binding="{Binding Album}"/>
+                        <DataGridTextColumn Header="Genre" Width="*" IsReadOnly="True" Binding="{Binding Genre}"/>
+                        <DataGridTextColumn Header="Hotness" Width="*" IsReadOnly="True" Binding="{Binding Hotness}"/>
+                        <DataGridTextColumn Header="Duration" Width="*" IsReadOnly="True" Binding="{Binding Duration}"/>
+                        <DataGridTextColumn Header="Country" Width="*" IsReadOnly="True" Binding="{Binding Country}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button  x:Name="RemoveBtn" Content="Remove" Grid.Row="5" Click="RemoveBtn_Click" IsEnabled="{Binding SelectedItems.Count, ElementName=lstBox}" Grid.ColumnSpan="2" />
+            </Grid>
+            <Button Content="Save" Height="23" HorizontalAlignment="Left" Margin="25,344,0,0" Name="btnSave" VerticalAlignment="Top" Width="70" Click="Save_Click" RenderTransformOrigin="0.586,-0.043" />
         </Grid>
-    </Grid>
+    </Border>
 </Window>

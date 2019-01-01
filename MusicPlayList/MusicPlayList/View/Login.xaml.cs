@@ -30,8 +30,8 @@ namespace MusicPlayList.View
         private void SubmitBtn_Click(object sender, RoutedEventArgs e)
         {
             // TODO: need to check if the user and password exist and connect him if it does else error message
-            int result = ((ViewModel.LoginVM)loginVM).Confirm();
-            if (result == 1)
+            Boolean result = ((ViewModel.LoginVM)loginVM).Confirm();
+            if (result)
             {
                 //TODO: go to next window
                 Window playList = new PlayList();

@@ -34,5 +34,11 @@ namespace MusicPlayList.View
         {
             //vm.VM_HandlerClose((string)lstBox.SelectedItem);
         }
+
+        private void SubmitBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Window playList = new PlayList();
+            playList.Show();
+        }
     }
 }
