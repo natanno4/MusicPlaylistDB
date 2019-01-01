@@ -9,6 +9,7 @@ using MusicPlayList.DataBase;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
+using System.Data;
 
 namespace MusicPlayList.Model
 {
@@ -19,6 +20,7 @@ namespace MusicPlayList.Model
         public DB_Executer executer;
         private Area area;
         private User user;
+        private Dictionary<Area, int> mapper;
         private ObservableCollection<String> areasName = new ObservableCollection<string>();
 
         public Boolean CalculateAreaProps(Double xVal, Double yVal, Double mapMinHeight, Double mapMinWidth)
@@ -44,8 +46,21 @@ namespace MusicPlayList.Model
             subQuery.Append("+ sin( radians(area.latitude) ) * sin(radians(" + area.Latitude.ToString() + "))))");
             subQuery.Append("Asc \n LIMIT 10");
             String query = "SELECT area.location_name, COUNT(song_name) FROM (" + subQuery + ") AS country JOIN artist JOIN Songs WHERE Songs.artist_id = artist.id AND artist.location_id = country.location_id GROUP BY country.location_name ORDER BY count(song)";
-            JArray set = this.executer.ExecuteCommandWithResults(query);
-            FromJTokenToString(set);
+            DataTable set = this.executer.ExecuteCommandWithResults(query);
+            JObject j = QueryInterpreter.Instance.getQueryEntitesObject(QueryInterpreter.QueryType.AreaSongsCount, set);
+            Mapper = JsonConvert.DeserializeObject<Dictionary<Area, int>>(j.ToString());
+
+        }
+        public Dictionary<Area, int> Mapper
+        {
+            get
+            {
+                return mapper;
+            }
+            set
+            {
+                this.mapper = value;
+            }
         }
         private void FromJTokenToString(JArray arr)
         {
@@ -75,13 +90,13 @@ namespace MusicPlayList.Model
                 area = value;
             }
         }
-        public JArray ConvertToJson(JArray areas)
+        public JArray ConvertToJson(DataTable areas)
         {
             JArray j = new JArray();
             j[0] = JsonConvert.SerializeObject(User);
             // for now we send list of countries directly to Editor
             // j[1] = JsonConvert.SerializeObject(Area);
-            j[2] = JsonConvert.SerializeObject(areasName);
+            j[2] = JsonConvert.SerializeObject(Mapper);
             return j;
         }
         

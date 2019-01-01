@@ -21,7 +21,11 @@ namespace MusicPlayList.Model
 
         public Boolean SignUp()
         {
-     
+            String checkIfUserExist = "Select * FROM Users WHERE user_name = '" + Username + "' AND password = '" + Password;
+            if (executer.ExecuteCommandWithResults(checkIfUserExist).Count() != 0)
+            {
+                return false;
+            }
             String query = "INSERT INTO Users (user name, password) VALUES (" + Username + "," + Password + ")";
             if (executer.ExecuteCommandWithoutResult(query) != -1)
             {
