@@ -62,12 +62,14 @@ namespace MusicPlayList.Model
                 this.mapper = value;
             }
         }
+        /*
         private void FromJTokenToString(JArray arr)
         {
             foreach (JToken j in arr) {
                 this.areasName.Add(j.First.ToString());
             }
         }
+        */
         public User User
         {
             get

@@ -1,4 +1,5 @@
-﻿using MusicPlayList.Model;
+﻿using MusicPlayList.Entities;
+using MusicPlayList.Model;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,19 @@ namespace MusicPlayList.ViewModel
     class CountryChooserVM : IVM
     {
         private CountryChooserModel countryChooser_model;
-        public void RecievedRecivedParameters(JArray arr)
+        public Dictionary<Area, int> Map
+        {
+            get
+            {
+                return countryChooser_model.AreaToNumberOfSongs;
+            }
+            set
+            {
+                countryChooser_model.AreaToNumberOfSongs = value;
+            }
+        }
+        override
+        public void RecivedParameters(JArray arr)
         {
             countryChooser_model.ConvertFromJson(arr);
 
@@ -19,7 +32,6 @@ namespace MusicPlayList.ViewModel
         override
         public JArray GetParameters()
         {
-            // temporary
             return countryChooser_model.ConvertToJson();
         }
         override
@@ -27,5 +39,6 @@ namespace MusicPlayList.ViewModel
         {
             BaseVM.instance.SendParam(BaseVM.ViewModels.AreaChooser, BaseVM.ViewModels.PlayListEditor);
         }
+        
     }
 }

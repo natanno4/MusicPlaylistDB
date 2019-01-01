@@ -7,16 +7,17 @@
         mc:Ignorable="d"
         Title="Country chooser" Height="450" Width="800" Background="#04c582">
     <Grid Margin="0,0,0,-21">
-        <ListBox ItemsSource="{Binding Passages}" Margin="22,19,20,36">
-            <ListBox.ItemTemplate>
+        <TabControl ItemsSource="{Binding Map}" SelectedIndex="0">
+            <TabControl.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel  Orientation="Horizontal">
-                        <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" />
-                        <TextBlock Text="{Binding Path=Name, StringFormat=Passage: {0}}"
-                           Foreground="Blue" />
-                    </StackPanel>
+                    <TextBlock Text="{Binding Path=Key.AreaName}"/>
                 </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+            </TabControl.ItemTemplate>
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Value}"/>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+        </TabControl>
     </Grid>
 </Window>
