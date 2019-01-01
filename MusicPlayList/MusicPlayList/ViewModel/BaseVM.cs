@@ -8,7 +8,7 @@ namespace MusicPlayList.ViewModel
 {
     class BaseVM
     {
-        public enum ViewModels { MainWindow, Login, Registration, PlayListEditor, PlayList, LocationMap};
+        public enum ViewModels { MainWindow, Login, Registration, PlayListEditor, PlayList, LocationMap, AreaChooser};
         private Dictionary<ViewModels, IVM> ViewModelToType = new Dictionary<ViewModels, IVM>();
 
         private BaseVM()
