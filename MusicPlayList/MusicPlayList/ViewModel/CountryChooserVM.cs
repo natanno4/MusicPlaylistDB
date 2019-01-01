@@ -20,7 +20,7 @@ namespace MusicPlayList.ViewModel
         public JArray GetParameters()
         {
             // temporary
-            return new JArray();
+            return countryChooser_model.ConvertToJson();
         }
         override
         public void SendParameters()
