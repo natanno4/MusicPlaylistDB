@@ -14,7 +14,7 @@ namespace MusicPlayList.ViewModel
     class PlayListEditorVM : IVM
     {
         private PlayListEditorModel model;
-        private String vm_filter;
+        private String[] vm_filter;
         private String vm_sort;
         /// <summary>
         /// Initializes a new instance of the <see cref="PlayListEditorVM"/> class.
@@ -34,13 +34,11 @@ namespace MusicPlayList.ViewModel
             get { return model.GetPlayList(); }
         }
 
-        public String VM_Filter
+        public String[] VM_Filter_PlayList
         {
             set {
                 this.vm_filter = value;
-                model.Filter(this.vm_filter);
-                //String query = "write query here";
-               // model.Filter(query);
+                model.Filter_PlayList(this.vm_filter);;
             }
         }
 
@@ -49,7 +47,7 @@ namespace MusicPlayList.ViewModel
             set
             {
                 this.vm_sort = value;
-                String query = "write query here";
+                String query = "not sure yet";
                 model.Sort(query);
             }
         }

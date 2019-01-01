@@ -22,6 +22,7 @@ namespace MusicPlayList.Model
             String query = "SELECT * FROM users WHERE users.user_name = name AND users.password = password";
             // user = dataBase.ExecuteCommandWithResults(query).First.ToObject<User>();
             user = JsonConvert.DeserializeObject<User>(dataBase.ExecuteCommandWithResults(query)[0].ToString());
+
             return user;
         }
 
