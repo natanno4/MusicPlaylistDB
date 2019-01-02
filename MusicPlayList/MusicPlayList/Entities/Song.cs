@@ -14,8 +14,21 @@ namespace MusicPlayList.Entities
         private Double hotness;
         private Double duration;
         private Double tempo;
-        private String artist;
+        private Artist artist;
         private String genre;
+        private Album album;
+
+        public Album Album
+        {
+            get
+            {
+                return album;
+            }
+            set
+            {
+                album = value;
+            }
+        }
 
         public int ID
         {
@@ -40,7 +53,7 @@ namespace MusicPlayList.Entities
                 genre = value;
             }
         }
-        public String Artist
+        public Artist Artist
         {
             get
             {
@@ -48,7 +61,7 @@ namespace MusicPlayList.Entities
             }
             set
             {
-                artist = value
+                artist = value;
             }
         }
         public String Name

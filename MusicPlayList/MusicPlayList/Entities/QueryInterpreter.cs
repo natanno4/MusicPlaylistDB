@@ -78,8 +78,9 @@ namespace MusicPlayList.Entities
                 sng.Hotness = row.Field<Double>(3);
                 sng.Duration = row.Field<Double>(4);
                 sng.Tempo = row.Field<Double>(5);
-                sng.Artist = row.Field<String>(6);
+                sng.Artist = row.Field<Artist>(6);
                 sng.Genere = row.Field<String>(7);
+                sng.Album = row.Field<Album>(8);
                 list.Add(sng);
             }
             playlist.Playlist = list;
