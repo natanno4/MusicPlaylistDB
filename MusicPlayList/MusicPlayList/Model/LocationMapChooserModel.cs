@@ -15,7 +15,7 @@ namespace MusicPlayList.Model
 {
     class LocationMapChooserModel : INotifyPropertyChanged
     {
-        private Map map;
+        public Map map;
         public event PropertyChangedEventHandler PropertyChanged;
         public DB_Executer executer;
         private Area area;
@@ -23,7 +23,7 @@ namespace MusicPlayList.Model
         private Dictionary<Area, int> mapper;
         private ObservableCollection<String> areasName = new ObservableCollection<string>();
 
-        public Boolean CalculateAreaProps(Double xVal, Double yVal, Double mapMinHeight, Double mapMinWidth)
+        public void CalculateAreaProps(Double xVal, Double yVal, Double mapMinHeight, Double mapMinWidth)
         {
             //from xaml
             double[] dif = map.getMapSizeDiffernce();
@@ -32,8 +32,6 @@ namespace MusicPlayList.Model
             map.fromPixelToCoordinates(x, y);
             area.Longtitude = map.CurrentLongitude;
             area.Latitude = map.CurrentLatitude;
-
-            return true;
         }
         public void CheckForClosestCountries()
         {
@@ -92,7 +90,7 @@ namespace MusicPlayList.Model
                 area = value;
             }
         }
-        public JArray ConvertToJson(DataTable areas)
+        public JArray ConvertToJson()
         {
             JArray j = new JArray();
             j[0] = JsonConvert.SerializeObject(User);
