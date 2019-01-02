@@ -9,6 +9,7 @@ using MySql.Data.MySqlClient;
 using MusicPlayList.Entities;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using System.Data;
 
 namespace MusicPlayList.Model
 {
@@ -18,7 +19,12 @@ namespace MusicPlayList.Model
         public DB_Executer executer = new DB_Executer();
         public User user = new User();
 
-
+        public void getIDFromTable()
+        {
+            String query = "SELECT idUsers FROM users WHERE user_name = '" + Username + "' AND password = '" + Password + "'";
+            DataTable dt = executer.ExecuteCommandWithResults(query);
+            ID = dt.Rows[0].Field<int>(0);
+        }
         public Boolean SignUp()
         {
             String checkIfUserExist = "Select * FROM Users WHERE user_name = '" + Username + "' AND password = '" + Password;
@@ -29,6 +35,7 @@ namespace MusicPlayList.Model
             String query = "INSERT INTO Users (user name, password) VALUES (" + Username + "," + Password + ")";
             if (executer.ExecuteCommandWithoutResult(query) != -1)
             {
+                getIDFromTable();
                 return true;
             }
             return false;
@@ -45,7 +52,17 @@ namespace MusicPlayList.Model
         {
             ;
         }
-
+        public int ID
+        {
+            get
+            {
+                return user.ID;
+            }
+            set
+            {
+                user.ID = value;
+            }
+        }
         public String Password
         {
             get

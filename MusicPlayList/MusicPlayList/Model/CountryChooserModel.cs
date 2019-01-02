@@ -36,8 +36,9 @@ namespace MusicPlayList.Model
         {
             String query = "SELECT * FROM Songs JOIN Artist JOIN Area WHERE song.artist_id = artist.artist_id AND artist.areaID = area.areaID AND area.location_name IN(" + KeysToString() +")";
             DataTable dt = executer.ExecuteCommandWithResults(query);
-            JObject j = QueryInterpreter.Instance.getQueryEntitesObject(QueryInterpreter.QueryType.CreateInitPlaylist, dt);
+            JObject j = QueryInterpreter.Instance.getQueryEntitesObject(QueryInterpreter.QueryType.ResolveInitialPlaylist, dt);
             model_playlist = JsonConvert.DeserializeObject<SongPlaylist>(j.ToString());
+            model_playlist.User = User;
 
         }
         public JArray ConvertToJson()

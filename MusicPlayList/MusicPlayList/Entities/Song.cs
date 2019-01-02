@@ -8,12 +8,49 @@ namespace MusicPlayList.Entities
 {
     class Song
     {
+        private int song_id;
         private String name;
         private int year;
         private Double hotness;
         private Double duration;
         private Double tempo;
+        private String artist;
+        private String genre;
 
+        public int ID
+        {
+            get
+            {
+                return song_id;
+            }
+            set
+            {
+                song_id = value;
+            }
+        }
+        public String Genere
+
+        {
+            get
+            {
+                return genre;
+            }
+            set
+            {
+                genre = value;
+            }
+        }
+        public String Artist
+        {
+            get
+            {
+                return artist;
+            }
+            set
+            {
+                artist = value
+            }
+        }
         public String Name
         {
             get
