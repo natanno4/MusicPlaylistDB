@@ -14,9 +14,8 @@ namespace MusicPlayList.Entities
         private Double hotness;
         private Double duration;
         private Double tempo;
-        private Artist artist;
-        private String genre;
-        private Album album;
+        private Artist artist = new Artist();
+        private Album album = new Album();
 
         public Album Album
         {
@@ -40,18 +39,7 @@ namespace MusicPlayList.Entities
             {
                 song_id = value;
             }
-        }
-        public String Genere
-
-        {
-            get
-            {
-                return genre;
-            }
-            set
-            {
-                genre = value;
-            }
+        
         }
         public Artist Artist
         {
