@@ -52,8 +52,6 @@ namespace MusicPlayList.View
         private void ResetBtn_Click(object sender, RoutedEventArgs e)
         {
             textBoxUserName.Clear();
-            textBoxLastName.Clear();
-            textBoxFirstName.Clear();
             passwordBox.Clear();
             passwordBoxConfirm.Clear();
         }
