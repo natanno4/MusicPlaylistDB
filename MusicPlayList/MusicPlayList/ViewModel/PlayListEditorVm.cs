@@ -29,7 +29,7 @@ namespace MusicPlayList.ViewModel
                 };
         }
 
-        public ObservableCollection<Song> VM_GetPlayList
+        public SongPlaylist VM_GetPlayList
         {
             get { return model.GetPlayList(); }
         }

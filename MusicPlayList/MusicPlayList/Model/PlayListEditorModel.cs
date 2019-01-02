@@ -21,7 +21,11 @@ namespace MusicPlayList.Model
         /// <summary>
         /// The model playlist
         /// </summary>
-        private ObservableCollection<Song> model_playlist;
+        private SongPlaylist model_playlist;
+        /// <summary>
+        /// The model playlist
+        /// </summary>
+        private SongPlaylist new_playlist;
         /// <summary>
         /// The data base
         /// </summary>
@@ -48,7 +52,7 @@ namespace MusicPlayList.Model
         /// Gets the play list.
         /// </summary>
         /// <returns></returns>
-        public ObservableCollection<Song> GetPlayList()
+        public SongPlaylist GetPlayList()
         {
             return model_playlist;
         }
@@ -60,7 +64,8 @@ namespace MusicPlayList.Model
         public void Filter_PlayList(String[] filter)
         {
             int size = filter.Count();
-            ObservableCollection<Song> new_playlist = new ObservableCollection<Song>();
+            new_playlist = new SongPlaylist();
+            new_playlist.ID(model_playlist.ID);
             Dictionary<String, String> map = new Dictionary<String, String>();
             /// <summary>
             /// Iterate over the filter and put the type subject and its type in a dictionary.
@@ -73,32 +78,30 @@ namespace MusicPlayList.Model
             /// <summary>
             /// Iterate over all the songs in the playlist and insert those who weren't in the filter into a new playlist.
             /// </summary>
-            foreach (Song song in model_playlist)
+            foreach (Song song in model_playlist.Songs)
             {
-                if(!map.ContainsKey("Hotness"))
+                if(map.ContainsKey("Hotness"))
                 {
-                    if(!map["Hotness"].Equals(song.Hotness))
+                    if(map["Hotness"].Equals(song.Hotness))
                     {
-                        new_playlist.Add(song);
+                        new_playlist.Songs.Add(song);
                     }
                 }
-                if (!map.ContainsKey("Duration"))
+                if (map.ContainsKey("Duration"))
                 {
-                    if (!map["Duration"].Equals(song.Duration))
+                    if (map["Duration"].Equals(song.Duration))
                     {
-                        new_playlist.Add(song);
+                        new_playlist.Songs.Add(song);
                     }
                 }
-                if (!map.ContainsKey("Tempo"))
+                if (map.ContainsKey("Tempo"))
                 {
-                    if (!map["Tempo"].Equals(song.Tempo))
+                    if (map["Tempo"].Equals(song.Tempo))
                     {
-                        new_playlist.Add(song);
+                        new_playlist.Songs.Add(song);
                     }
                 }
-                model_playlist = new_playlist;
                 this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Filter"));
-
             }
 
         }
@@ -111,13 +114,14 @@ namespace MusicPlayList.Model
         public JArray ConvertToJson()
         {
             JArray j = new JArray();
-            j[0] = JsonConvert.SerializeObject(model_playlist);
+            j[0] = JsonConvert.SerializeObject(new_playlist);
             return j;
         }
 
         public void ConvertFromJson(JArray j)
         {
-            model_playlist = JsonConvert.DeserializeObject<ObservableCollection<Song>>(j[0].ToString());
+            model_playlist = JsonConvert.DeserializeObject<SongPlaylist>(j[0].ToString());
+            new_playlist = model_playlist;
         }
     }
     
