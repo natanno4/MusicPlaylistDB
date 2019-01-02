@@ -36,7 +36,7 @@ namespace MusicPlayList.Entities
                 playlist_id = value;
             }
         }
-        public ObservableCollection<Song> Playlist
+        public ObservableCollection<Song> Songs
         {
             get
             {

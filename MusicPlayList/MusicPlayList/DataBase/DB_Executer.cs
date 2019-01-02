@@ -37,6 +37,20 @@ namespace MusicPlayList.DataBase
             }
             return -1;
         }
+        public int ExecuteQueryWithoutDisconnect(String query)
+        {
+            MySqlCommand command = ResolveCommand(query);
+            int s;
+            try
+            {
+                s = command.ExecuteNonQuery();
+            }
+            catch (MySqlException e)
+            {
+                // do smoething
+            }
+            return s; 
+        }
         public DataTable ExecuteCommandWithResults(String query)
         {
             MySqlCommand command = ResolveCommand(query);

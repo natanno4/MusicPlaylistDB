@@ -10,7 +10,19 @@ namespace MusicPlayList.Entities
     {
         private String name;
         private String genre;
+        private String artist_id;
 
+        public String ID
+        {
+            get
+            {
+                return artist_id;
+            }
+            set
+            {
+                artist_id = value;
+            }
+        }
         public String Name
         {
             get

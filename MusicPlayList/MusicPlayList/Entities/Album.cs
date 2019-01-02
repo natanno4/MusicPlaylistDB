@@ -9,7 +9,19 @@ namespace MusicPlayList.Entities
     class Album
     {
         private String name;
+        private int album_id;
 
+        public int ID
+        {
+            get
+            {
+                return album_id;
+            }
+            set
+            {
+                album_id = value;
+            }
+        }
         public String Name
         {
             get

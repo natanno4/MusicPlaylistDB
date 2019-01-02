@@ -83,7 +83,7 @@ namespace MusicPlayList.Entities
                 sng.Album = row.Field<Album>(8);
                 list.Add(sng);
             }
-            playlist.Playlist = list;
+            playlist.Songs = list;
             return JObject.FromObject(playlist);
         }
     }
