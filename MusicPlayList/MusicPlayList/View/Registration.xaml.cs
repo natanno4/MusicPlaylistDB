@@ -36,13 +36,8 @@ namespace MusicPlayList.View
 
         private void SubmitBtn_Click(object sender, RoutedEventArgs e)
         {
-            //TODO: cheak if the passwords are matched and add the data to the DB
-            //vm.SaveSettings();
-            //MainWindow win = (MainWindow)Application.Current.MainWindow;
-            //win.Show();
-            //this.Close();
-            Boolean resualt = ((ViewModel.RegistrationVM)registrationVM).CheckRegistraion();
-            if (resualt)
+            Boolean result = ((ViewModel.RegistrationVM)registrationVM).CheckRegistraion();
+            if (result)
             {
                 Window chooser = new LocationMapChooser();
                 chooser.Show();
@@ -51,9 +46,7 @@ namespace MusicPlayList.View
 
         private void ResetBtn_Click(object sender, RoutedEventArgs e)
         {
-            textBoxUserName.Clear();
-            passwordBox.Clear();
-            passwordBoxConfirm.Clear();
+            ((ViewModel.RegistrationVM)registrationVM).resetinput();
         }
     }
 }

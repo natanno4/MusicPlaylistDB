@@ -18,10 +18,12 @@ namespace MusicPlayList.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
         private RegistrationModel model;
 
-        private TextBox username;
-        private TextBox password;
+        private TextBox textBoxUserName;
+        private TextBox passwordBox;
+        private TextBlock errorbox;
 
-        private TextBox messageToClient;
+        string error = "";
+
         /// <summary>
         /// Initializes a new instance of the <see cref="RegistrationVM"/> class.
         /// </summary>
@@ -37,30 +39,35 @@ namespace MusicPlayList.ViewModel
 
         public Boolean CheckRegistraion()
         {
-            Username = username.Text;
-            Password = password.Text;
             if (Username.Equals("")|| Password.Equals(""))
             {
-                messageToClient.AppendText("One or More Fields missing");
+                string temp = "One or More Fields missing";
+                error = temp;
       
                 return false;
             }
-            messageToClient.Clear();
+            error = "";
             if (model.SignUp())
             {
-                // so continue to next window
-                SendParameters();
-                
                 // base class send parametres to next view model
+                SendParameters();
+                // so continue to next window   
                 return true;
             } else
             {
-                messageToClient.Clear();
-                messageToClient.AppendText("Error was occured, please try again");
+                
+                string temp = "Error was occured, please try again";
+                error = temp;
                 return false;
-                // try again
             }
         }
+        public void resetinput()
+        {
+            passwordBox.Clear();
+            textBoxUserName.Clear();
+            error = "";
+        }
+
         override
         public void SendParameters()
         {

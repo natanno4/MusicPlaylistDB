@@ -10,7 +10,7 @@
         <StackPanel Margin="20,23,20,41">
             <Label Content="Choose location" Foreground="White" FontStyle="Italic" FontSize="40" HorizontalAlignment="Center" RenderTransformOrigin="0.499,0.714"/>
             <Separator Height="55" ></Separator>
-            <Grid x:Name="girdMap">
+            <Grid x:Name="gridMap">
                 <Image Source="../greenMap.png"  MouseLeftButtonDown="OnMapClick" x:Name="worldMap" Height="360" Width="720"/>
             </Grid>
             <Separator Height="55" ></Separator>

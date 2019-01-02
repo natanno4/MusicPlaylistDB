@@ -28,8 +28,16 @@ namespace MusicPlayList.View
 
         private void BtnNext_Click(object sender, RoutedEventArgs e)
         {
-            Window editor = new PlayListEditor();
-            editor.Show();
+            ((ViewModel.LocationMapChooserVM)locationChooserVM).Finish();
+            Window chooser = new CountryChooser();
+            chooser.Show();
         }
+        private void OnMapClick(object sender, MouseEventArgs e)
+        {
+            Point p = e.GetPosition(this);
+            ((ViewModel.LocationMapChooserVM)locationChooserVM).onChooseSpot(p.X, p.Y);
+
+        }
+       
     }
 }

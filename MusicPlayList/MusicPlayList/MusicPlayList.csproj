@@ -145,6 +145,7 @@
     <Compile Include="Entities\Song.cs" />
     <Compile Include="Entities\SongPlaylist.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Model\CountryChooserModel.cs" />
     <Compile Include="Model\LocationMapChooserModel.cs" />
     <Compile Include="Model\LoginModel.cs" />
     <Compile Include="Model\MainWindowModel.cs" />
@@ -152,6 +153,7 @@
     <Compile Include="Model\PlayListModel.cs" />
     <Compile Include="Model\RegistrationModel.cs" />
     <Compile Include="ViewModel\BaseVM.cs" />
+    <Compile Include="ViewModel\CountryChooserVM.cs" />
     <Compile Include="ViewModel\IVM.cs" />
     <Compile Include="ViewModel\LocationMapChooserVM.cs" />
     <Compile Include="ViewModel\LoginVM.cs" />
