@@ -45,8 +45,8 @@ namespace MusicPlayList.Model
             this.executer.connection.connect();
             StringBuilder query = new StringBuilder();
             foreach (Song sng in Playlist.Songs) {
-                query.Append("INSERT INTO songs_in_playlist(Songs_idSongs, Songs_Album_idAlbum, Songs_Artists_idArtists , Playlist_idSongsPlaylist, Playlist_Users_idUsers)");
-                query.Append(" VALUES(");
+                query.Append("insert into songs_in_playlist (Songs_idSongs, Songs_Album_idAlbum, Songs_Artists_idArtists ");
+                query.Append(" , Playlist_idSongsPlaylist, Playlist_Users_idUsers) value("+sng.ID.ToString()+", "+sng.Album.ID.ToString()+", '"+sng.Artist.ID+"', "+Playlist.ID.ToString()+", "+Playlist.User.ID.ToString()+"))");
                 query.Append(sng.ID + "," + sng.Album.ID + "," + sng.Artist.ID + "," + Playlist.ID + "," + Playlist.User.ID);
                int n =  executer.ExecuteQueryWithoutDisconnect(query.ToString());
                 if (n != 1)
