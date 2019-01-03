@@ -7,17 +7,19 @@
         mc:Ignorable="d"
         Title="Country chooser" Height="450" Width="800" Background="#04c582">
     <Grid Margin="0,0,0,-21">
-        <TabControl ItemsSource="{Binding Map}" SelectedIndex="0">
-            <TabControl.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Path=Key.AreaName}"/>
-                </DataTemplate>
-            </TabControl.ItemTemplate>
-            <TabControl.ContentTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Value}"/>
-                </DataTemplate>
-            </TabControl.ContentTemplate>
-        </TabControl>
+        <Border Background="#2e3137" CornerRadius="20" Margin="30">
+            <ListBox BorderThickness="0" Background="Transparent" Name="list" ItemsSource="{Binding Map}" Margin="80,30,77,111" SelectionMode="Extended">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <CheckBox Name="check" IsChecked="{Binding IsChecked, Mode=TwoWay}" Margin="5 5 0 10" VerticalAlignment="Center" />
+                            <ContentPresenter Content="{Binding Value}" Margin="5 5 0 10"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+        <Button IsEnabled="{Binding Path=IsButtonEnabled}" Content="Submit" Margin="355,362,357,53" />
+
     </Grid>
 </Window>
