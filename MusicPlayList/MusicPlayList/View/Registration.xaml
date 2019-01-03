@@ -32,7 +32,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                 </Grid.RowDefinitions>
                 <TextBlock Height="23" HorizontalAlignment="Left" Margin="67,70,0,0" Name="textBlockEmailId" Text="User name" VerticalAlignment="Top" Width="110" />
                 <TextBlock Height="23" HorizontalAlignment="Left" Margin="67,121,0,0" Name="textBlockPassword" Text="Password:" VerticalAlignment="Top" Width="110"  />
-                <TextBox Height="24" HorizontalAlignment="Left" Margin="183,70,0,0" Text="{Binding Path=UserName}" x:Name="textBoxUserName" VerticalAlignment="Top" Width="222" />
+                <TextBox Height="24" HorizontalAlignment="Left" Margin="183,70,0,0" Text="{Binding Path=Username}" x:Name="textBoxUserName" VerticalAlignment="Top" Width="222" />
                 <TextBox Height="23" HorizontalAlignment="Left" Margin="182,121,0,0" Text="{Binding Path=Password}" x:Name="passwordBox" VerticalAlignment="Top" Width="222" />
                 <TextBlock Height="25" HorizontalAlignment="Left" Margin="139,202,0,0" Text="{Binding Path=error}" VerticalAlignment="Top" Width="300" />
 
