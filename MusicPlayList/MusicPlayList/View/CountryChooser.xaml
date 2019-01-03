@@ -19,7 +19,7 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </Border>
-        <Button IsEnabled="{Binding Path=IsButtonEnabled}" Content="Submit" Margin="355,362,357,53" />
+        <Button IsEnabled="{Binding Path=IsButtonEnabled}" Content="Continue" Margin="355,362,357,50" Name="btnContinue" Click="ContinueBtn_Click" Background="#545d6a" Foreground="White" FontSize="20"/>
 
     </Grid>
 </Window>

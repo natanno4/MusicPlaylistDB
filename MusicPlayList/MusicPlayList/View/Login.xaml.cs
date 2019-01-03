@@ -27,7 +27,7 @@ namespace MusicPlayList.View
             this.DataContext = loginVM;
         }
 
-        private void SubmitBtn_Click(object sender, RoutedEventArgs e)
+        private void BtnSubmit_Click(object sender, RoutedEventArgs e)
         {
             // TODO: need to check if the user and password exist and connect him if it does else error message
             Boolean result = ((ViewModel.LoginVM)loginVM).Confirm();
