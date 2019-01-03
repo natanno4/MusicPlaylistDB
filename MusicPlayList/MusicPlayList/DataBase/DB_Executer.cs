@@ -40,7 +40,7 @@ namespace MusicPlayList.DataBase
         public int ExecuteQueryWithoutDisconnect(String query)
         {
             MySqlCommand command = ResolveCommand(query);
-            int s;
+            int s = 0;
             try
             {
                 s = command.ExecuteNonQuery();

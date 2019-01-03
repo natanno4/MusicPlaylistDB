@@ -148,7 +148,6 @@
     <Compile Include="Model\CountryChooserModel.cs" />
     <Compile Include="Model\LocationMapChooserModel.cs" />
     <Compile Include="Model\LoginModel.cs" />
-    <Compile Include="Model\MainWindowModel.cs" />
     <Compile Include="Model\PlayListEditorModel.cs" />
     <Compile Include="Model\PlayListModel.cs" />
     <Compile Include="Model\RegistrationModel.cs" />
@@ -157,7 +156,6 @@
     <Compile Include="ViewModel\IVM.cs" />
     <Compile Include="ViewModel\LocationMapChooserVM.cs" />
     <Compile Include="ViewModel\LoginVM.cs" />
-    <Compile Include="ViewModel\MainWindowVM.cs" />
     <Compile Include="ViewModel\PlayListEditorVM.cs" />
     <Compile Include="ViewModel\PlayListVM.cs" />
     <Compile Include="ViewModel\RegistrationVM.cs" />
@@ -245,7 +243,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

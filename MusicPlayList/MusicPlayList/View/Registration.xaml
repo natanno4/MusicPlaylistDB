@@ -5,7 +5,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     <Grid Background="#04c582" Margin="0,0,2,-1">
         <TextBlock Height="23" HorizontalAlignment="Left" Margin="10,5,0,0" Name="textBlockHeading" Text="Registration:" VerticalAlignment="Top" Width="110"  FontSize="17" FontStretch="ExtraCondensed"/>
         <!--Button as a Link button using style-->
-        <Button Margin="585,5,12,652" Content="Login" Cursor="Hand" Click="Login_Click">
+        <Button Margin="585,5,12,652" Content="Login" Cursor="Hand" Click="CancelBtn_Click">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <TextBlock TextDecorations="Underline">  
@@ -35,10 +35,10 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                 <TextBox Height="24" HorizontalAlignment="Left" Margin="183,70,0,0" Text="{Binding Path=UserName}" x:Name="textBoxUserName" VerticalAlignment="Top" Width="222" />
                 <TextBox Height="23" HorizontalAlignment="Left" Margin="182,121,0,0" Text="{Binding Path=Password}" x:Name="passwordBox" VerticalAlignment="Top" Width="222" />
                 <TextBlock Height="25" HorizontalAlignment="Left" Margin="139,202,0,0" Text="{Binding Path=error}" VerticalAlignment="Top" Width="300" />
-                
-                <Button Content="Submit" Height="23" HorizontalAlignment="Left" Margin="183,301,0,0" Name="btnSubmit" VerticalAlignment="Top" Width="70" Click="Submit_Click" RenderTransformOrigin="0.586,-0.043" />
-                <Button Content="Reset" Height="23" HorizontalAlignment="Left" Margin="354,301,0,0" Name="btnReset" VerticalAlignment="Top" Width="70" Click="Reset_Click" />
-                <Button Content="Cancel" Height="23" HorizontalAlignment="Right" Margin="0,301,40,0" Name="btnCnacel" VerticalAlignment="Top" Width="70" Click="Cancel_Click" />
+
+                <Button Content="Submit" Height="23" HorizontalAlignment="Left" Margin="183,301,0,0" Name="btnSubmit" VerticalAlignment="Top" Width="70" Click="SubmitBtn_Click" RenderTransformOrigin="0.586,-0.043" />
+                <Button Content="Reset" Height="23" HorizontalAlignment="Left" Margin="354,301,0,0" Name="btnReset" VerticalAlignment="Top" Width="70" Click="ResetBtn_Click" />
+                <Button Content="Cancel" Height="23" HorizontalAlignment="Right" Margin="0,301,40,0" Name="btnCnacel" VerticalAlignment="Top" Width="70" Click="ResetBtn_Click" />
             </Grid>
         </Border>
     </Grid>

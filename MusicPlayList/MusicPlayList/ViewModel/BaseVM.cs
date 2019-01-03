@@ -8,12 +8,11 @@ namespace MusicPlayList.ViewModel
 {
     class BaseVM
     {
-        public enum ViewModels { MainWindow, Login, Registration, PlayListEditor, PlayList, LocationMap, AreaChooser};
+        public enum ViewModels { Login, Registration, PlayListEditor, PlayList, LocationMap, AreaChooser};
         private Dictionary<ViewModels, IVM> ViewModelToType = new Dictionary<ViewModels, IVM>();
 
         private BaseVM()
         {
-            ViewModelToType.Add(ViewModels.MainWindow, _MainWindowVM);
             ViewModelToType.Add(ViewModels.Login, _LoginVM);
             ViewModelToType.Add(ViewModels.Registration, _RegistrationVM);
             ViewModelToType.Add(ViewModels.PlayListEditor, _PlayListEditorVM);
@@ -39,15 +38,6 @@ namespace MusicPlayList.ViewModel
             get
             {
                 return locationMapChoosenVM;
-            }
-        }
-
-        private IVM mainWindowVM = new MainWindowVM();
-        public IVM _MainWindowVM
-        {
-            get
-            {
-                return mainWindowVM;
             }
         }
 
@@ -85,7 +75,7 @@ namespace MusicPlayList.ViewModel
             IVM srcVM, dstVM;
             ViewModelToType.TryGetValue(src, out srcVM);
             ViewModelToType.TryGetValue(dst, out dstVM);
-            dstVM.rec(srcVM.get);
+            dstVM.RecivedParameters(srcVM.GetParameters());
         }
     }
 }

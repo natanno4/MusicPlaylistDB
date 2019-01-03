@@ -43,7 +43,7 @@
                 </DataGrid>
                 <Button  x:Name="RemoveBtn" Content="Remove" Grid.Row="5" Click="RemoveBtn_Click" IsEnabled="{Binding SelectedItems.Count, ElementName=lstBox}" Grid.ColumnSpan="2" />
             </Grid>
-            <Button Content="Save" Height="23" HorizontalAlignment="Left" Margin="25,344,0,0" Name="btnSave" VerticalAlignment="Top" Width="70" Click="Save_Click" RenderTransformOrigin="0.586,-0.043" />
+            <Button Content="Save" Height="23" HorizontalAlignment="Left" Margin="25,344,0,0" Name="btnSave" VerticalAlignment="Top" Width="70" Click="SubmitBtn_Click" RenderTransformOrigin="0.586,-0.043" />
             <Label Content="Genre:" HorizontalAlignment="Left" Height="34" Margin="10,42,0,0" VerticalAlignment="Top" Width="60" Foreground="White"/>
         </Grid>
     </Border>

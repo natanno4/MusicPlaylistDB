@@ -25,7 +25,6 @@ namespace MusicPlayList
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainWindowVM();
         }
 
         private void SubmitBtn_Click(object sender, RoutedEventArgs e)

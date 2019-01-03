@@ -65,7 +65,7 @@ namespace MusicPlayList.Model
         {
             int size = filter.Count();
             new_playlist = new SongPlaylist();
-            new_playlist.ID(model_playlist.ID);
+            //new_playlist.ID(model_playlist.ID);
             Dictionary<String, String> map = new Dictionary<String, String>();
             /// <summary>
             /// Iterate over the filter and put the type subject and its type in a dictionary.
