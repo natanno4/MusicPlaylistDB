@@ -20,7 +20,7 @@ namespace MusicPlayList.Model
         public DB_Executer executer = new DB_Executer();
         private Area area = new Area();
         private User user;
-        private Dictionary<Area, int> mapper;
+        private Dictionary<Area, int> mapper = new Dictionary<Area, int>();
         private ObservableCollection<String> areasName = new ObservableCollection<string>();
 
         public void CalculateAreaProps(Double xVal, Double yVal, Double mapMinHeight, Double mapMinWidth)
@@ -36,7 +36,7 @@ namespace MusicPlayList.Model
         public void CheckForClosestCountries()
         {
             // need to be changed later, maybe in sunday
-            StringBuilder subQuery = null;
+            StringBuilder subQuery = new StringBuilder();
             subQuery.Append("Select LocationId, location_name, count(location_name) FROM ");
             subQuery.Append("(SELECT area.LocationId,area.location_name FROM music_area_playlist.area ");
             subQuery.Append("WHERE area.latitude != 0 AND area.longitude != 0 ");
@@ -53,8 +53,14 @@ namespace MusicPlayList.Model
             String query = "SELECT area.location_name, COUNT(song_name) FROM (" + subQuery + ") AS country JOIN artist JOIN Songs WHERE Songs.artist_id = artist.id AND artist.location_id = country.location_id GROUP BY country.location_name ORDER BY count(song)";
            */
             DataTable set = this.executer.ExecuteCommandWithResults(subQuery.ToString());
-            JObject j = QueryInterpreter.Instance.getQueryEntitesObject(QueryInterpreter.QueryType.AreaSongsCount, set);
-            Mapper = JsonConvert.DeserializeObject<Dictionary<Area, int>>(j.ToString());
+            string ans = QueryInterpreter.Instance.getQueryEntitesObject(QueryInterpreter.QueryType.AreaSongsCount, set);
+            Dictionary<string,int> tempDic = JsonConvert.DeserializeObject<Dictionary<string, int>>(ans);
+            foreach (string item in tempDic.Keys)
+            {
+                int count;
+                tempDic.TryGetValue(item, out count);
+                Mapper.Add(JsonConvert.DeserializeObject<Area>(item), count);
+            }
 
         }
         public Dictionary<Area, int> Mapper
@@ -101,10 +107,15 @@ namespace MusicPlayList.Model
         public JArray ConvertToJson()
         {
             JArray j = new JArray();
-            j[0] = JsonConvert.SerializeObject(User);
-            // for now we send list of countries directly to Editor
-            // j[1] = JsonConvert.SerializeObject(Area);
-            j[2] = JsonConvert.SerializeObject(Mapper);
+            j.Add(JsonConvert.SerializeObject(User));
+            Dictionary<string, int> tempDict = new Dictionary<string, int>();
+            foreach(Area item in Mapper.Keys)
+            {
+                int count;
+                Mapper.TryGetValue(item, out count);
+                tempDict.Add(JsonConvert.SerializeObject(item), count);
+            }
+            j.Add(JsonConvert.SerializeObject(tempDict));
             return j;
         }
         
@@ -112,5 +123,6 @@ namespace MusicPlayList.Model
         {
             User = JsonConvert.DeserializeObject<User>(j[0].ToString());
         }
+
     }
 }

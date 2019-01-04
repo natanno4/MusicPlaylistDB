@@ -7,19 +7,17 @@
         mc:Ignorable="d"
         Title="Country chooser" Height="450" Width="800" Background="#04c582">
     <Grid Margin="0,0,0,-21">
-        <Border Background="#2e3137" CornerRadius="20" Margin="30">
-            <ListBox BorderThickness="0" Background="Transparent" Name="list" ItemsSource="{Binding Map}" Margin="80,30,77,111" SelectionMode="Extended">
+        <Border CornerRadius="20" Margin="30">
+            <ListBox Background="#2e3137" ItemsSource="{Binding Areas_count}" >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <CheckBox Name="check" IsChecked="{Binding IsChecked, Mode=TwoWay}" Margin="5 5 0 10" VerticalAlignment="Center" />
-                            <ContentPresenter Content="{Binding Value}" Margin="5 5 0 10"/>
-                        </StackPanel>
+                        <CheckBox IsChecked="{Binding IsChecked}" Content="{Binding Extension}"/>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+
         </Border>
-        <Button IsEnabled="{Binding Path=IsButtonEnabled}" Content="Continue" Margin="355,362,357,50" Name="btnContinue" Click="ContinueBtn_Click" Background="#545d6a" Foreground="White" FontSize="20"/>
+        <Button IsEnabled="{Binding Path=IsButtonEnabled}" Content="Continue" Margin="318,342,376.6,65" Name="btnContinue" Click="ContinueBtn_Click" Background="#545d6a" Foreground="White" FontSize="20"/>
 
     </Grid>
 </Window>

@@ -18,6 +18,7 @@ namespace MusicPlayList.ViewModel
             ViewModelToType.Add(ViewModels.PlayListEditor, _PlayListEditorVM);
             ViewModelToType.Add(ViewModels.PlayList, _PlayListVM);
             ViewModelToType.Add(ViewModels.LocationMap, _LocationMapChoosenVM);
+            ViewModelToType.Add(ViewModels.AreaChooser, _CountryChooserVM);
         }
 
         public static BaseVM instance { get; } = new BaseVM();
@@ -67,6 +68,15 @@ namespace MusicPlayList.ViewModel
             get
             {
                 return registrationVM;
+            }
+        }
+
+        private IVM countryChooserVM = new CountryChooserVM();
+        public IVM _CountryChooserVM
+        {
+            get
+            {
+                return countryChooserVM;
             }
         }
 

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MusicPlayList.View"
         mc:Ignorable="d"
-        Title="LocationMapChooser" Height="800" Width="850" Background="#04c582">
+        Title="LocationMapChooser" Height="800" Width="850" Background="#04c582" ResizeMode="NoResize">
     <Border Background="#2e3137" x:Name="border" CornerRadius="20" Margin="30">
         <StackPanel x:Name="panel" Margin="20,23,20,41">
             <Label x:Name="label" Content="Choose location" Foreground="White" FontStyle="Italic" Height="60" FontSize="40" HorizontalAlignment="Center" RenderTransformOrigin="0.499,0.714"/>
@@ -13,14 +13,14 @@
 
             <Grid x:Name="gridMap">
                 <Image Source="../greenMap.png"  MouseLeftButtonDown="OnMapClick" x:Name="worldMap" Margin="5,5,5,5" Height="360" Width="720"/>
-                <Ellipse Height="10" Width="10" VerticalAlignment="Top"  Margin="{Binding EllipseMargin}" HorizontalAlignment="Left"  Fill="red" Stroke="Black"  Visibility="Hidden">
+                <Ellipse Height="8" Width="8" VerticalAlignment="Top" Margin="{Binding EllipseMargin}"  HorizontalAlignment="Left"  Fill="red" Stroke="Black">
                     <Ellipse.Style>
                         <Style TargetType="{x:Type Ellipse}">
+                            <Setter Property="Visibility" Value="Hidden" />
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding CircleFlag}" Value="True">
+                                <DataTrigger Binding="{Binding Path=CircleFlag}" Value="true">
                                  <Setter Property="Visibility" Value="Visible" />
                                 </DataTrigger>
-                                
                             </Style.Triggers>
                         </Style>
                     </Ellipse.Style>

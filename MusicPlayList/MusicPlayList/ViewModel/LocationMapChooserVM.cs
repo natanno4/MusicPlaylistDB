@@ -20,7 +20,7 @@ namespace MusicPlayList.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private LocationMapChooserModel model;
-        public Boolean CircleFlag;
+        public Boolean CircleFlag { get; set;}
         public Thickness EllipseMargin { get; set; } = new Thickness();
 
         /// <summary>
@@ -39,10 +39,12 @@ namespace MusicPlayList.ViewModel
         public void onChooseSpot(double X, double Y, double marginTop, double marginLeft)
         {
             this.model.CalculateAreaProps(X, Y, marginTop, marginLeft);
-            double left = X - 5;
-            double top = Y - 5;
+            double left = X - marginLeft + 2;
+            double top = Y - marginTop;
             EllipseMargin = new Thickness(left, top, 0, 0);
+            NotifyPropertyChanged("EllipseMargin");
             CircleFlag = true;
+            NotifyPropertyChanged("CircleFlag");
         }
 
         public void Finish()
@@ -55,7 +57,7 @@ namespace MusicPlayList.ViewModel
         override
         public void SendParameters()
         {
-            BaseVM.instance.SendParam(BaseVM.ViewModels.LocationMap, BaseVM.ViewModels.PlayListEditor);
+            BaseVM.instance.SendParam(BaseVM.ViewModels.LocationMap, BaseVM.ViewModels.AreaChooser);
         }
         override
         public JArray GetParameters()
