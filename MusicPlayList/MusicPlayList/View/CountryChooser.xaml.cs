@@ -32,6 +32,12 @@ namespace MusicPlayList.View
                 Window editor = new PlayListEditor();
                 editor.Show();
         }
+        private void RandomBtn_click(object sender, RoutedEventArgs e)
+        {
+            ((ViewModel.CountryChooserVM)countryChooserVM).ChooseRandom();
+            Window editor = new PlayListEditor();
+            editor.Show();
+        }
     }
     
 }

@@ -54,13 +54,13 @@ namespace MusicPlayList.Model
             StringBuilder build = null;
             foreach (Area a in AreaToNumberOfSongs.Keys)
             {
-                build.Append("'" + a.AreaName + "',");
+                build.Append("'" + a.Id.ToString() + "',");
             }
             return build.ToString();
         }
         public void CreateInitPlaylist()
         {
-            String query = "SELECT * FROM Songs JOIN Artist JOIN Area WHERE song.artist_id = artist.artist_id AND artist.areaID = area.areaID AND area.location_name IN(" + KeysToString() +")";
+            String query = "SELECT * FROM Songs JOIN Artist JOIN Area WHERE song.artist_id = artist.artist_id AND artist.areaID = area.areaID AND area.areaID IN(" + KeysToString() +")";
             DataTable dt = executer.ExecuteCommandWithResults(query);
             //JObject j = QueryInterpreter.Instance.getQueryEntitesObject(QueryInterpreter.QueryType.ResolveInitialPlaylist, dt);
             //model_playlist = JsonConvert.DeserializeObject<SongPlaylist>(j.ToString());
@@ -94,6 +94,27 @@ namespace MusicPlayList.Model
             {
                 user = value;
             }
+        }
+        public void GetRandomAreas()
+        {
+            String query = "SELECT * FROM Songs JOIN Artist JOIN Area WHERE song.artist_id = artist.artist_id AND artist.areaID = area.areaID AND area.areaID IN(" + CheckForRandomAreas() + ")";
+            DataTable dt = executer.ExecuteCommandWithResults(query);
+            // need to continue and pass the param
+        }
+        public string CheckForRandomAreas()
+        {
+            StringBuilder q = new StringBuilder();
+            q.Append("SELECT TOP 8 LocationId, location_name ");
+            q.Append("FROM music_area_playlist.area WHERE area.longitude = 0 AND area.latitude = 0");
+            DataTable dt = executer.ExecuteCommandWithResults(q.ToString());
+            StringBuilder areasID= new StringBuilder();
+            areasID.Append("(");
+            foreach (DataRow d in dt.Rows)
+            {
+                areasID.Append(d.Field<int>(0).ToString() + ",");
+            }
+            areasID.Append(")");
+            return areasID.ToString();
         }
     }
 }

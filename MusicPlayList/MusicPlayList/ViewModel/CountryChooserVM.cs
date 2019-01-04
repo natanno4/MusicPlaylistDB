@@ -31,8 +31,11 @@ namespace MusicPlayList.ViewModel
                 NotifyPropertyChanged("Areas_count");
             }
         }
-
-
+        // need to make a button that will call this function
+        public void ChooseRandom()
+        {
+            this.countryChooser_model.GetRandomAreas();
+        }
 
         override
         public void RecivedParameters(JArray arr)
