@@ -12,7 +12,8 @@ namespace MusicPlayList.DataBase
 
         private DataBaseConnection()
         {
-            connection = new MySqlConnection();
+            string connstring = string.Format("Server=localhost;database={0};uid=root;password={1}", "music_area_playlist", "12341234bhr");
+            connection = new MySqlConnection(connstring);
         }
 
         public string DatabaseName
@@ -33,12 +34,10 @@ namespace MusicPlayList.DataBase
         {
             if (String.IsNullOrEmpty(databaseName))
             {
-                return false;
+                //return false;
             }
             try
             { 
-                string connstring = string.Format("Server=localhost;database={0};userid=root;password={1}", databaseName, Password);
-                connection = new MySqlConnection(connstring);
                 connection.Open();
             }
             catch (MySqlException ex)

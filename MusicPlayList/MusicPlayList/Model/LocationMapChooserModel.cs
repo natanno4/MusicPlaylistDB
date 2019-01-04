@@ -15,10 +15,10 @@ namespace MusicPlayList.Model
 {
     class LocationMapChooserModel : INotifyPropertyChanged
     {
-        public Map map;
+        public Map map = new Map();
         public event PropertyChangedEventHandler PropertyChanged;
-        public DB_Executer executer;
-        private Area area;
+        public DB_Executer executer = new DB_Executer();
+        private Area area = new Area();
         private User user;
         private Dictionary<Area, int> mapper;
         private ObservableCollection<String> areasName = new ObservableCollection<string>();

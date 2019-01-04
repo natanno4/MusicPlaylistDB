@@ -18,10 +18,6 @@ namespace MusicPlayList.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
         private RegistrationModel model;
 
-        private TextBox textBoxUserName;
-        private TextBox passwordBox;
-        private TextBlock errorbox;
-
         string error = "";
 
         /// <summary>
@@ -39,7 +35,7 @@ namespace MusicPlayList.ViewModel
 
         public Boolean CheckRegistraion()
         {
-            if (Username.Equals("")|| Password.Equals(""))
+            if (Username == null || Password == null)
             {
                 string temp = "One or More Fields missing";
                 error = temp;
@@ -63,8 +59,8 @@ namespace MusicPlayList.ViewModel
         }
         public void resetinput()
         {
-            passwordBox.Clear();
-            textBoxUserName.Clear();
+            Username = "";
+            Password = "";
             error = "";
         }
 

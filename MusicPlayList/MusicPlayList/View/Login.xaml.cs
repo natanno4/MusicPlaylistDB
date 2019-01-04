@@ -19,7 +19,7 @@ namespace MusicPlayList.View
     /// </summary>
     public partial class Login : Window
     {
-        private ViewModel.IVM loginVM = ViewModel.BaseVM.instance._LoginVM;
+        private ViewModel.IVM loginVM = new ViewModel.LoginVM();
 
         public Login()
         {

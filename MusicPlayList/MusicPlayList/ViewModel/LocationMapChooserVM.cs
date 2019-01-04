@@ -20,15 +20,15 @@ namespace MusicPlayList.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private LocationMapChooserModel model;
-        public Image worldMap;
-        private Ellipse el;
-        private Grid gridMap;
+        public Boolean CircleFlag;
+        public Thickness EllipseMargin { get; set; } = new Thickness();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LocationMapChooserVM"/> class.
         /// </summary>
         public LocationMapChooserVM()
         {
+            CircleFlag = false;
             this.model = new LocationMapChooserModel();
             this.model.PropertyChanged +=
                 delegate (Object sender, PropertyChangedEventArgs e) {
@@ -36,23 +36,18 @@ namespace MusicPlayList.ViewModel
                 };
         }
         //the function that will do binding when mouse clicked
-        public void onChooseSpot(double X, double Y)
+        public void onChooseSpot(double X, double Y, double marginTop, double marginLeft)
         {
-            this.model.CalculateAreaProps(X, Y, worldMap.Margin.Top, worldMap.Margin.Left);
-            Ellipse el = new Ellipse();
-            el.Width = 5;
-            el.Height = 5;
-            el.Fill = new SolidColorBrush(Colors.Red);
-            double left = X - (el.Width / 2);
-            double top = Y - (el.Height / 2);
-            el.Margin = new Thickness(left, top, 0, 0);
-            el.VerticalAlignment = VerticalAlignment.Top;
-            el.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
-            gridMap.Children.Add(el);
+            this.model.CalculateAreaProps(X, Y, marginTop, marginLeft);
+            double left = X - 5;
+            double top = Y - 5;
+            EllipseMargin = new Thickness(left, top, 0, 0);
+            CircleFlag = true;
         }
 
         public void Finish()
         {
+            CircleFlag = false;
             this.model.CheckForClosestCountries();
             this.SendParameters();
         }
