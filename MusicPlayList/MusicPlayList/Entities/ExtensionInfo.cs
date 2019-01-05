@@ -10,10 +10,12 @@ namespace MusicPlayList.Entities
     {
         public string Extension { get; set; }
         public bool IsChecked { get; set; }
+        public int Count { get; set; }
 
-        public ExtensionInfo(string extension)
+        public ExtensionInfo(string extension, int c)
         {
             Extension = extension;
+            Count = c; 
         }
     }
 }

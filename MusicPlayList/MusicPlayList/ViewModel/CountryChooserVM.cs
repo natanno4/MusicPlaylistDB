@@ -13,6 +13,7 @@ namespace MusicPlayList.ViewModel
     class CountryChooserVM : IVM
     {
         private CountryChooserModel countryChooser_model;
+        public String Error { get; set; } = "";
 
         public CountryChooserVM()
         {
@@ -35,6 +36,23 @@ namespace MusicPlayList.ViewModel
         public void ChooseRandom()
         {
             this.countryChooser_model.GetRandomAreas();
+            SendParameters();
+        }
+
+
+        public bool chooseCountry()
+        {
+            bool check = countryChooser_model.CreateInitPlaylist();
+            if(check)
+            {
+                Error = "";
+                NotifyPropertyChanged("Error");
+                SendParameters();
+                return check;
+            }
+            Error = "Please Choose Areas!";
+            NotifyPropertyChanged("Error");
+            return false;
         }
 
         override
@@ -51,7 +69,7 @@ namespace MusicPlayList.ViewModel
         override
         public void SendParameters()
         {
-            BaseVM.instance.SendParam(BaseVM.ViewModels.AreaChooser, BaseVM.ViewModels.PlayListEditor);
+            BaseVM.instance.SendParam(BaseVM.ViewModels.AreaChooser, BaseVM.ViewModels.PlayList);
         }
         
     }

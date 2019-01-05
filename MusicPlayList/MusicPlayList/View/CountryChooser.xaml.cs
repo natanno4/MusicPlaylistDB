@@ -29,8 +29,11 @@ namespace MusicPlayList.View
 
         private void ContinueBtn_Click(object sender, RoutedEventArgs e)
         {
-                Window editor = new PlayListEditor();
-                editor.Show();
+            if (((ViewModel.CountryChooserVM)countryChooserVM).chooseCountry())
+            {
+                Window playlist = new PlayList();
+                playlist.Show();
+            }
         }
         private void RandomBtn_click(object sender, RoutedEventArgs e)
         {

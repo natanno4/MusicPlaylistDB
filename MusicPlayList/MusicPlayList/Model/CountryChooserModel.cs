@@ -15,7 +15,7 @@ namespace MusicPlayList.Model
     class CountryChooserModel
     {
         private User user;
-        public DB_Executer executer;
+        public DB_Executer executer = new DB_Executer();
         private Dictionary<Area, int> AreasAndNumberOfSongs = new Dictionary<Area, int>();
         public ObservableCollection<ExtensionInfo> Areas_count = new ObservableCollection<ExtensionInfo>();
 
@@ -43,28 +43,59 @@ namespace MusicPlayList.Model
             {
                 int count;
                 AreasAndNumberOfSongs.TryGetValue(item, out count);
-                string str = string.Format("{0}-{1}", item.AreaName, count);
-                Areas_count.Add(new ExtensionInfo(str));
+                Areas_count.Add(new ExtensionInfo(item.AreaName, count));
             }
         }
+
 
 
         private String KeysToString()
         {
-            StringBuilder build = null;
-            foreach (Area a in AreaToNumberOfSongs.Keys)
+            StringBuilder build = new StringBuilder();
+            build.Append("");
+            bool flag = true;
+            foreach(ExtensionInfo ex in Areas_count)
             {
-                build.Append("'" + a.Id.ToString() + "',");
+                if (ex.IsChecked)
+                {
+                    foreach (Area a in AreaToNumberOfSongs.Keys)
+                    {
+                        if(a.AreaName.Equals(ex.Extension))
+                        {
+                            if(!flag)
+                            {
+                                build.Append("," + a.Id.ToString());
+                            }
+                            else
+                            {
+                                build.Append(a.Id.ToString());
+                                flag = false;
+                            }
+                            
+                        }
+                    }
+                }
             }
             return build.ToString();
         }
-        public void CreateInitPlaylist()
+        public bool CreateInitPlaylist()
         {
-            String query = "SELECT * FROM Songs JOIN Artist JOIN Area WHERE song.artist_id = artist.artist_id AND artist.areaID = area.areaID AND area.areaID IN(" + KeysToString() +")";
-            DataTable dt = executer.ExecuteCommandWithResults(query);
+
+            string str = KeysToString();
+            if(String.IsNullOrEmpty(str))
+            {
+                return false;
+            }
+            StringBuilder query = new StringBuilder();
+            query.Append("SELECT idSongs,song_name,year,song_hotness,song_duration,song_tempo,artists_from_areas.idArtists,artists_from_areas.artist_name,artists_from_areas.genre,album_name,idAlbum ");
+            query.Append("FROM songs JOIN (SELECT idArtists, artist_name, genre FROM artists WHERE Area_LocationId in (" + str + ") GROUP BY idArtists) AS artists_from_areas ");
+            query.Append("join album ");
+            query.Append("WHERE songs.Artists_idArtists = artists_from_areas.idArtists and songs.Album_idAlbum = album.idAlbum GROUP BY idSongs order by idSongs");
+            DataTable dt = executer.ExecuteCommandWithResults(query.ToString());
             //JObject j = QueryInterpreter.Instance.getQueryEntitesObject(QueryInterpreter.QueryType.ResolveInitialPlaylist, dt);
             //model_playlist = JsonConvert.DeserializeObject<SongPlaylist>(j.ToString());
             //model_playlist.User = User;
+            return true;
 
         }
         public JArray ConvertToJson()
