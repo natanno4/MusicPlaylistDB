@@ -37,7 +37,7 @@ namespace MusicPlayList.Model
         {
             
             JArray arr = new JArray();
-            arr[0] = JsonConvert.SerializeObject(Playlist);
+            arr.Add( JsonConvert.SerializeObject(Playlist));
             return arr;
         }
         public void SavePlaylistInTable ()

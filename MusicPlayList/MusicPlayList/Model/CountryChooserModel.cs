@@ -133,21 +133,41 @@ namespace MusicPlayList.Model
         }
         public void GetRandomAreas()
         {
-            String query = "SELECT * FROM Songs JOIN Artist JOIN Area WHERE song.artist_id = artist.artist_id AND artist.areaID = area.areaID AND area.areaID IN(" + CheckForRandomAreas() + ")";
-            DataTable dt = executer.ExecuteCommandWithResults(query);
-            // need to continue and pass the param
+            StringBuilder query = new StringBuilder();
+            query.Append("SELECT idSongs,song_name,year,song_hotness,song_duration,song_tempo,artists_from_areas.idArtists,artists_from_areas.artist_name,artists_from_areas.genre,album_name,idAlbum ");
+            query.Append("FROM songs JOIN (SELECT idArtists, artist_name, genre FROM artists WHERE Area_LocationId in " + CheckForRandomAreas() + " GROUP BY idArtists) AS artists_from_areas ");
+            query.Append("join album ");
+            query.Append("WHERE songs.Artists_idArtists = artists_from_areas.idArtists and songs.Album_idAlbum = album.idAlbum GROUP BY idSongs order by idSongs");
+            DataTable dt = executer.ExecuteCommandWithResults(query.ToString());
+            ObservableCollection<string> list = JsonConvert.DeserializeObject<ObservableCollection<string>>(QueryInterpreter.Instance.getQueryEntitesObject(QueryInterpreter.QueryType.ResolveInitialPlaylist, dt));
+            ObservableCollection<Song> songs = new ObservableCollection<Song>();
+            foreach (string item in list)
+            {
+                songs.Add(JsonConvert.DeserializeObject<Song>(item));
+            }
+            model_playlist.Songs = songs;
+            model_playlist.User = User;
         }
+
         public string CheckForRandomAreas()
         {
             StringBuilder q = new StringBuilder();
-            q.Append("SELECT TOP 8 LocationId, location_name ");
-            q.Append("FROM music_area_playlist.area WHERE area.longitude = 0 AND area.latitude = 0");
+            q.Append("SELECT LocationId ");
+            q.Append("FROM music_area_playlist.area WHERE area.longitude = 0 AND area.latitude = 0 order by rand() limit 6");
             DataTable dt = executer.ExecuteCommandWithResults(q.ToString());
             StringBuilder areasID= new StringBuilder();
+            bool flag = true;
             areasID.Append("(");
             foreach (DataRow d in dt.Rows)
             {
-                areasID.Append(d.Field<int>(0).ToString() + ",");
+                if(!flag)
+                {
+                    areasID.Append("," + d.Field<int>(0).ToString());
+                } else
+                {
+                    areasID.Append(d.Field<int>(0).ToString());
+                    flag = false;
+                }
             }
             areasID.Append(")");
             return areasID.ToString();

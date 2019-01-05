@@ -72,7 +72,7 @@ namespace MusicPlayList.Entities
                 Song sng = new Song();
                 sng.ID = row.Field<int>(0);
                 sng.Name = row.Field<string>(1);
-                sng.Year = row.Field<int>(2);
+                sng.Year = row.Field<int>(2).ToString();
                 sng.Hotness = row.Field<float>(3);
                 sng.Duration = row.Field<float>(4);
                 sng.Tempo = row.Field<float>(5);

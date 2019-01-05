@@ -163,6 +163,7 @@
     <Compile Include="View\CountryChooser.xaml.cs">
       <DependentUpon>CountryChooser.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\HotnessConvert.cs" />
     <Compile Include="View\LocationMapChooser.xaml.cs">
       <DependentUpon>LocationMapChooser.xaml</DependentUpon>
     </Compile>

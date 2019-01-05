@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ namespace MusicPlayList.Entities
         private float tempo;
         private Artist artist = new Artist();
         private Album album = new Album();
+
 
         public Album Album
         {
@@ -63,22 +65,26 @@ namespace MusicPlayList.Entities
                 this.name = value;
             }
         }
-        public int Year
+        public string Year
         {
             get
             {
-                return year;
+                if(year == 0)
+                {
+                    return "Unknown";
+                }
+                return year.ToString();
             }
             set
             {
-                this.year = value;
+                 Int32.TryParse(value, out this.year);
             }
         }
         public float Hotness
         {
             get
             {
-                return hotness;
+                return this.hotness;
             }
             set
             {

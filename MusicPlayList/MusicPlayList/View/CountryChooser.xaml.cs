@@ -38,8 +38,8 @@ namespace MusicPlayList.View
         private void RandomBtn_click(object sender, RoutedEventArgs e)
         {
             ((ViewModel.CountryChooserVM)countryChooserVM).ChooseRandom();
-            Window editor = new PlayListEditor();
-            editor.Show();
+            Window playlist = new PlayList();
+            playlist.Show();
         }
     }
     
