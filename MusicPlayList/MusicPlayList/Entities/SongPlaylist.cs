@@ -9,11 +9,20 @@ namespace MusicPlayList.Entities
 {
     class SongPlaylist
     {
-        private String type;
         private ObservableCollection<Song> songsList;
         private int playlist_id;
         private User user;
         
+        public SongPlaylist(SongPlaylist play)
+        {
+            this.ID = play.ID;
+            this.Songs = new ObservableCollection<Song>(play.Songs);
+            this.User = play.User; 
+        }
+
+        public SongPlaylist() { }
+
+
         public User User
         {
             get

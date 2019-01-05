@@ -29,28 +29,32 @@ namespace MusicPlayList.ViewModel
                 };
         }
 
+        public ObservableCollection<string> Vm_CurrentGenres
+        {
+            get
+            {
+                return model.CurrentGeners;
+            }
+            set
+            {
+                model.CurrentGeners = value;
+                NotifyPropertyChanged("Vm_CurrentGenres");
+            }
+        }
+
         public SongPlaylist VM_GetPlayList
         {
-            get { return model.GetPlayList(); }
+            get { return model.CurrentPlayList; }
         }
 
         public String[] VM_Filter_PlayList
         {
             set {
                 this.vm_filter = value;
-                model.Filter_PlayList(this.vm_filter);;
+               // model.Filter_PlayList(this.vm_filter);;
             }
         }
 
-        public String VM_Sort
-        {
-            set
-            {
-                this.vm_sort = value;
-                String query = "not sure yet";
-                model.Sort(query);
-            }
-        }
 
         override
         public void SendParameters()

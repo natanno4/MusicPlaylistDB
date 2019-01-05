@@ -40,6 +40,21 @@ namespace MusicPlayList.ViewModel
             }
         }
 
+        public ObservableCollection<Song> VM_CopyLogsList
+        {
+            get
+            {
+                return playList_model.copyPlaylist.Songs;
+            }
+            set
+            {
+                playList_model.copyPlaylist.Songs = value;
+                NotifyPropertyChanged("VM_LogsList");
+            }
+        }
+
+
+
         override
         public void SendParameters()
         {

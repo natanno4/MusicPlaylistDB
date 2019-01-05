@@ -30,6 +30,7 @@ namespace MusicPlayList.View
 
         private void BtmEdit_Click(object sender, RoutedEventArgs e)
         {
+            ((ViewModel.PlayListVM)playListVM).SendParameters();
             Window editor = new PlayListEditor();
             editor.Show();
             //PlayListEditor editor = (PlayListEditor)Application.Current.MainWindow;
