@@ -25,12 +25,13 @@ namespace MusicPlayList
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainWindowVM();
+            DataContext = this;
         }
-
         private void SubmitBtn_Click(object sender, RoutedEventArgs e)
         {
             Window login = new Login();
+            App.Current.MainWindow = login;
+            this.Close();
             login.Show();
         }
     }

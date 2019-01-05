@@ -19,7 +19,7 @@ namespace MusicPlayList.View
     /// </summary>
     public partial class PlayListEditor : Window
     {
-        private ViewModel.IVM editorVM = ViewModel.BaseVM.instance._PlayListEditorVM;
+        private ViewModel.IVM editorVM = ViewModel.BaseVM.GetInstance._PlayListEditorVM;
 
         public PlayListEditor()
         {

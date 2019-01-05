@@ -20,7 +20,7 @@ namespace MusicPlayList.View
     public partial class PlayList : Window
     {
 
-        private ViewModel.IVM playListVM = ViewModel.BaseVM.instance._PlayListVM;
+        private ViewModel.IVM playListVM = ViewModel.BaseVM.GetInstance._PlayListVM;
 
         public PlayList()
         {

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MusicPlayList.Model
+namespace MusicPlayList.Entities
 {
-    class MainWindowModel
+    class ExtensionInfo
     {
         public string Extension { get; set; }
         public bool IsChecked { get; set; }
@@ -15,7 +15,7 @@ namespace MusicPlayList.Model
         public ExtensionInfo(string extension, int c)
         {
             Extension = extension;
-            Count = c; 
+            Count = c;
         }
     }
 }

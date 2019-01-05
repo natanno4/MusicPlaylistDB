@@ -55,7 +55,7 @@ namespace MusicPlayList.ViewModel
         override
         public void SendParameters()
         {
-            BaseVM.instance.SendParam(BaseVM.ViewModels.Login, BaseVM.ViewModels.PlayList);
+            BaseVM.GetInstance.SendParam(BaseVM.ViewModels.Login, BaseVM.ViewModels.LocationMap);
         }
 
         override

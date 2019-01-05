@@ -19,7 +19,7 @@ namespace MusicPlayList.View
     /// </summary>
     public partial class LocationMapChooser : Window
     {
-        private ViewModel.IVM locationChooserVM = ViewModel.BaseVM.instance._LocationMapChoosenVM;
+        private ViewModel.IVM locationChooserVM = ViewModel.BaseVM.GetInstance._LocationMapChoosenVM;
         public LocationMapChooser()
         {
             InitializeComponent();
@@ -28,8 +28,18 @@ namespace MusicPlayList.View
 
         private void BtnNext_Click(object sender, RoutedEventArgs e)
         {
-            Window editor = new PlayListEditor();
-            editor.Show();
+            ((ViewModel.LocationMapChooserVM)locationChooserVM).Finish();
+            Window chooser = new CountryChooser();
+            chooser.Show();
         }
+        private void OnMapClick(object sender, MouseEventArgs e)
+        {
+            Point p = e.GetPosition(this);
+            double top = border.Margin.Top + panel.Margin.Top + label.Height + separtor.Height + gridMap.Margin.Top + worldMap.Margin.Top;
+            double left = border.Margin.Left + panel.Margin.Left + gridMap.Margin.Left + worldMap.Margin.Left;
+            ((ViewModel.LocationMapChooserVM)locationChooserVM).onChooseSpot(p.X, p.Y, top, left);
+
+        }
+       
     }
 }

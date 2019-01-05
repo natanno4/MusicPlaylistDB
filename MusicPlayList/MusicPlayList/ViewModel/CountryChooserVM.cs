@@ -69,7 +69,7 @@ namespace MusicPlayList.ViewModel
         override
         public void SendParameters()
         {
-            BaseVM.instance.SendParam(BaseVM.ViewModels.AreaChooser, BaseVM.ViewModels.PlayList);
+            BaseVM.GetInstance.SendParam(BaseVM.ViewModels.AreaChooser, BaseVM.ViewModels.PlayList);
         }
         
     }

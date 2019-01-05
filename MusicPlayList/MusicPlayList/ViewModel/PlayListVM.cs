@@ -28,7 +28,7 @@ namespace MusicPlayList.ViewModel
         override
         public void SendParameters()
         {
-            BaseVM.instance.SendParam(BaseVM.ViewModels.PlayList, BaseVM.ViewModels.PlayListEditor);
+            BaseVM.GetInstance.SendParam(BaseVM.ViewModels.PlayList, BaseVM.ViewModels.PlayListEditor);
         }
         override
         public JArray GetParameters()

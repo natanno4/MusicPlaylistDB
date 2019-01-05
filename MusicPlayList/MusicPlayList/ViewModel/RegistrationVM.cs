@@ -18,10 +18,8 @@ namespace MusicPlayList.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
         private RegistrationModel model;
 
-        private TextBox username;
-        private TextBox password;
+        string error = "";
 
-        private TextBox messageToClient;
         /// <summary>
         /// Initializes a new instance of the <see cref="RegistrationVM"/> class.
         /// </summary>
@@ -37,34 +35,39 @@ namespace MusicPlayList.ViewModel
 
         public Boolean CheckRegistraion()
         {
-            Username = username.Text;
-            Password = password.Text;
-            if (Username.Equals("")|| Password.Equals(""))
+            if (Username == null || Password == null)
             {
-                messageToClient.AppendText("One or More Fields missing");
+                string temp = "One or More Fields missing";
+                error = temp;
       
                 return false;
             }
-            messageToClient.Clear();
+            error = "";
             if (model.SignUp())
             {
-                // so continue to next window
-                SendParameters();
-                
                 // base class send parametres to next view model
+                SendParameters();
+                // so continue to next window   
                 return true;
             } else
             {
-                messageToClient.Clear();
-                messageToClient.AppendText("Error was occured, please try again");
+                
+                string temp = "Error was occured, please try again";
+                error = temp;
                 return false;
-                // try again
             }
         }
+        public void resetinput()
+        {
+            Username = "";
+            Password = "";
+            error = "";
+        }
+
         override
         public void SendParameters()
         {
-            BaseVM.instance.SendParam(BaseVM.ViewModels.Registration, BaseVM.ViewModels.LocationMap);
+            BaseVM.GetInstance.SendParam(BaseVM.ViewModels.Registration, BaseVM.ViewModels.LocationMap);
         }
         override
         public JArray GetParameters() 

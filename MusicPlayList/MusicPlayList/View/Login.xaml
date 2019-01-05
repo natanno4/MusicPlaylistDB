@@ -11,7 +11,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
             <Label Content="Password" Foreground="White"/>
             <PasswordBox Name="txtPassword" Background="#545d6a" Foreground="White" FontSize="18"/>
             <TextBlock Text="{Binding VM_LblError}" Name="LblError" Foreground="Red"/>
-            <Button Name="btnSubmit" Click="btnSubmit_Click" Content="Submit" Margin="180 40" Background="#545d6a" Foreground="White" FontSize="20"/>
+            <Button Name="btnSubmit" Click="BtnSubmit_Click" Content="Submit" Margin="180 40" Background="#545d6a" Foreground="White" FontSize="20"/>
             <Button Content="SignUp" Cursor="Hand" Click="BtnSignUp_Click" HorizontalAlignment="Center" Margin="258,0,259,0">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">

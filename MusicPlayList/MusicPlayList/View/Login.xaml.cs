@@ -19,15 +19,28 @@ namespace MusicPlayList.View
     /// </summary>
     public partial class Login : Window
     {
-        private ViewModel.IVM loginVM = ViewModel.BaseVM.instance._LoginVM;
+
+        private ViewModel.IVM loginVM;
 
         public Login()
         {
             InitializeComponent();
-            this.DataContext = loginVM;
+            try
+            {
+                ViewModel.BaseVM baseVM = ViewModel.BaseVM.GetInstance;
+                loginVM = baseVM._LoginVM;
+                this.DataContext = loginVM;
+
+            }
+            catch (TypeInitializationException tiex)
+            {
+                var ex = tiex.InnerException;
+
+                Console.WriteLine("Exception from type init: '{0}'", ex.Message);
+            }
         }
 
-        private void SubmitBtn_Click(object sender, RoutedEventArgs e)
+        private void BtnSubmit_Click(object sender, RoutedEventArgs e)
         {
             // TODO: need to check if the user and password exist and connect him if it does else error message
             Boolean result = ((ViewModel.LoginVM)loginVM).Confirm();

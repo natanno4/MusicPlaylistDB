@@ -140,22 +140,23 @@
     <Compile Include="Entities\Album.cs" />
     <Compile Include="Entities\Area.cs" />
     <Compile Include="Entities\Artist.cs" />
+    <Compile Include="Entities\ExtensionInfo.cs" />
     <Compile Include="Entities\Map.cs" />
     <Compile Include="Entities\QueryInterpreter.cs" />
     <Compile Include="Entities\Song.cs" />
     <Compile Include="Entities\SongPlaylist.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Model\CountryChooserModel.cs" />
     <Compile Include="Model\LocationMapChooserModel.cs" />
     <Compile Include="Model\LoginModel.cs" />
-    <Compile Include="Model\MainWindowModel.cs" />
     <Compile Include="Model\PlayListEditorModel.cs" />
     <Compile Include="Model\PlayListModel.cs" />
     <Compile Include="Model\RegistrationModel.cs" />
     <Compile Include="ViewModel\BaseVM.cs" />
+    <Compile Include="ViewModel\CountryChooserVM.cs" />
     <Compile Include="ViewModel\IVM.cs" />
     <Compile Include="ViewModel\LocationMapChooserVM.cs" />
     <Compile Include="ViewModel\LoginVM.cs" />
-    <Compile Include="ViewModel\MainWindowVM.cs" />
     <Compile Include="ViewModel\PlayListEditorVM.cs" />
     <Compile Include="ViewModel\PlayListVM.cs" />
     <Compile Include="ViewModel\RegistrationVM.cs" />
@@ -233,6 +234,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -241,9 +243,16 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <Folder Include="Service References\" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="greenMap.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="musicworld.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

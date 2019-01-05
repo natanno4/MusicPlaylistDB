@@ -40,7 +40,7 @@ namespace MusicPlayList.DataBase
         public int ExecuteQueryWithoutDisconnect(String query)
         {
             MySqlCommand command = ResolveCommand(query);
-            int s;
+            int s = 0;
             try
             {
                 s = command.ExecuteNonQuery();
@@ -84,6 +84,8 @@ namespace MusicPlayList.DataBase
             MySqlDataReader reader = command.ExecuteReader();
             DataTable dt = new DataTable();
             dt.Load(reader);
+            reader.Close();
+            this.connection.Close();
             return dt;
         }
         // function that might be, for now leave it

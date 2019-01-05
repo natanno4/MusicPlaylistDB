@@ -19,7 +19,7 @@ namespace MusicPlayList.View
     /// </summary>
     public partial class CountryChooser : Window
     {
-        private ViewModel.IVM countryChooserVM = ViewModel.BaseVM.instance._CountryChooserVM;
+        private ViewModel.IVM countryChooserVM = ViewModel.BaseVM.GetInstance._CountryChooserVM;
 
         public CountryChooser()
         {
