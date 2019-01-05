@@ -19,21 +19,21 @@ namespace MusicPlayList.Model
     class PlayListEditorModel : INotifyPropertyChanged
     {
         /// <summary>
-        /// The model playlist
+        /// The original playlist fromthe data base
+        /// </summary>
+        private SongPlaylist full_playlist;
+        /// <summary>
+        /// The model playlist from Playlist
         /// </summary>
         private SongPlaylist model_playlist;
         /// <summary>
-        /// The model playlist
+        /// The working playlist
         /// </summary>
         private SongPlaylist new_playlist;
         /// <summary>
         /// The data base
         /// </summary>
         private DB_Executer dataBase;
-        /// <summary>
-        /// The value
-        /// </summary>
-        private string value;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PlayListEditorModel"/> class.
@@ -52,27 +52,63 @@ namespace MusicPlayList.Model
         /// Gets the play list.
         /// </summary>
         /// <returns></returns>
-        public SongPlaylist GetPlayList()
+        public SongPlaylist OriginalPlayList
         {
-            return model_playlist;
+            get
+            {
+                return model_playlist;
+            }
+            set
+            {
+                model_playlist = value;
+            }
+            
+        }
+
+        public SongPlaylist CurrentPlayList
+        {
+            get
+            {
+                return new_playlist;
+            }
+            set
+            {
+                new_playlist = value;
+            }
+
+        }
+
+        public SongPlaylist FirstPlayList
+        {
+            get
+            {
+                return full_playlist;
+            }
+            set
+            {
+                full_playlist = value;
+            }
+
         }
 
         /// <summary>
         /// Filters the specified filter.
         /// </summary>
         /// <param name="filter">The filter.</param>
-        public void Filter_PlayList(String[] filter)
+        public void Filter_PlayList(ObservableCollection<String> filter)
         {
             int size = filter.Count();
             new_playlist = new SongPlaylist();
-            //new_playlist.ID(model_playlist.ID);
+            new_playlist.ID = model_playlist.ID;
+            new_playlist.User = model_playlist.User;
+            String[] array_filter = filter.ToArray();
             Dictionary<String, String> map = new Dictionary<String, String>();
             /// <summary>
             /// Iterate over the filter and put the type subject and its type in a dictionary.
             /// </summary>
             for (int i = 0; i < size; i++)
             {
-                String[] words = filter[i].Split(':');
+                String[] words = array_filter[i].Split(':');
                 map.Add(words[0], words[1]);
             }
             /// <summary>
@@ -106,22 +142,24 @@ namespace MusicPlayList.Model
 
         }
 
-        public void Sort(String sort)
+       /** public void Sort(String sort)
         {
             //didnt do yet
-        }
+        }**/
 
         public JArray ConvertToJson()
         {
             JArray j = new JArray();
-            j[0] = JsonConvert.SerializeObject(new_playlist);
+            j[0] = JsonConvert.SerializeObject(CurrentPlayList);
+            j[1] = JsonConvert.SerializeObject(FirstPlayList);
             return j;
         }
 
         public void ConvertFromJson(JArray j)
         {
-            model_playlist = JsonConvert.DeserializeObject<SongPlaylist>(j[0].ToString());
-            new_playlist = model_playlist;
+            OriginalPlayList = JsonConvert.DeserializeObject<SongPlaylist>(j[0].ToString());
+            CurrentPlayList = OriginalPlayList;
+            FirstPlayList = JsonConvert.DeserializeObject<SongPlaylist>(j[1].ToString());
         }
     }
     

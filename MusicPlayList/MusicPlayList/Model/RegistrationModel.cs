@@ -32,7 +32,7 @@ namespace MusicPlayList.Model
             {
                 return false;
             }
-            String query = "INSERT INTO Users (user_name, password) VALUES ('" +  Username + "','" + Password + "')";
+            String query = "INSERT INTO Users (user name, password) VALUES (" + Username + "," + Password + ")";
             if (executer.ExecuteCommandWithoutResult(query) != -1)
             {
                 getIDFromTable();
@@ -45,7 +45,7 @@ namespace MusicPlayList.Model
         public JArray ConvertToJson()
         {
             JArray arr = new JArray();
-            arr.Add(JsonConvert.SerializeObject(this.user));
+            arr[0] = JsonConvert.SerializeObject(this.user);
             return arr;
         }
         public void ConvertFromJson()

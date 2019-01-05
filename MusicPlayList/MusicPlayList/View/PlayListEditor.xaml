@@ -8,10 +8,6 @@
         Title="PlayListEditor" Height="450" Width="800"  Background="#04c582">
     <Border Background="#2e3137" CornerRadius="20" Margin="15">
         <Grid TextBlock.FontSize="14">
-            <ComboBox Margin="75,46,525,319" ItemsSource="{Binding Path=Genre}"
-                  DisplayMemberPath="Name"
-                  SelectedValuePath="Name"
-                  SelectedValue="{Binding Path=Genre}" AutomationProperties.Name="GenreList" />
             <Grid Margin="272,42,8,18" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -43,8 +39,7 @@
                 </DataGrid>
                 <Button  x:Name="RemoveBtn" Content="Remove" Grid.Row="5" Click="RemoveBtn_Click" IsEnabled="{Binding SelectedItems.Count, ElementName=lstBox}" Grid.ColumnSpan="2" />
             </Grid>
-            <Button Content="Save" Height="23" HorizontalAlignment="Left" Margin="25,344,0,0" Name="btnSave" VerticalAlignment="Top" Width="70" Click="SubmitBtn_Click" RenderTransformOrigin="0.586,-0.043" />
-            <Label Content="Genre:" HorizontalAlignment="Left" Height="34" Margin="10,42,0,0" VerticalAlignment="Top" Width="60" Foreground="White"/>
+            <Button Content="Save" Height="23" HorizontalAlignment="Left" Margin="25,344,0,0" Name="btnSave" VerticalAlignment="Top" Width="70" Click="Save_Click" RenderTransformOrigin="0.586,-0.043" />
         </Grid>
     </Border>
 </Window>

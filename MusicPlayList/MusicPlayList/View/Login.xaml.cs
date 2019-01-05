@@ -19,7 +19,7 @@ namespace MusicPlayList.View
     /// </summary>
     public partial class Login : Window
     {
-        private ViewModel.IVM loginVM = new ViewModel.LoginVM();
+        private ViewModel.IVM loginVM = ViewModel.BaseVM.instance._LoginVM;
 
         public Login()
         {
@@ -27,7 +27,7 @@ namespace MusicPlayList.View
             this.DataContext = loginVM;
         }
 
-        private void BtnSubmit_Click(object sender, RoutedEventArgs e)
+        private void SubmitBtn_Click(object sender, RoutedEventArgs e)
         {
             // TODO: need to check if the user and password exist and connect him if it does else error message
             Boolean result = ((ViewModel.LoginVM)loginVM).Confirm();

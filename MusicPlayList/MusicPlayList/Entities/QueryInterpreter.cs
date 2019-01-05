@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,23 +15,24 @@ namespace MusicPlayList.Entities
         private QueryInterpreter() { }
         public static QueryInterpreter Instance { get; } = new QueryInterpreter();
         
-        public string getQueryEntitesObject(QueryType q, DataTable dt)
+        public JObject getQueryEntitesObject(QueryType q, DataTable dt)
         {
+            JObject obj = null;
             switch(q)
             {
                 case QueryType.AreaSongsCount:
                     {
-                        return GetAreaSongsCount(dt);
+                        obj = GetAreaSongsCount(dt);
                         break;
                     }
                 case QueryType.ResolveInitialPlaylist:
                     {
-                      //  obj = getPlaylist(dt);
+                        obj = getPlaylist(dt);
                         break;
                     }
                 case QueryType.GetUser:
                     {
-                        //obj = getUser(dt);
+                        obj = getUser(dt);
                         break;
                     }
                 default:
@@ -40,7 +40,7 @@ namespace MusicPlayList.Entities
                         return null;
                     }
             }
-            return null;
+            return obj;
         }
 
         private JObject getUser(DataTable dt)
@@ -51,19 +51,18 @@ namespace MusicPlayList.Entities
             us.Password = dt.Rows[0].Field<String>(2);
             return JObject.FromObject(us);
         }
-        private string GetAreaSongsCount(DataTable dt)
+        private JObject GetAreaSongsCount(DataTable dt)
         {
-            Dictionary<string, int> song_in_area = new Dictionary<string, int>();
+            Dictionary<Area, int> song_in_area = new Dictionary<Area, int>();
             foreach (DataRow row in dt.Rows)
             {
                 Area a = new Area();
                 a.Id = row.Field<int>(0);
                 a.AreaName = row.Field<string>(1);
-                int count = (int)row.Field<Int64>(2);
-                song_in_area.Add(JsonConvert.SerializeObject(a), count);
+                int count = row.Field<int>(2);
+                song_in_area.Add(a, count);
             }
-             string json = JsonConvert.SerializeObject(song_in_area, Formatting.Indented);
-            return json;
+            return JObject.FromObject(song_in_area);
         }
         private JObject getPlaylist(DataTable dt)
         {

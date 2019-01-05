@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MusicPlayList.Entities
+namespace MusicPlayList.Model
 {
-    class ExtensionInfo
+    class MainWindowModel
     {
         public string Extension { get; set; }
         public bool IsChecked { get; set; }
