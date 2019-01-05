@@ -70,7 +70,7 @@ namespace MusicPlayList.Model
         public JArray ConvertToJson()
         {
             JArray arr = new JArray();
-            arr[0] = JsonConvert.SerializeObject(model_playlist);
+            arr.Add(JsonConvert.SerializeObject(model_playlist));
             return arr;
         }
         public Dictionary<Area, int> AreaToNumberOfSongs
