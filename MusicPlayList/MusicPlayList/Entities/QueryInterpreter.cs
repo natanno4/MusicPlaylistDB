@@ -23,12 +23,10 @@ namespace MusicPlayList.Entities
                 case QueryType.AreaSongsCount:
                     {
                         return GetAreaSongsCount(dt);
-                        break;
                     }
                 case QueryType.ResolveInitialPlaylist:
                     {
-                      //  obj = getPlaylist(dt);
-                        break;
+                        return getSongsForPlayList(dt);
                     }
                 case QueryType.GetUser:
                     {
@@ -65,10 +63,9 @@ namespace MusicPlayList.Entities
              string json = JsonConvert.SerializeObject(song_in_area, Formatting.Indented);
             return json;
         }
-        private JObject getPlaylist(DataTable dt)
+        private string getSongsForPlayList(DataTable dt)
         {
-            SongPlaylist playlist = new SongPlaylist();
-            ObservableCollection<Song> list = new ObservableCollection<Song>();
+            ObservableCollection<string> list = new ObservableCollection<string>();
 
             foreach (DataRow row in dt.Rows)
             {
@@ -76,18 +73,17 @@ namespace MusicPlayList.Entities
                 sng.ID = row.Field<int>(0);
                 sng.Name = row.Field<string>(1);
                 sng.Year = row.Field<int>(2);
-                sng.Hotness = row.Field<Double>(3);
-                sng.Duration = row.Field<Double>(4);
-                sng.Tempo = row.Field<Double>(5);
+                sng.Hotness = row.Field<float>(3);
+                sng.Duration = row.Field<float>(4);
+                sng.Tempo = row.Field<float>(5);
                 sng.Artist.ID = row.Field<string>(6);
                 sng.Artist.Name = row.Field<string>(7);
                 sng.Artist.Genre = row.Field<String>(8);
-                sng.Album.ID = row.Field<int>(9);
-                sng.Album.Name = row.Field<string>(10);
-                list.Add(sng);
+                sng.Album.ID = row.Field<int>(10);
+                sng.Album.Name = row.Field<string>(9);
+                list.Add(JsonConvert.SerializeObject(sng));
             }
-            playlist.Songs = list;
-            return JObject.FromObject(playlist);
+            return JsonConvert.SerializeObject(list, Formatting.Indented);
         }
     }
 }

@@ -11,9 +11,9 @@ namespace MusicPlayList.Entities
         private int song_id;
         private String name;
         private int year;
-        private Double hotness;
-        private Double duration;
-        private Double tempo;
+        private float hotness;
+        private float duration;
+        private float tempo;
         private Artist artist = new Artist();
         private Album album = new Album();
 
@@ -74,7 +74,7 @@ namespace MusicPlayList.Entities
                 this.year = value;
             }
         }
-        public Double Hotness
+        public float Hotness
         {
             get
             {
@@ -85,7 +85,7 @@ namespace MusicPlayList.Entities
                 this.hotness = value;
             }
         }
-        public Double Duration
+        public float Duration
         {
             get
             {
@@ -96,7 +96,7 @@ namespace MusicPlayList.Entities
                 this.duration = value;
             }
         }
-        public Double Tempo
+        public float Tempo
         {
             get
             {

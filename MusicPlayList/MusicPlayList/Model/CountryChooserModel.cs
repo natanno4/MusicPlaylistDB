@@ -21,7 +21,7 @@ namespace MusicPlayList.Model
 
 
 
-        private SongPlaylist model_playlist;
+        private SongPlaylist model_playlist = new SongPlaylist();
         public void ConvertFromJson(JArray j)
         {
             User = JsonConvert.DeserializeObject<User>(j[0].ToString());
@@ -92,9 +92,14 @@ namespace MusicPlayList.Model
             query.Append("join album ");
             query.Append("WHERE songs.Artists_idArtists = artists_from_areas.idArtists and songs.Album_idAlbum = album.idAlbum GROUP BY idSongs order by idSongs");
             DataTable dt = executer.ExecuteCommandWithResults(query.ToString());
-            //JObject j = QueryInterpreter.Instance.getQueryEntitesObject(QueryInterpreter.QueryType.ResolveInitialPlaylist, dt);
-            //model_playlist = JsonConvert.DeserializeObject<SongPlaylist>(j.ToString());
-            //model_playlist.User = User;
+            ObservableCollection<string> list = JsonConvert.DeserializeObject<ObservableCollection<string>>(QueryInterpreter.Instance.getQueryEntitesObject(QueryInterpreter.QueryType.ResolveInitialPlaylist, dt));
+            ObservableCollection<Song> songs = new ObservableCollection<Song>();
+            foreach (string item in list)
+            {
+                songs.Add(JsonConvert.DeserializeObject<Song>(item));
+            }
+            model_playlist.Songs = songs;
+            model_playlist.User = User;
             return true;
 
         }

@@ -1,7 +1,9 @@
-﻿using MusicPlayList.Model;
+﻿using MusicPlayList.Entities;
+using MusicPlayList.Model;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -25,6 +27,19 @@ namespace MusicPlayList.ViewModel
                     this.PropertyChanged?.Invoke(this, e);
                 };
         }
+
+        public ObservableCollection<Song> VM_LogsList {
+            get
+            {
+                return playList_model.Playlist.Songs;
+            }
+            set
+            {
+                playList_model.Playlist.Songs = value;
+                NotifyPropertyChanged("VM_LogsList");
+            }
+        }
+
         override
         public void SendParameters()
         {
