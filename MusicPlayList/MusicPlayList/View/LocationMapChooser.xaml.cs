@@ -30,6 +30,8 @@ namespace MusicPlayList.View
         {
             ((ViewModel.LocationMapChooserVM)locationChooserVM).Finish();
             Window chooser = new CountryChooser();
+            App.Current.MainWindow = chooser;
+            this.Close();
             chooser.Show();
         }
         private void OnMapClick(object sender, MouseEventArgs e)

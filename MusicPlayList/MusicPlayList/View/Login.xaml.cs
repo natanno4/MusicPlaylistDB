@@ -37,6 +37,8 @@ namespace MusicPlayList.View
             if (result)
             {
                 Window playList = new PlayList();
+                App.Current.MainWindow = playList;
+                this.Close();
                 playList.Show();
             }
         }
@@ -44,6 +46,8 @@ namespace MusicPlayList.View
         private void BtnSignUp_Click(object sender, RoutedEventArgs e)
         {
             Window reg = new Registration();
+            App.Current.MainWindow = reg;
+            this.Close();
             reg.Show();
         }
 

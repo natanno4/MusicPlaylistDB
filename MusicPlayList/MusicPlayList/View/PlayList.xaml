@@ -7,13 +7,14 @@
         mc:Ignorable="d"
         Title="PlayList" Height="450" Width="900" Background="#04c582">
     <Border Background="#2e3137" CornerRadius="20" Margin="15">
-        
+
         <Grid>
 
             <!--<Window.Resources>
                 <ResourceDictionary>
                     <local: x:Key="NameToBrushConverter"/>
-                </ResourceDictionary>--><!--
+                </ResourceDictionary>-->
+            <!--
             </Window.Resources>-->
             <Grid TextBlock.FontSize="14" Background="#2e3237" Margin="15,0">
 
@@ -75,7 +76,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
                 <Button Content="Edit" Height="31" HorizontalAlignment="Left" Name="btnEdit" Margin="0,283.6,0,17.4" Width="380" Click="BtmEdit_Click" RenderTransformOrigin="0.586,-0.043" Grid.Row="3" Grid.ColumnSpan="2" />
-                <Button Content="Exit" Height="31" HorizontalAlignment="Left" Margin="380,283.6,0,0" Name="btnExit" VerticalAlignment="Top" Width="453" Click="BtmExit_Click" Grid.Row="3" Grid.Column="1" />
+                <Button Content="Save And Exit" Height="31" HorizontalAlignment="Left" Margin="380,283.6,0,0" Name="btnExit" VerticalAlignment="Top" Width="453" Click="BtmExit_Click" Grid.Row="3" Grid.Column="1" />
             </Grid>
         </Grid>
     </Border>

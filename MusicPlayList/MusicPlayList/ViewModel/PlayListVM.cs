@@ -72,7 +72,7 @@ namespace MusicPlayList.ViewModel
         }
         public void SaveAndExit()
         {
-            this.playList_model.SavePlaylistInTable();
+            this.playList_model.savePlaylist();
 
         }
     }

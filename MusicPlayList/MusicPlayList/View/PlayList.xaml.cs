@@ -32,16 +32,18 @@ namespace MusicPlayList.View
         {
             ((ViewModel.PlayListVM)playListVM).SendParameters();
             Window editor = new PlayListEditor();
+            App.Current.MainWindow = editor;
+            this.Close();
             editor.Show();
         }
 
         private void BtmExit_Click(object sender, RoutedEventArgs e)
         {
-            Window login = new Login();
-            login.Show();
-            //Login login = (Login)Application.Current.MainWindow;
-            //login.Show();
-            //this.Close();
+            ((ViewModel.PlayListVM)playListVM).SaveAndExit();
+            Window mainWin = new MainWindow();
+            App.Current.MainWindow = mainWin;
+            this.Close();
+            mainWin.Show();
         }
     }
 }

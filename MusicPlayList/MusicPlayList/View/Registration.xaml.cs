@@ -39,6 +39,8 @@ namespace MusicPlayList.View
             if (result)
             {
                 Window chooser = new LocationMapChooser();
+                App.Current.MainWindow = chooser;
+                this.Close();
                 chooser.Show();
             }
         }

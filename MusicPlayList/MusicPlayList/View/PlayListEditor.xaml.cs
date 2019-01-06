@@ -35,6 +35,8 @@ namespace MusicPlayList.View
         {
             editorVM.SendParameters();
             Window playList = new PlayList();
+            App.Current.MainWindow = playList;
+            this.Close();
             playList.Show();
         }
 

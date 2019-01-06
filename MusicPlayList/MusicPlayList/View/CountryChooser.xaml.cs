@@ -32,6 +32,8 @@ namespace MusicPlayList.View
             if (((ViewModel.CountryChooserVM)countryChooserVM).chooseCountry())
             {
                 Window playlist = new PlayList();
+                App.Current.MainWindow = playlist;
+                this.Close();
                 playlist.Show();
             }
         }
@@ -39,6 +41,8 @@ namespace MusicPlayList.View
         {
             ((ViewModel.CountryChooserVM)countryChooserVM).ChooseRandom();
             Window playlist = new PlayList();
+            App.Current.MainWindow = playlist;
+            this.Close();
             playlist.Show();
         }
     }
