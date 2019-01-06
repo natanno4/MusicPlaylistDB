@@ -29,7 +29,7 @@ namespace MusicPlayList.ViewModel
                 };
         }
 
-        public ObservableCollection<string> Vm_CurrentGenres
+        public ObservableCollection<ExtensionInfo> Vm_CurrentGenres
         {
             get
             {
@@ -45,8 +45,19 @@ namespace MusicPlayList.ViewModel
         public SongPlaylist VM_GetPlayList
         {
             get { return model.CurrentPlayList; }
+            set
+            {
+                this.model.CurrentPlayList = value;
+                NotifyPropertyChanged("VM_GetPlayList");
+            }
         }
 
+
+        public void Filter()
+        {
+            this.model.Filter();
+        }
+        /*
         public String[] VM_Filter_PlayList
         {
             set {
@@ -54,7 +65,7 @@ namespace MusicPlayList.ViewModel
                // model.Filter_PlayList(this.vm_filter);;
             }
         }
-
+        */
 
         override
         public void SendParameters()

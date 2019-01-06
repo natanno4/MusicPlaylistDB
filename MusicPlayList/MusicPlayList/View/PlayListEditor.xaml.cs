@@ -40,5 +40,10 @@ namespace MusicPlayList.View
             Window playList = new PlayList();
             playList.Show();
         }
+
+        private void FilterBtn_click(object sender, RoutedEventArgs e)
+        {
+            ((ViewModel.PlayListEditorVM)editorVM).Filter();
+        }
     }
 }

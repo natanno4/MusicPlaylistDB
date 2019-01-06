@@ -43,7 +43,7 @@ namespace MusicPlayList.Model
             dataBase = new DB_Executer();
         }
 
-        public ObservableCollection<string> CurrentGeners
+        public ObservableCollection<ExtensionInfo> CurrentGeners
         {
             get;set;
         }
@@ -84,7 +84,7 @@ namespace MusicPlayList.Model
 
         }
 
-        public SongPlaylist FirstPlayList
+        public SongPlaylist CopyCurrentPlayList
         {
             get
             {
@@ -94,9 +94,46 @@ namespace MusicPlayList.Model
             {
                 full_playlist = value;
             }
+        }
+
+        public void Filter()
+        {
+            List<string> genres = choosenGenres();
+            if (genres.Count == 0)
+            {
+                return;
+            }
+            ObservableCollection<Song> temp = new ObservableCollection<Song>(CurrentPlayList.Songs);
+            CurrentPlayList.Songs.Clear();
+            foreach (Song song in temp)
+            {
+                if (genres.Contains(song.Artist.Genre))
+                {
+                    CurrentPlayList.Songs.Add(song);
+                }
+            }
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("VM_GetPlayList"));
+            CurrentGeners.Clear();
+            resolveGenres(CurrentPlayList);
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Vm_CurrentGenres"));
 
         }
 
+        private List<string> choosenGenres()
+        {
+            List<String> genres = new List<string>(); 
+            foreach(ExtensionInfo ext in CurrentGeners)
+            {
+                if(ext.IsChecked)
+                {
+                    genres.Add(ext.Extension);
+                    ext.IsChecked = false;
+                }
+            }
+            return genres;
+        }
+
+        /*
         /// <summary>
         /// Filters the specified filter.
         /// </summary>
@@ -145,8 +182,8 @@ namespace MusicPlayList.Model
                 }
                 this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Filter"));
             }
-
-        }
+           
+        }*/
 
         /** public void Sort(String sort)
          {
@@ -165,6 +202,8 @@ namespace MusicPlayList.Model
             OriginalPlayList = JsonConvert.DeserializeObject<SongPlaylist>(j[0].ToString());
             CurrentPlayList = OriginalPlayList;
             CurrentPlayList = JsonConvert.DeserializeObject<SongPlaylist>(j[1].ToString());
+            CopyCurrentPlayList = new SongPlaylist(CurrentPlayList);
+            CurrentGeners = new ObservableCollection<ExtensionInfo>();
             resolveGenres(CurrentPlayList);
         }
 
@@ -172,12 +211,11 @@ namespace MusicPlayList.Model
         public void resolveGenres(SongPlaylist playList)
         {
             bool flag = true;
-            CurrentGeners = new ObservableCollection<string>();
             foreach (Song item in playList.Songs)
             {
-                foreach (string str in CurrentGeners)
+                foreach (ExtensionInfo ex in CurrentGeners)
                 {
-                    if(str.Equals(item.Artist.Genre))
+                    if(ex.Extension.Equals(item.Artist.Genre))
                     {
                         flag = false;
                         break;
@@ -185,7 +223,7 @@ namespace MusicPlayList.Model
                 }
                 if (flag)
                 {
-                    CurrentGeners.Add(item.Artist.Genre);
+                    CurrentGeners.Add(new ExtensionInfo(item.Artist.Genre, 0));
                 }
                 flag = true;
 

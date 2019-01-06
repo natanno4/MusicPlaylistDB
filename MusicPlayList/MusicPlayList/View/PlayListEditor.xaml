@@ -72,17 +72,26 @@
                 </DataGrid>
                 <Button  x:Name="RemoveBtn" Content="Remove" Grid.Row="5" Click="RemoveBtn_Click" IsEnabled="{Binding SelectedItems.Count, ElementName=lstBox}" Grid.ColumnSpan="2" />
             </Grid>
-            <Button Content="submit" Height="23" HorizontalAlignment="Left" Margin="25,344,0,0" Name="btnSave" VerticalAlignment="Top" Width="70" Click="SubmitBtn_Click" RenderTransformOrigin="0.586,-0.043" />
+            <Button Content="submit" Height="27" HorizontalAlignment="Left" Margin="10,345,0,0" Name="btnSave" VerticalAlignment="Top" Width="55" Click="SubmitBtn_Click" RenderTransformOrigin="0.586,-0.043" />
             <Label Content="Genre:" HorizontalAlignment="Left" Height="34" Margin="94,22,0,0" VerticalAlignment="Top" Width="60" Foreground="White" RenderTransformOrigin="1.758,0.354"/>
             <Grid HorizontalAlignment="Left" Height="109" Margin="53,61,0,0" VerticalAlignment="Top" Width="156">
                 <ListBox Background="#2e3137" SelectionMode="Multiple"  Foreground="White" ItemsSource="{Binding Vm_CurrentGenres}" >
-                    <!--<ListBox.ItemContainerStyle>
+                    <ListBox.ItemContainerStyle>
                         <Style TargetType="ListBoxItem">
-                            <Setter Property="IsSelected" Value="{Binding IsSelected}"/>
+                            <Setter Property="IsSelected" Value="{Binding IsChecked}"/>
                         </Style>
-                    </ListBox.ItemContainerStyle>-->
+                    </ListBox.ItemContainerStyle>
+
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <ListBoxItem Content="{Binding Extension}"></ListBoxItem>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
                 </ListBox>
             </Grid>
+            <Button x:Name="button" Click="FilterBtn_click" Content="OK" HorizontalAlignment="Left" Margin="94,345,0,0" VerticalAlignment="Top" Width="55" Height="27">
+            </Button>
+            <Button x:Name="button1" Content="Button" HorizontalAlignment="Left" Margin="192,350,0,0" VerticalAlignment="Top" Width="75"/>
         </Grid>
     </Border>
 </Window>

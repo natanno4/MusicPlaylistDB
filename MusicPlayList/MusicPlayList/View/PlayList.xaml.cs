@@ -33,9 +33,6 @@ namespace MusicPlayList.View
             ((ViewModel.PlayListVM)playListVM).SendParameters();
             Window editor = new PlayListEditor();
             editor.Show();
-            //PlayListEditor editor = (PlayListEditor)Application.Current.MainWindow;
-            //editor.Show();
-            //this.Close();
         }
 
         private void BtmExit_Click(object sender, RoutedEventArgs e)
