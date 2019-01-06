@@ -45,6 +45,7 @@ namespace MusicPlayList.View
 
         private void BtnSignUp_Click(object sender, RoutedEventArgs e)
         {
+            ((ViewModel.LoginVM)loginVM).clear();
             Window reg = new Registration();
             App.Current.MainWindow = reg;
             this.Close();

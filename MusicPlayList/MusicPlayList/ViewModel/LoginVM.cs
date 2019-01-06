@@ -13,6 +13,7 @@ namespace MusicPlayList.ViewModel
     class LoginVM : IVM
     {
         private LoginModel model;
+        private string error = "";
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
@@ -28,6 +29,15 @@ namespace MusicPlayList.ViewModel
                 };
         }
 
+        public string Error
+        {
+            get { return error; }
+            set
+            {
+                error = value;
+                NotifyPropertyChanged("Error");
+            }
+        }
         public string Name
         {
             get { return model.User.Name; }
@@ -55,11 +65,19 @@ namespace MusicPlayList.ViewModel
         {
            if(!model.FindUser())
             {
-
+                Error = "invalid Username or Password";
+                return false;
             }
-            this.SendParameters();
-            // return user != null;
+            SendParameters();
+            clear();
             return true;
+        }
+
+        public void clear()
+        {
+            Password = "";
+            Name = "";
+            Error = "";
         }
 
         override

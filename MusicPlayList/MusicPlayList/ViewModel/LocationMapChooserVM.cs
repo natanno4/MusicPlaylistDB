@@ -20,6 +20,7 @@ namespace MusicPlayList.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private LocationMapChooserModel model;
+        private bool isClicked = false;
         public Boolean CircleFlag { get; set;}
         public Thickness EllipseMargin { get; set; } = new Thickness();
 
@@ -45,13 +46,20 @@ namespace MusicPlayList.ViewModel
             NotifyPropertyChanged("EllipseMargin");
             CircleFlag = true;
             NotifyPropertyChanged("CircleFlag");
+            isClicked = true;
         }
 
-        public void Finish()
+        public bool Finish()
         {
+            if(!isClicked)
+            {
+                return false;
+            }
             CircleFlag = false;
             this.model.CheckForClosestCountries();
             this.SendParameters();
+            isClicked = false;
+            return true;
         }
 
         override

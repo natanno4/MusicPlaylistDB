@@ -28,9 +28,11 @@ namespace MusicPlayList.View
 
         private void CancelBtn_Click(object sender, RoutedEventArgs e)
         {
-            Login win = (Login)Application.Current.MainWindow;
-            win.Show();
+            ((ViewModel.RegistrationVM)registrationVM).resetinput();
+            Login win = new Login();
+            App.Current.MainWindow = win;
             this.Close();
+            win.Show();
         }
 
         private void SubmitBtn_Click(object sender, RoutedEventArgs e)

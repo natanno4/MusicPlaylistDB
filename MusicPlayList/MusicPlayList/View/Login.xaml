@@ -10,9 +10,9 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
             <TextBox Name="txtUsername" Background="#545d6a" Text="{Binding Path=Name}"  Foreground="White" FontSize="18"/>
             <Label Content="Password" Foreground="White"/>
             <TextBox Name="txtPassword" Background="#545d6a"  Foreground="White" Text="{Binding Path=Password}"  FontSize="18"/>
-            <TextBlock Text="{Binding VM_LblError}" Name="LblError" Foreground="Red"/>
+            <TextBlock Text="{Binding Error}" HorizontalAlignment="Center" x:Name="LblError" Foreground="Red" Margin="20"/>
             <Button Name="btnSubmit" Click="BtnSubmit_Click" Content="Submit" Margin="180 40" Background="#545d6a" Foreground="White" FontSize="20"/>
-            <Button Content="SignUp"  Cursor="Hand" Click="BtnSignUp_Click"  Margin="250,0,259.4,0" Height="33" Width="80">
+            <Button Content="SignUp"  Cursor="Hand" Click="BtnSignUp_Click"  Margin="255,0,242.4,0" Height="33">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <TextBlock TextDecorations="Underline"><InlineUIContainer>  

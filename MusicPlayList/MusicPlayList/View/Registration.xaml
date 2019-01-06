@@ -30,15 +30,15 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                 <Grid.RowDefinitions>
                     <RowDefinition Height="252*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Height="23" HorizontalAlignment="Left" Margin="67,70,0,0" Name="textBlockEmailId" Text="User name" VerticalAlignment="Top" Width="110" />
-                <TextBlock Height="23" HorizontalAlignment="Left" Margin="67,121,0,0" Name="textBlockPassword" Text="Password:" VerticalAlignment="Top" Width="110"  />
+                <TextBlock Height="23" HorizontalAlignment="Left" Margin="67,70,0,0" FontSize="15" Foreground="White"  Name="textBlockEmailId" Text="User name" VerticalAlignment="Top" Width="110" />
+                <TextBlock Height="23" HorizontalAlignment="Left" Margin="67,121,0,0" FontSize="15" Foreground="White" Name="textBlockPassword" Text="Password:" VerticalAlignment="Top" Width="110"  />
                 <TextBox Height="24" HorizontalAlignment="Left" Margin="183,70,0,0" Text="{Binding Path=Username}" x:Name="textBoxUserName" VerticalAlignment="Top" Width="222" />
-                <TextBox Height="23" HorizontalAlignment="Left" Margin="182,121,0,0" Text="{Binding Path=Password}" x:Name="passwordBox" VerticalAlignment="Top" Width="222" />
-                <TextBlock Height="25" HorizontalAlignment="Left" Margin="139,202,0,0" Text="{Binding Path=error}" VerticalAlignment="Top" Width="300" />
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="182,121,0,0"  Text="{Binding Path=Password}" x:Name="passwordBox" VerticalAlignment="Top" Width="222" />
+                <TextBlock Height="25" HorizontalAlignment="Center" Foreground="Red" Margin="137,226,118.2,0" Text="{Binding Path=Error}"  VerticalAlignment="Top" Width="300" />
 
                 <Button Content="Submit" Height="23" HorizontalAlignment="Left" Margin="183,301,0,0" Name="btnSubmit" VerticalAlignment="Top" Width="70" Click="SubmitBtn_Click" RenderTransformOrigin="0.586,-0.043" />
                 <Button Content="Reset" Height="23" HorizontalAlignment="Left" Margin="354,301,0,0" Name="btnReset" VerticalAlignment="Top" Width="70" Click="ResetBtn_Click" />
-                <Button Content="Cancel" Height="23" HorizontalAlignment="Right" Margin="0,301,40,0" Name="btnCnacel" VerticalAlignment="Top" Width="70" Click="ResetBtn_Click" />
+               
             </Grid>
         </Border>
     </Grid>

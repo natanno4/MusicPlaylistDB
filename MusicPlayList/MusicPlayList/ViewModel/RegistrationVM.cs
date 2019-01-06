@@ -17,8 +17,19 @@ namespace MusicPlayList.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private RegistrationModel model;
-
-        string error = "";
+        private string error = "";
+        public string Error
+        {
+            get
+            {
+                return error;
+            }
+            set
+            {
+                error = value;
+                NotifyPropertyChanged("Error");
+            }
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RegistrationVM"/> class.
@@ -35,25 +46,20 @@ namespace MusicPlayList.ViewModel
 
         public Boolean CheckRegistraion()
         {
-            if (Username == null || Password == null)
+            if (String.IsNullOrEmpty(Username) || String.IsNullOrEmpty(Password))
             {
-                string temp = "One or More Fields missing";
-                error = temp;
-      
+                Error = "One or More Fields missing";
                 return false;
             }
-            error = "";
             if (model.SignUp())
             {
-                // base class send parametres to next view model
                 SendParameters();
-                // so continue to next window   
+                resetinput();  
                 return true;
-            } else
+            }
+            else
             {
-                
-                string temp = "Error was occured, please try again";
-                error = temp;
+                Error = "Username is already exists";
                 return false;
             }
         }
@@ -61,7 +67,7 @@ namespace MusicPlayList.ViewModel
         {
             Username = "";
             Password = "";
-            error = "";
+            Error = "";
         }
 
         override
@@ -89,6 +95,7 @@ namespace MusicPlayList.ViewModel
             set
             {
                 this.model.Username = value;
+                NotifyPropertyChanged("UserName");
             }
         }
         public String Password
@@ -100,6 +107,7 @@ namespace MusicPlayList.ViewModel
             set
             {
                 this.model.Password = value;
+                NotifyPropertyChanged("Password");
             }
         }
     }

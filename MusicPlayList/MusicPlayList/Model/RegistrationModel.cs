@@ -41,7 +41,7 @@ namespace MusicPlayList.Model
         /// <returns></returns>
         public Boolean SignUp()
         {
-            String checkIfUserExist = "Select * FROM Users WHERE user_name = '" + Username + "' AND password = '" + Password +"'";
+            String checkIfUserExist = "Select * FROM Users WHERE user_name = '" + Username + "'";
             if (executer.ExecuteCommandWithResults(checkIfUserExist).Rows.Count != 0)
             {
                 return false;

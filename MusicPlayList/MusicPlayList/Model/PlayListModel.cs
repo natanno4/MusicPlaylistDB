@@ -115,6 +115,7 @@ namespace MusicPlayList.Model
                 {
                     query.Append("Delete from songs_in_playlist where Songs_idSongs = " + dr.Field<int>(0).ToString() + " and Playlist_idSongsPlaylist = " + playlist.ID.ToString());
                     executer.ExecuteQueryWithoutDisconnect(query.ToString());
+                    query.Clear();
                 }
                 flag = true;
             }
