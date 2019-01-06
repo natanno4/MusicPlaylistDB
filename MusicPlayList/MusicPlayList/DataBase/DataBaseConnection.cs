@@ -4,6 +4,11 @@ using System;
 
 namespace MusicPlayList.DataBase
 {
+    /// <summary>
+    /// DataBaseConnection class.
+    /// responsible of the connection of the application to the 
+    /// database.
+    /// </summary>
     class DataBaseConnection
     {
         private string databaseName =  string.Empty;
@@ -29,7 +34,11 @@ namespace MusicPlayList.DataBase
             get { return connection; }
         }
 
-   
+        /// <summary>
+        /// connnect function.
+        /// connect to database.
+        /// </summary>
+        /// <returns>true if connect successfully else false</returns>
         public bool connect()
         {
             if (String.IsNullOrEmpty(databaseName))
@@ -47,7 +56,10 @@ namespace MusicPlayList.DataBase
             }
             return true;
         }
-
+        /// <summary>
+        /// Close function.
+        /// close the connection.
+        /// </summary>
         public void Close()
         {
             try

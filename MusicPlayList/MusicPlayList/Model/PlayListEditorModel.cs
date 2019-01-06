@@ -55,7 +55,7 @@ namespace MusicPlayList.Model
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
-        /// Gets the play list.
+        /// Gets the original play list.
         /// </summary>
         /// <returns></returns>
         public SongPlaylist OriginalPlayList
@@ -70,7 +70,9 @@ namespace MusicPlayList.Model
             }
 
         }
-
+        /// <summary>
+        /// gets the current playlist.
+        /// </summary>
         public SongPlaylist CurrentPlayList
         {
             get
@@ -95,7 +97,13 @@ namespace MusicPlayList.Model
                 full_playlist = value;
             }
         }
-
+        /// <summary>
+        /// Filter method.
+        /// filter playlist according to user choice.
+        /// first check for generes that user want, than clear
+        /// the collection that the playlist is based on and add
+        /// the appropriate songs to the playlist, and notify the viewmodel
+        /// </summary>
         public void Filter()
         {
             List<string> genres = choosenGenres();
@@ -118,7 +126,12 @@ namespace MusicPlayList.Model
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Vm_CurrentGenres"));
 
         }
-
+        /// <summary>
+        /// choosenGeneres method.
+        /// retrieve from user the genere that will
+        /// be in the edited playlist
+        /// </summary>
+        /// <returns>list of strings (genres)</returns>
         private List<string> choosenGenres()
         {
             List<String> genres = new List<string>(); 
@@ -132,7 +145,12 @@ namespace MusicPlayList.Model
             }
             return genres;
         }
-
+        /// <summary>
+        /// reset method.
+        /// change the current playlist that is showed to the user 
+        /// to the original playlist that he entered with to the
+        /// editor.
+        /// </summary>
         public void reset()
         {
             CurrentPlayList.Songs.Clear();
@@ -206,14 +224,23 @@ namespace MusicPlayList.Model
          {
              //didnt do yet
          }**/
-
+        /// <summary>
+        /// ConvertToJson method.
+        /// convert this window's parameters into a Jarray.
+        /// </summary>
+        /// <returns>Jarray with param</returns>
         public JArray ConvertToJson()
         {
             JArray j = new JArray();
             j.Add(JsonConvert.SerializeObject(CurrentPlayList));
             return j;
         }
-
+        /// <summary>
+        /// ConvertFromJson method.
+        /// convert from jarray jtokens to the appropriate 
+        /// params for this window
+        /// </summary>
+        /// <param name="j"></param>
         public void ConvertFromJson(JArray j)
         {
             OriginalPlayList = JsonConvert.DeserializeObject<SongPlaylist>(j[0].ToString());
@@ -223,7 +250,11 @@ namespace MusicPlayList.Model
             resolveGenres(CurrentPlayList);
         }
 
-
+        /// <summary>
+        /// resolveGeners method.
+        /// resolve the generes from a given playlist
+        /// </summary>
+        /// <param name="playList">playlist</param>
         public void resolveGenres(SongPlaylist playList)
         {
             bool flag = true;

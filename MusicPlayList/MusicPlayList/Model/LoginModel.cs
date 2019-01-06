@@ -13,12 +13,18 @@ using System.Threading.Tasks;
 
 namespace MusicPlayList.Model
 {
+    /// <summary>
+    /// LoginModel class.
+    /// responsible of the login process (with option to sign up).
+    /// </summary>
     class LoginModel : INotifyPropertyChanged
     {
         private DB_Executer dataBase = new DB_Executer();
         private User user = new User();
         public event PropertyChangedEventHandler PropertyChanged;
-
+        /// <summary>
+        /// user.
+        /// </summary>
         public User User
         {
             get
@@ -30,7 +36,12 @@ namespace MusicPlayList.Model
                 user = value;
             }
         }
-
+        /// <summary>
+        /// FindUser method.
+        /// bind from the user the username and password, and confirm if
+        /// he exists in table or not.
+        /// </summary>
+        /// <returns></returns>
         public bool FindUser()
         {
             String query = "SELECT * FROM users WHERE users.user_name = '" + User.Name + "' AND users.password = '" + User.Password + "'";
@@ -43,7 +54,13 @@ namespace MusicPlayList.Model
 
             return false;
         }
-
+        /// <summary>
+        /// ConvertToJson method.
+        /// convert this window's parameters into a Jarray.
+        /// specifically retrieve the user's playlist and convert
+        /// it to Json
+        /// </summary>
+        /// <returns>Jarray with param</returns>
         public JArray ConvertToJson()
         {
             JArray j = new JArray();
@@ -61,11 +78,19 @@ namespace MusicPlayList.Model
             j.Add(JsonConvert.SerializeObject(playList));
             return j;
         }
-
+        /// <summary>
+        /// ConvertFromJson
+        /// </summary>
+        /// <param name="j"></param>
         public void ConvertFromJson(JArray j)
         {
         }
-
+        /// <summary>
+        /// getPlaylistString.
+        /// returns the string represent the query that
+        /// retrieve the user's playlist.
+        /// </summary>
+        /// <returns>string query</returns>
         private string getPlaylistString()
         {
             StringBuilder query = new StringBuilder();

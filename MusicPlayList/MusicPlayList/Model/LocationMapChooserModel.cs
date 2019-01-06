@@ -13,6 +13,12 @@ using System.Data;
 
 namespace MusicPlayList.Model
 {
+    /// <summary>
+    /// LoactionMapChooserModel class.
+    /// responsible of showing the user the world map, and when
+    /// he press a point and submit - generate the 8 closest area's 
+    /// to this point.
+    /// </summary>
     class LocationMapChooserModel : INotifyPropertyChanged
     {
         public Map map = new Map();
@@ -22,7 +28,15 @@ namespace MusicPlayList.Model
         private User user;
         private Dictionary<Area, int> mapper = new Dictionary<Area, int>();
         private ObservableCollection<String> areasName = new ObservableCollection<string>();
-
+        /// <summary>
+        /// CalculateAreaProps method.
+        /// with a given x,y pixels, calculate the latitude and longtitude
+        /// values.
+        /// </summary>
+        /// <param name="xVal">x value</param>
+        /// <param name="yVal">y value</param>
+        /// <param name="mapMinHeight">margin of window</param>
+        /// <param name="mapMinWidth">margin of window</param>
         public void CalculateAreaProps(Double xVal, Double yVal, Double mapMinHeight, Double mapMinWidth)
         {
             //from xaml
@@ -33,6 +47,13 @@ namespace MusicPlayList.Model
             area.Longtitude = map.CurrentLongitude;
             area.Latitude = map.CurrentLatitude;
         }
+        /// <summary>
+        /// CheckForClosestCountries method.
+        /// According to the longtitude and latitude that were
+        /// calculated earlier - take from table the 8 most close
+        /// areas to the latitude and longtitue point according
+        /// to a well known formula
+        /// </summary>
         public void CheckForClosestCountries()
         {
             // need to be changed later, maybe in sunday
@@ -63,6 +84,9 @@ namespace MusicPlayList.Model
             }
 
         }
+        /// <summary>
+        /// mapping between area int.
+        /// </summary>
         public Dictionary<Area, int> Mapper
         {
             get
@@ -82,6 +106,9 @@ namespace MusicPlayList.Model
             }
         }
         */
+        /// <summary>
+        /// user.
+        /// </summary>
         public User User
         {
             get
@@ -93,6 +120,9 @@ namespace MusicPlayList.Model
                 user = value;
             }
         }
+        /// <summary>
+        /// Area.
+        /// </summary>
         public Area Area
         {
             get
@@ -104,6 +134,11 @@ namespace MusicPlayList.Model
                 area = value;
             }
         }
+        /// <summary>
+        /// ConvertToJson method.
+        /// convert this window's parameters into a Jarray.
+        /// </summary>
+        /// <returns>Jarray with param</returns>
         public JArray ConvertToJson()
         {
             JArray j = new JArray();
@@ -118,7 +153,12 @@ namespace MusicPlayList.Model
             j.Add(JsonConvert.SerializeObject(tempDict));
             return j;
         }
-        
+        /// <summary>
+        /// ConvertFromJson method.
+        /// take from the jarray the jtokens and convert them
+        /// into this appropriate parameters
+        /// </summary>
+        /// <param name="j">Jarray</param>
         public void ConvertFromJson(JArray j)
         {
             User = JsonConvert.DeserializeObject<User>(j[0].ToString());

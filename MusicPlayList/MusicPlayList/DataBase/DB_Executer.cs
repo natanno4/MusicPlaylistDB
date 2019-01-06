@@ -8,6 +8,11 @@ using System.Data;
 
 namespace MusicPlayList.DataBase
 {
+    /// <summary>
+    /// DB_Executer class.
+    /// responsible of interacting with the database
+    /// via varios kind of queries
+    /// </summary>
     class DB_Executer
     {
         public DataBaseConnection connection = DataBaseConnection.instance;
@@ -51,6 +56,12 @@ namespace MusicPlayList.DataBase
             }
             return s; 
         }
+        /// <summary>
+        /// ExecuteCommandWithResults method.
+        /// execute a query with expected answer as dataTable.
+        /// </summary>
+        /// <param name="query">query</param>
+        /// <returns>DataTable of the result</returns>
         public DataTable ExecuteCommandWithResults(String query)
         {
             MySqlCommand command = ResolveCommand(query);
@@ -93,6 +104,13 @@ namespace MusicPlayList.DataBase
         {
             return 0;
         }
+        /// <summary>
+        /// ResolveCommand method.
+        /// with a given string represeny SQL query, 
+        /// convert it to an Appropriate MySQl Command
+        /// </summary>
+        /// <param name="q">query</param>
+        /// <returns>MYSQL command</returns>
         private MySqlCommand ResolveCommand(String q)
         {
             MySqlCommand cmd = new MySqlCommand();

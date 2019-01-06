@@ -11,6 +11,11 @@ using System.Threading.Tasks;
 
 namespace MusicPlayList.Model
 {
+    /// <summary>
+    /// PlayListModel class.
+    /// responsible of showing the playlist to user, with option
+    /// to edit/save and exit.
+    /// </summary>
     class PlayListModel : INotifyPropertyChanged
     {
         private SongPlaylist playlist;
@@ -20,7 +25,9 @@ namespace MusicPlayList.Model
         {
             get; set;
         }
-
+        /// <summary>
+        /// Playlist.
+        /// </summary>
         public SongPlaylist Playlist
         {
             get
@@ -32,11 +39,22 @@ namespace MusicPlayList.Model
                 playlist = value;
             }
         }
+        /// <summary>
+        /// ConvertFromJson method.
+        /// convert the jarray token's into appropriate
+        /// parameters, in this case - playlist
+        /// </summary>
+        /// <param name="arr"></param>
         public void ConvertFromJson(JArray arr)
         {
             Playlist = JsonConvert.DeserializeObject<SongPlaylist>(arr[0].ToString());
 
         }
+        /// <summary>
+        /// ConvertToJson method.
+        /// convert this window's parameters into a Jarray.
+        /// </summary>
+        /// <returns>Jarray with param</returns>
         public JArray ConvertToJson()
         {
 
@@ -44,6 +62,11 @@ namespace MusicPlayList.Model
             arr.Add(JsonConvert.SerializeObject(Playlist));
             return arr;
         }
+        /// <summary>
+        /// SavePlaylistInTable method.
+        /// save the desired playlist of user in table.
+        /// first connect to database, and then insert it into table
+        /// </summary>
         public void SavePlaylistInTable ()
         {
             this.executer.connection.connect();

@@ -12,6 +12,12 @@ using System.Threading.Tasks;
 
 namespace MusicPlayList.Model
 {
+    /// <summary>
+    /// CountryChooserModel class.
+    /// represent of displaying the Closest area's to 
+    /// the spot that the user choose, and according to his choice
+    /// generate initial playlist
+    /// </summary>
     class CountryChooserModel
     {
         private User user;
@@ -22,6 +28,13 @@ namespace MusicPlayList.Model
 
 
         private SongPlaylist model_playlist = new SongPlaylist();
+        /// <summary>
+        /// ConvertFromJson method.
+        /// convert the Jarray token's into Parameters
+        /// that the previus windows sent, and config
+        /// this window's Model Properties
+        /// </summary>
+        /// <param name="j">Jarray</param>
         public void ConvertFromJson(JArray j)
         {
             User = JsonConvert.DeserializeObject<User>(j[0].ToString());
@@ -36,7 +49,11 @@ namespace MusicPlayList.Model
             CreateAreasList();
             
         }
-
+        /// <summary>
+        /// CreateAreasList method.
+        /// build the Area's count list according to
+        /// info in Dictionary
+        /// </summary>
         private void CreateAreasList()
         {
             foreach (Area item in AreasAndNumberOfSongs.Keys)
@@ -48,7 +65,13 @@ namespace MusicPlayList.Model
         }
 
 
-
+        /// <summary>
+        /// KeysToString method.
+        /// take the area's that were checked by user
+        /// and make from them a string include
+        /// the area's id.
+        /// </summary>
+        /// <returns>string</returns>
         private String KeysToString()
         {
             StringBuilder build = new StringBuilder();
@@ -78,6 +101,14 @@ namespace MusicPlayList.Model
             }
             return build.ToString();
         }
+        /// <summary>
+        /// CreateInitPlaylist method.
+        /// according to the areas that the user choose, create
+        /// a playlist that is built from all songs that are from
+        /// there areas. execute a query to resolve that and then convert
+        /// the results to the appropriate fields.
+        /// </summary>
+        /// <returns>true if the user choose at least one area, else false</returns>
         public bool CreateInitPlaylist()
         {
 
@@ -103,12 +134,20 @@ namespace MusicPlayList.Model
             return true;
 
         }
+        /// <summary>
+        /// ConvertToJson method.
+        /// convert this window's parameters into a Jaraay.
+        /// </summary>
+        /// <returns>Jarray with param</returns>
         public JArray ConvertToJson()
         {
             JArray arr = new JArray();
             arr.Add(JsonConvert.SerializeObject(model_playlist));
             return arr;
         }
+        /// <summary>
+        /// mapping between Area and the number of song in each area
+        /// </summary>
         public Dictionary<Area, int> AreaToNumberOfSongs
         {
             get
@@ -120,6 +159,9 @@ namespace MusicPlayList.Model
                 AreasAndNumberOfSongs = value;
             }
         }
+        /// <summary>
+        /// user.
+        /// </summary>
         public User User
         {
             get
@@ -131,6 +173,10 @@ namespace MusicPlayList.Model
                 user = value;
             }
         }
+        /// <summary>
+        /// GetRandomAreas method.
+        /// genereate a playlist randomaly
+        /// </summary>
         public void GetRandomAreas()
         {
             StringBuilder query = new StringBuilder();
@@ -148,7 +194,12 @@ namespace MusicPlayList.Model
             model_playlist.Songs = songs;
             model_playlist.User = User;
         }
-
+        /// <summary>
+        /// CheckForRandomAreas method.
+        /// select from database locationID that have an Unknown latitude and
+        /// longitude
+        /// </summary>
+        /// <returns></returns>
         public string CheckForRandomAreas()
         {
             StringBuilder q = new StringBuilder();
