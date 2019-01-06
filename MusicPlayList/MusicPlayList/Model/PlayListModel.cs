@@ -15,7 +15,6 @@ namespace MusicPlayList.Model
     {
         private SongPlaylist playlist;
         private DB_Executer executer;
-        private bool firstFlag = true;
         public event PropertyChangedEventHandler PropertyChanged;
         public SongPlaylist copyPlaylist
         {
@@ -42,13 +41,7 @@ namespace MusicPlayList.Model
         {
 
             JArray arr = new JArray();
-            if(firstFlag)
-            {
-                copyPlaylist = new SongPlaylist(Playlist);
-                firstFlag = false;
-            }
             arr.Add(JsonConvert.SerializeObject(Playlist));
-            arr.Add(JsonConvert.SerializeObject(copyPlaylist));
             return arr;
         }
         public void SavePlaylistInTable ()

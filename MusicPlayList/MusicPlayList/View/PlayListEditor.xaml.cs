@@ -25,18 +25,15 @@ namespace MusicPlayList.View
         {
             InitializeComponent();
             this.DataContext = editorVM;
-            //this.DataContext = new PlayListEditorViewModel();
-            //vm = new SettingsViewModel(new SettingsModel());
-            //DataContext = vm;
         }
 
         private void RemoveBtn_Click(object sender, RoutedEventArgs e)
         {
-            //vm.VM_HandlerClose((string)lstBox.SelectedItem);
         }
 
         private void SubmitBtn_Click(object sender, RoutedEventArgs e)
         {
+            editorVM.SendParameters();
             Window playList = new PlayList();
             playList.Show();
         }
@@ -44,6 +41,11 @@ namespace MusicPlayList.View
         private void FilterBtn_click(object sender, RoutedEventArgs e)
         {
             ((ViewModel.PlayListEditorVM)editorVM).Filter();
+        }
+
+        private void ResetBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ((ViewModel.PlayListEditorVM)editorVM).reset();
         }
     }
 }

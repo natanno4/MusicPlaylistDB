@@ -133,6 +133,23 @@ namespace MusicPlayList.Model
             return genres;
         }
 
+        public void reset()
+        {
+            CurrentPlayList.Songs.Clear();
+            CurrentGeners.Clear();
+            foreach(Song item in OriginalPlayList.Songs)
+            {
+                CurrentPlayList.Songs.Add(item);
+            }
+            resolveGenres(CurrentPlayList);
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("VM_GetPlayList"));
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Vm_CurrentGenres"));
+
+        }
+
+
+
+
         /*
         /// <summary>
         /// Filters the specified filter.
@@ -200,8 +217,7 @@ namespace MusicPlayList.Model
         public void ConvertFromJson(JArray j)
         {
             OriginalPlayList = JsonConvert.DeserializeObject<SongPlaylist>(j[0].ToString());
-            CurrentPlayList = OriginalPlayList;
-            CurrentPlayList = JsonConvert.DeserializeObject<SongPlaylist>(j[1].ToString());
+            CurrentPlayList = new SongPlaylist(OriginalPlayList);
             CopyCurrentPlayList = new SongPlaylist(CurrentPlayList);
             CurrentGeners = new ObservableCollection<ExtensionInfo>();
             resolveGenres(CurrentPlayList);
@@ -229,6 +245,7 @@ namespace MusicPlayList.Model
 
             }
         }
+
     }
 
 }

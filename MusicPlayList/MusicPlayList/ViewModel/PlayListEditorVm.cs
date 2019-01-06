@@ -52,6 +52,11 @@ namespace MusicPlayList.ViewModel
             }
         }
 
+        public void reset()
+        {
+            model.reset();
+        }
+
 
         public void Filter()
         {
