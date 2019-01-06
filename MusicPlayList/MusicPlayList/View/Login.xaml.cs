@@ -25,28 +25,17 @@ namespace MusicPlayList.View
         public Login()
         {
             InitializeComponent();
-            try
-            {
-                ViewModel.BaseVM baseVM = ViewModel.BaseVM.GetInstance;
-                loginVM = baseVM._LoginVM;
-                this.DataContext = loginVM;
 
-            }
-            catch (TypeInitializationException tiex)
-            {
-                var ex = tiex.InnerException;
-
-                Console.WriteLine("Exception from type init: '{0}'", ex.Message);
-            }
+            ViewModel.BaseVM baseVM = ViewModel.BaseVM.GetInstance;
+            loginVM = baseVM._LoginVM;
+            this.DataContext = loginVM;
         }
 
         private void BtnSubmit_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: need to check if the user and password exist and connect him if it does else error message
             Boolean result = ((ViewModel.LoginVM)loginVM).Confirm();
             if (result)
             {
-                //TODO: go to next window
                 Window playList = new PlayList();
                 playList.Show();
             }
@@ -54,8 +43,6 @@ namespace MusicPlayList.View
 
         private void BtnSignUp_Click(object sender, RoutedEventArgs e)
         {
-            //Registration registration = (Registration)Application.Current.MainWindow;
-            //registration.Show();
             Window reg = new Registration();
             reg.Show();
         }

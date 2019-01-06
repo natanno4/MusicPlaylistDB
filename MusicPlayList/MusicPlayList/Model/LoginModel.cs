@@ -4,7 +4,9 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,27 +16,64 @@ namespace MusicPlayList.Model
     class LoginModel : INotifyPropertyChanged
     {
         private DB_Executer dataBase = new DB_Executer();
-        private User user;
+        private User user = new User();
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public User FindUser(string name, String password)
+        public User User
         {
-            String query = "SELECT * FROM users WHERE users.user_name = name AND users.password = password";
-            // user = dataBase.ExecuteCommandWithResults(query).First.ToObject<User>();
-            //user = JsonConvert.DeserializeObject<User>(dataBase.ExecuteCommandWithResults(query)[0].ToString());
+            get
+            {
+                return user;
+            }
+            set
+            {
+                user = value;
+            }
+        }
 
-            return user;
+        public bool FindUser()
+        {
+            String query = "SELECT * FROM users WHERE users.user_name = '" + User.Name + "' AND users.password = '" + User.Password + "'";
+            DataTable dt = dataBase.ExecuteCommandWithResults(query);
+            if(dt.Rows.Count != 0)
+            {
+                user.ID = dt.Rows[0].Field<int>(0);
+                return true; 
+            }
+
+            return false;
         }
 
         public JArray ConvertToJson()
         {
             JArray j = new JArray();
-            j[0] = JsonConvert.SerializeObject(user);
+            DataTable dt = dataBase.ExecuteCommandWithResults(getPlaylistString());
+            ObservableCollection<string> temp = JsonConvert.DeserializeObject<ObservableCollection<string>>(QueryInterpreter.Instance.getQueryEntitesObject(QueryInterpreter.QueryType.ResolveInitialPlaylist, dt));
+            ObservableCollection<Song> songs = new ObservableCollection<Song>();
+            SongPlaylist playList = new SongPlaylist();
+            playList.User = user;
+            foreach (string item in temp)
+            {
+                songs.Add(JsonConvert.DeserializeObject<Song>(item));
+            }
+            playList.Songs = songs;
+
+            j.Add(JsonConvert.SerializeObject(playList));
             return j;
         }
 
         public void ConvertFromJson(JArray j)
         {
+        }
+
+        private string getPlaylistString()
+        {
+            StringBuilder query = new StringBuilder();
+            query.Append("SELECT idSongs, song_name,year,song_hotness, song_duration, song_tempo, idArtists,artist_name, genre , album_name, idAlbum ");
+            query.Append("from songs join (select Songs_idSongs from songs_in_playlist where Playlist_Users_idUsers = " + user.ID+ ") as play_list ");
+            query.Append("join artists join album ");
+            query.Append("where play_list.Songs_idSongs = idSongs and idArtists = songs.Artists_idArtists and idAlbum = songs.Album_idAlbum GROUP BY idSongs order by idSongs");
+            return query.ToString();
         }
     }
 }

@@ -13,8 +13,8 @@ namespace MusicPlayList.ViewModel
     class LoginVM : IVM
     {
         private LoginModel model;
-        private String m_name;
-        private String vm_password;
+        public event PropertyChangedEventHandler PropertyChanged;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="LoginVM"/> class.
         /// </summary>
@@ -22,40 +22,50 @@ namespace MusicPlayList.ViewModel
         public LoginVM()
         {
             this.model =  new LoginModel();
-         //?   this.model.PropertyChanged +=
-            //    delegate (Object sender, PropertyChangedEventArgs e) {
-              //      this.PropertyChanged?.Invoke(this, e);
-                //};
+            this.model.PropertyChanged +=
+                delegate (Object sender, PropertyChangedEventArgs e) {
+                   this.PropertyChanged?.Invoke(this, e);
+                };
         }
 
-        public string User
+        public string Name
         {
-            get { return m_name; }
+            get { return model.User.Name; }
             set
             {
-                m_name = value;
+                model.User.Name = value;
+                NotifyPropertyChanged("Name");
             }
         }
+
         public string Password
         {
-            get { return vm_password; }
+            get
+            {
+                return model.User.Password;
+            }
             set
             {
-                vm_password = value;
+                model.User.Password = value;
+                NotifyPropertyChanged("Password");
             }
         }
 
         public Boolean Confirm()
         {
-            User user = model.FindUser(m_name, Password);
+           if(!model.FindUser())
+            {
+
+            }
             this.SendParameters();
-            return user != null;
+            // return user != null;
+            return true;
         }
 
         override
         public void SendParameters()
         {
-            BaseVM.GetInstance.SendParam(BaseVM.ViewModels.Login, BaseVM.ViewModels.LocationMap);
+            BaseVM.GetInstance.SendParam(BaseVM.ViewModels.Login, BaseVM.ViewModels.PlayList);
         }
 
         override
