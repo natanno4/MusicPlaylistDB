@@ -5,6 +5,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -18,11 +19,12 @@ namespace MusicPlayList.Model
     /// the spot that the user choose, and according to his choice
     /// generate initial playlist
     /// </summary>
-    class CountryChooserModel
+    class CountryChooserModel : INotifyPropertyChanged
     {
         private User user;
         public DB_Executer executer = new DB_Executer();
         private Dictionary<Area, int> AreasAndNumberOfSongs = new Dictionary<Area, int>();
+        public event PropertyChangedEventHandler PropertyChanged;
         public ObservableCollection<ExtensionInfo> Areas_count = new ObservableCollection<ExtensionInfo>();
 
 
@@ -37,7 +39,9 @@ namespace MusicPlayList.Model
         /// <param name="j">Jarray</param>
         public void ConvertFromJson(JArray j)
         {
+            Areas_count.Clear();
             User = JsonConvert.DeserializeObject<User>(j[0].ToString());
+            AreaToNumberOfSongs.Clear();
             Dictionary<string, int> tempDic = JsonConvert.DeserializeObject<Dictionary<string, int>>(j[1].ToString());
             foreach (string item in tempDic.Keys)
             {
@@ -62,6 +66,8 @@ namespace MusicPlayList.Model
                 AreasAndNumberOfSongs.TryGetValue(item, out count);
                 Areas_count.Add(new ExtensionInfo(item.AreaName, count));
             }
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Areas_count"));
+
         }
 
 

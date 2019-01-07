@@ -151,6 +151,7 @@ namespace MusicPlayList.Model
                 tempDict.Add(JsonConvert.SerializeObject(item), count);
             }
             j.Add(JsonConvert.SerializeObject(tempDict));
+            Mapper.Clear();
             return j;
         }
         /// <summary>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MusicPlayList.View"
         mc:Ignorable="d"
-        Title="PlayListEditor" Height="450" Width="800"  Background="#04c582">
+        Title="PlayListEditor" Height="450" Width="800"  Background="#04c582" ResizeMode="NoResize">
     <Border Background="#2e3137" CornerRadius="20" Margin="15">
         <Grid TextBlock.FontSize="14">
 

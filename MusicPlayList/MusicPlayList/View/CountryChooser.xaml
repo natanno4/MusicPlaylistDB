@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MusicPlayList.View"
         mc:Ignorable="d"
-        Title="Country chooser" Height="450" Width="800" Background="#04c582">
+        Title="Country chooser" Height="450" Width="800" Background="#04c582" ResizeMode="NoResize">
     <Grid Margin="0,0,0,-21">
         <Border  Background="#2e3137" CornerRadius="20" Margin="30">
 
@@ -21,7 +21,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label Foreground="#FFE0E0E0" Grid.Column="1">Area</Label>
-                                <Label Foreground="#FFE0E0E0" Grid.Column="2">Number of Songs</Label>
+                                <Label Foreground="#FFE0E0E0" Grid.Column="2" Margin="0,0,-14,0">Number of Songs</Label>
                             </Grid>
                             <ItemsPresenter></ItemsPresenter>
                         </DockPanel>
