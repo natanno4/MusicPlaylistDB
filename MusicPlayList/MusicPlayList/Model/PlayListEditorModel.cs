@@ -34,6 +34,7 @@ namespace MusicPlayList.Model
         /// The data base
         /// </summary>
         private DB_Executer dataBase;
+        private Song songRemove;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PlayListEditorModel"/> class.
@@ -46,6 +47,18 @@ namespace MusicPlayList.Model
         public ObservableCollection<ExtensionInfo> CurrentGeners
         {
             get;set;
+        }
+
+        public Song SongRemove
+        {
+            get
+            {
+                return songRemove;
+            }
+            set
+            {
+                songRemove = value;
+            }
         }
 
 
@@ -165,65 +178,6 @@ namespace MusicPlayList.Model
 
         }
 
-
-
-
-        /*
-        /// <summary>
-        /// Filters the specified filter.
-        /// </summary>
-        /// <param name="filter">The filter.</param>
-        public void Filter_PlayList(ObservableCollection<String> filter)
-        {
-            int size = filter.Count();
-            new_playlist = new SongPlaylist();
-            new_playlist.ID = model_playlist.ID;
-            new_playlist.User = model_playlist.User;
-            String[] array_filter = filter.ToArray();
-            Dictionary<String, String> map = new Dictionary<String, String>();
-            /// <summary>
-            /// Iterate over the filter and put the type subject and its type in a dictionary.
-            /// </summary>
-            for (int i = 0; i < size; i++)
-            {
-                String[] words = array_filter[i].Split(':');
-                map.Add(words[0], words[1]);
-            }
-            /// <summary>
-            /// Iterate over all the songs in the playlist and insert those who weren't in the filter into a new playlist.
-            /// </summary>
-            foreach (Song song in model_playlist.Songs)
-            {
-                if (map.ContainsKey("Hotness"))
-                {
-                    if (map["Hotness"].Equals(song.Hotness))
-                    {
-                        new_playlist.Songs.Add(song);
-                    }
-                }
-                if (map.ContainsKey("Duration"))
-                {
-                    if (map["Duration"].Equals(song.Duration))
-                    {
-                        new_playlist.Songs.Add(song);
-                    }
-                }
-                if (map.ContainsKey("Tempo"))
-                {
-                    if (map["Tempo"].Equals(song.Tempo))
-                    {
-                        new_playlist.Songs.Add(song);
-                    }
-                }
-                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Filter"));
-            }
-           
-        }*/
-
-        /** public void Sort(String sort)
-         {
-             //didnt do yet
-         }**/
         /// <summary>
         /// ConvertToJson method.
         /// convert this window's parameters into a Jarray.
@@ -275,6 +229,27 @@ namespace MusicPlayList.Model
                 flag = true;
 
             }
+        }
+
+
+        public void RemoveSong()
+        {
+            if(SongRemove != null)
+            {
+                foreach (Song item in CurrentPlayList.Songs)
+                {
+                    if (item.ID == SongRemove.ID)
+                    {
+                        CurrentPlayList.Songs.Remove(item);
+                        break;
+                    }
+                }
+                CurrentGeners.Clear();
+                resolveGenres(CurrentPlayList);
+                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("VM_GetPlayList"));
+                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Vm_CurrentGenres"));
+            }
+
         }
 
     }

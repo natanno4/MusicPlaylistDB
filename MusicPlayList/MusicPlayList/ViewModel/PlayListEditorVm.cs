@@ -8,14 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using MusicPlayList.Entities;
+using Prism.Commands;
+using System.Windows.Input;
 
 namespace MusicPlayList.ViewModel
 {
     class PlayListEditorVM : IVM
     {
         private PlayListEditorModel model;
-        private String[] vm_filter;
-        private String vm_sort;
         /// <summary>
         /// Initializes a new instance of the <see cref="PlayListEditorVM"/> class.
         /// </summary>
@@ -27,6 +27,7 @@ namespace MusicPlayList.ViewModel
                 delegate (Object sender, PropertyChangedEventArgs e) {
                     this.NotifyPropertyChanged("VM_" + e.PropertyName);
                 };
+            this.Remove = new DelegateCommand<object>(this.onRemove, this.canBeRemoved);
         }
 
         public ObservableCollection<ExtensionInfo> Vm_CurrentGenres
@@ -62,15 +63,6 @@ namespace MusicPlayList.ViewModel
         {
             this.model.Filter();
         }
-        /*
-        public String[] VM_Filter_PlayList
-        {
-            set {
-                this.vm_filter = value;
-               // model.Filter_PlayList(this.vm_filter);;
-            }
-        }
-        */
 
         override
         public void SendParameters()
@@ -78,10 +70,42 @@ namespace MusicPlayList.ViewModel
             BaseVM.GetInstance.SendParam(BaseVM.ViewModels.PlayListEditor, BaseVM.ViewModels.PlayList);
         }
 
+
+        public ICommand Remove { get; private set; }
+
+
+        private void onRemove(object obj)
+        {
+            model.RemoveSong();
+        }
+
+        public Song RemoveSong
+        {
+            get
+            {
+                return model.SongRemove;
+            }
+            set
+            {
+                this.model.SongRemove = value;
+                var command = this.Remove as DelegateCommand<object>;
+                command.RaiseCanExecuteChanged();
+                NotifyPropertyChanged("RemoveSong");
+            }
+        }
+
         override
         public JArray GetParameters()
         {
             return model.ConvertToJson();
+        }
+
+        /// <summary>
+        /// check if can be removed
+        /// </summary>
+        private bool canBeRemoved(object obj)
+        {
+            return true;
         }
 
         override
