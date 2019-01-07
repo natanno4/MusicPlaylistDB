@@ -69,7 +69,7 @@
                                 </Style>
                             </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Header="Hotness" FontSize="15" Foreground="YellowGreen" Width="*" IsReadOnly="True" Binding="{Binding Hotness}"/>
+                        <DataGridTextColumn Header="Hotness" FontSize="15" Foreground="YellowGreen" Width="*" IsReadOnly="True" Binding="{Binding HotnessStar}"/>
                         <DataGridTextColumn Header="Duration" Width="*" IsReadOnly="True" Binding="{Binding Duration}"/>
                         <DataGridTextColumn Header="year" Width="*" IsReadOnly="True" Binding="{Binding Year}"/>
                     </DataGrid.Columns>

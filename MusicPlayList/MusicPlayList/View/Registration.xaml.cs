@@ -23,6 +23,7 @@ namespace MusicPlayList.View
         public Registration()
         {
             InitializeComponent();
+            WindowLocationSeter.CenterWindowOnScreen(this);
             this.DataContext = registrationVM;
         }
 

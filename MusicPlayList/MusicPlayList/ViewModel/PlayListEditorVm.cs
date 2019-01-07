@@ -42,6 +42,18 @@ namespace MusicPlayList.ViewModel
                 NotifyPropertyChanged("Vm_CurrentGenres");
             }
         }
+        public ObservableCollection<ExtensionInfo> Vm_TempoList
+        {
+            get
+            {
+                return model.TempoList;
+            }
+            set
+            {
+                model.TempoList = value;
+                NotifyPropertyChanged("Vm_TempoList");
+            }
+        }
 
         public SongPlaylist VM_GetPlayList
         {

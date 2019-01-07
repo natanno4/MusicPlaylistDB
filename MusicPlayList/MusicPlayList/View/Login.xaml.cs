@@ -28,6 +28,7 @@ namespace MusicPlayList.View
 
             ViewModel.BaseVM baseVM = ViewModel.BaseVM.GetInstance;
             loginVM = baseVM._LoginVM;
+            WindowLocationSeter.CenterWindowOnScreen(this);
             this.DataContext = loginVM;
         }
 
@@ -49,8 +50,10 @@ namespace MusicPlayList.View
             Window reg = new Registration();
             App.Current.MainWindow = reg;
             this.Close();
-            reg.Show();
+            reg.ShowDialog();
+
         }
+
 
 
     }

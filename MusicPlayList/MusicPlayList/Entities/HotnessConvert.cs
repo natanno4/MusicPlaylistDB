@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Data;
 
 namespace MusicPlayList.Entities
 {
-    class HotnessConvert : IValueConverter
+    class HotnessConvert
     {
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+
+        public string convert(float hot)
         {
-            float hot;
-            float.TryParse(value.ToString(), out hot);
             if (hot == -1)
             {
                 return "No Information";
@@ -37,14 +35,6 @@ namespace MusicPlayList.Entities
             {
                 return "*****";
             }
-
-
-        }
-
-
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            return 0;
         }
     }
 }

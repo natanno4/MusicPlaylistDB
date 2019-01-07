@@ -13,6 +13,7 @@ namespace MusicPlayList.Entities
         private String name;
         private int year;
         private float hotness;
+        private string hotness_stars = "";
         private float duration;
         private float tempo;
         private Artist artist = new Artist();
@@ -80,6 +81,19 @@ namespace MusicPlayList.Entities
                  Int32.TryParse(value, out this.year);
             }
         }
+
+        public string HotnessStar
+        {
+            get
+            {
+                return hotness_stars;
+            }
+            set
+            {
+                hotness_stars = value;
+            }
+        }
+
         public float Hotness
         {
             get
@@ -89,6 +103,8 @@ namespace MusicPlayList.Entities
             set
             {
                 this.hotness = value;
+                HotnessConvert convert = new HotnessConvert();
+                HotnessStar = convert.convert(value);
             }
         }
         public float Duration

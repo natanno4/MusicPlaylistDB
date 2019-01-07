@@ -25,6 +25,7 @@ namespace MusicPlayList.View
         public PlayList()
         {
             InitializeComponent();
+            WindowLocationSeter.CenterWindowOnScreen(this);
             this.DataContext = playListVM;
         }
 

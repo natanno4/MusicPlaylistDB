@@ -24,12 +24,10 @@ namespace MusicPlayList.View
         public PlayListEditor()
         {
             InitializeComponent();
+            WindowLocationSeter.CenterWindowOnScreen(this);
             this.DataContext = editorVM;
         }
 
-        private void RemoveBtn_Click(object sender, RoutedEventArgs e)
-        {
-        }
 
         private void SubmitBtn_Click(object sender, RoutedEventArgs e)
         {

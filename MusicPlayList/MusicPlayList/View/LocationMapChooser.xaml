@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MusicPlayList.View"
         mc:Ignorable="d"
-        Title="LocationMapChooser" Height="800" Width="850" Background="#04c582" ResizeMode="NoResize">
+        Title="LocationMapChooser" Height="800" Width="900" Background="#04c582" ResizeMode="NoResize">
     <Border Background="#2e3137" x:Name="border" CornerRadius="20" Margin="30">
         <StackPanel x:Name="panel" Margin="20,23,20,41">
             <Label x:Name="label" Content="Choose location" Foreground="White" FontStyle="Italic" Height="60" FontSize="40" HorizontalAlignment="Center" RenderTransformOrigin="0.499,0.714"/>

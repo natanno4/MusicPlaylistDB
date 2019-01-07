@@ -35,7 +35,7 @@ namespace MusicPlayList.Model
         /// </summary>
         private DB_Executer dataBase;
         private Song songRemove;
-
+        private ObservableCollection<ExtensionInfo> tempoList;
         /// <summary>
         /// Initializes a new instance of the <see cref="PlayListEditorModel"/> class.
         /// </summary>
@@ -58,6 +58,18 @@ namespace MusicPlayList.Model
             set
             {
                 songRemove = value;
+            }
+        }
+
+        public ObservableCollection<ExtensionInfo> TempoList
+        {
+            get
+            {
+                return tempoList;
+            }
+            set
+            {
+                tempoList = value;
             }
         }
 
@@ -120,7 +132,8 @@ namespace MusicPlayList.Model
         public void Filter()
         {
             List<string> genres = choosenGenres();
-            if (genres.Count == 0)
+            List<string> tempoes = chosenTempo();
+            if (genres.Count == 0 && tempoes.Count == 0)
             {
                 return;
             }
@@ -128,15 +141,40 @@ namespace MusicPlayList.Model
             CurrentPlayList.Songs.Clear();
             foreach (Song song in temp)
             {
+                if(genres.Count == 0 && tempoes.Count != 0)
+                {
+                    string tempo = tempoType(song);
+                    if(tempoes.Contains(tempo))
+                    {
+                        CurrentPlayList.Songs.Add(song);
+                        continue;
+                    }
+                }
                 if (genres.Contains(song.Artist.Genre))
                 {
-                    CurrentPlayList.Songs.Add(song);
+                    if (tempoes.Count == 0)
+                    {
+                        CurrentPlayList.Songs.Add(song);
+                    } 
+                    else
+                    {
+                        string tempo = tempoType(song);
+                        if (tempoes.Contains(tempo))
+                        {
+                            CurrentPlayList.Songs.Add(song);
+                        }
+                    }
+
                 }
             }
+
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("VM_GetPlayList"));
             CurrentGeners.Clear();
             resolveGenres(CurrentPlayList);
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Vm_CurrentGenres"));
+            TempoList.Clear();
+            resolveTempo(CurrentPlayList);
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Vm_TempoList"));
 
         }
         /// <summary>
@@ -158,6 +196,21 @@ namespace MusicPlayList.Model
             }
             return genres;
         }
+
+        private List<string> chosenTempo()
+        {
+            List<string> tempoes = new List<string>();
+            foreach (ExtensionInfo ext in TempoList)
+            {
+                if (ext.IsChecked)
+                {
+                    tempoes.Add(ext.Extension);
+                }
+            }
+            return tempoes;
+        }
+
+
         /// <summary>
         /// reset method.
         /// change the current playlist that is showed to the user 
@@ -168,13 +221,16 @@ namespace MusicPlayList.Model
         {
             CurrentPlayList.Songs.Clear();
             CurrentGeners.Clear();
+            TempoList.Clear();
             foreach(Song item in OriginalPlayList.Songs)
             {
                 CurrentPlayList.Songs.Add(item);
             }
             resolveGenres(CurrentPlayList);
+            resolveTempo(CurrentPlayList);
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("VM_GetPlayList"));
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Vm_CurrentGenres"));
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Vm_TempoList"));
 
         }
 
@@ -201,7 +257,9 @@ namespace MusicPlayList.Model
             CurrentPlayList = new SongPlaylist(OriginalPlayList);
             CopyCurrentPlayList = new SongPlaylist(CurrentPlayList);
             CurrentGeners = new ObservableCollection<ExtensionInfo>();
+            TempoList = new ObservableCollection<ExtensionInfo>();
             resolveGenres(CurrentPlayList);
+            resolveTempo(CurrentPlayList);
         }
 
         /// <summary>
@@ -231,6 +289,48 @@ namespace MusicPlayList.Model
             }
         }
 
+        private string tempoType(Song song)
+        {
+            string tempo = null;
+            if (song.Tempo >= 0 && song.Tempo < 95)
+            {
+                tempo = "calm";
+            }
+            if (song.Tempo >= 95 && song.Tempo < 185)
+            {
+                tempo = "normal";
+            }
+            else 
+            {
+                tempo = "rhythmic";
+            }
+            return tempo;
+        }
+
+        private void resolveTempo(SongPlaylist playList)
+        {
+            bool flag = true;
+            foreach (Song item in playList.Songs)
+            {
+                string tempo = tempoType(item);
+                foreach (ExtensionInfo ex in TempoList)
+                {
+                    if (ex.Extension.Equals(tempo))
+                    {
+                        flag = false;
+                        break;
+                    }
+                }
+                if (flag)
+                {
+                    TempoList.Add(new ExtensionInfo(tempo, 0));
+                }
+                flag = true;
+
+            }
+
+        }
+
 
         public void RemoveSong()
         {
@@ -245,9 +345,12 @@ namespace MusicPlayList.Model
                     }
                 }
                 CurrentGeners.Clear();
+                TempoList.Clear();
                 resolveGenres(CurrentPlayList);
+                resolveTempo(CurrentPlayList);
                 this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("VM_GetPlayList"));
                 this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Vm_CurrentGenres"));
+                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Vm_TempoList"));
             }
 
         }

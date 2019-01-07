@@ -24,6 +24,7 @@ namespace MusicPlayList.View
         public CountryChooser()
         {
             InitializeComponent();
+            WindowLocationSeter.CenterWindowOnScreen(this);
             DataContext = countryChooserVM;
         }
 

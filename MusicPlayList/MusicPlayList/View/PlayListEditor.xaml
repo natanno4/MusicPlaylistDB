@@ -65,7 +65,7 @@
                                 </Style>
                             </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Header="Hotness" FontSize="15" Foreground="YellowGreen" Width="*" IsReadOnly="True" Binding="{Binding Hotness}"/>
+                        <DataGridTextColumn Header="Hotness" FontSize="15" Foreground="YellowGreen" Width="*" IsReadOnly="True" Binding="{Binding HotnessStar}"/>
                         <DataGridTextColumn Header="Duration" Width="*" IsReadOnly="True" Binding="{Binding Duration}"/>
                         <DataGridTextColumn Header="year" Width="*" IsReadOnly="True" Binding="{Binding Year}"/>
                     </DataGrid.Columns>
@@ -76,6 +76,22 @@
             <Label Content="Genre:" HorizontalAlignment="Left" Height="34" Margin="94,22,0,0" VerticalAlignment="Top" Width="60" Foreground="White" RenderTransformOrigin="1.758,0.354"/>
             <Grid HorizontalAlignment="Left" Height="109" Margin="53,61,0,0" VerticalAlignment="Top" Width="156">
                 <ListBox Background="#2e3137" SelectionMode="Multiple"  Foreground="White" ItemsSource="{Binding Vm_CurrentGenres}" >
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="IsSelected" Value="{Binding IsChecked}"/>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <ListBoxItem Content="{Binding Extension}"></ListBoxItem>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+            <Label Content="Tempo:" HorizontalAlignment="Left" Height="34" Margin="94,175,0,0" VerticalAlignment="Top" Width="60" Foreground="White" RenderTransformOrigin="1.758,0.354"/>
+            <Grid HorizontalAlignment="Left" Height="83" Margin="53,233,0,0" VerticalAlignment="Top" Width="156">
+                <ListBox Background="#2e3137"  Foreground="White" ItemsSource="{Binding Vm_TempoList}" Margin="0,-24,0,24" >
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="ListBoxItem">
                             <Setter Property="IsSelected" Value="{Binding IsChecked}"/>

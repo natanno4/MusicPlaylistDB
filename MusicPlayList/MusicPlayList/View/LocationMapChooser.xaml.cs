@@ -23,6 +23,7 @@ namespace MusicPlayList.View
         public LocationMapChooser()
         {
             InitializeComponent();
+            WindowLocationSeter.CenterWindowOnScreen(this);
             this.DataContext = locationChooserVM;
         }
 
