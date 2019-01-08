@@ -59,15 +59,15 @@ namespace MusicPlayList.Model
             // need to be changed later, maybe in sunday
             StringBuilder subQuery = new StringBuilder();
             subQuery.Append("Select LocationId, location_name, count(location_name) FROM ");
-            subQuery.Append("(SELECT area.LocationId,area.location_name FROM music_area_playlist.area ");
+            subQuery.Append("(SELECT area.LocationId,area.location_name FROM area ");
             subQuery.Append("WHERE area.latitude != 0 AND area.longitude != 0 ");
             subQuery.Append("GROUP BY area.location_name ");
             subQuery.Append("order by (6371 * acos( cos( radians(area.latitude) ) * cos( radians(" + area.Latitude.ToString() + ")) ");
-            subQuery.Append("* cos( radians("+Area.Longtitude.ToString()+") - radians(area.longitude) ) + sin( radians(area.latitude) ) * sin(radians("+Area.Latitude.ToString()+")))) Asc ");
-            subQuery.Append("LIMIT 8) AS country ");
+            subQuery.Append("* cos( radians("+Area.Longtitude.ToString()+ ") - radians(area.longitude) ) + sin( radians(area.latitude) ) * sin(radians(" + Area.Latitude.ToString()+")))) Asc ");
+            subQuery.Append("LIMIT 20) AS country ");
             subQuery.Append("JOIN artists JOIN Songs ");
             subQuery.Append("WHERE songs.artists_idArtists = artists.idArtists AND artists.Area_LocationId = country.LocationId ");
-            subQuery.Append("GROUP BY location_name order by count(location_name) desc ");
+            subQuery.Append("GROUP BY location_name order by count(location_name) desc Limit 10");
             /*
             subQuery.Append("+ sin( radians(area.latitude) ) * sin(radians(" + area.Latitude.ToString() + "))))");
             subQuery.Append("Asc \n LIMIT 10");

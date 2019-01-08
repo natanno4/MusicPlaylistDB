@@ -210,7 +210,7 @@ namespace MusicPlayList.Model
         {
             StringBuilder q = new StringBuilder();
             q.Append("SELECT LocationId ");
-            q.Append("FROM music_area_playlist.area WHERE area.longitude = 0 AND area.latitude = 0 order by rand() limit 6");
+            q.Append("FROM area WHERE area.longitude = 0 AND area.latitude = 0 order by rand() limit 7");
             DataTable dt = executer.ExecuteCommandWithResults(q.ToString());
             StringBuilder areasID= new StringBuilder();
             bool flag = true;
