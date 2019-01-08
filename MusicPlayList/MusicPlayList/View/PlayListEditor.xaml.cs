@@ -21,6 +21,11 @@ namespace MusicPlayList.View
     {
         private ViewModel.IVM editorVM = ViewModel.BaseVM.GetInstance._PlayListEditorVM;
 
+        /// <summary>
+        /// constructor playlist editor.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public PlayListEditor()
         {
             InitializeComponent();
@@ -28,7 +33,11 @@ namespace MusicPlayList.View
             this.DataContext = editorVM;
         }
 
-
+        /// <summary>
+        /// click event for submit the changes and moving to the playlist.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SubmitBtn_Click(object sender, RoutedEventArgs e)
         {
             editorVM.SendParameters();
@@ -38,11 +47,21 @@ namespace MusicPlayList.View
             playList.Show();
         }
 
+        /// <summary>
+        /// click event for filtering the playlist.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FilterBtn_click(object sender, RoutedEventArgs e)
         {
             ((ViewModel.PlayListEditorVM)editorVM).Filter();
         }
 
+        /// <summary>
+        /// click event for reset the playlist.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ResetBtn_Click(object sender, RoutedEventArgs e)
         {
             ((ViewModel.PlayListEditorVM)editorVM).reset();

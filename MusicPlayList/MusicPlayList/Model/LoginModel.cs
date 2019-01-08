@@ -44,12 +44,19 @@ namespace MusicPlayList.Model
         /// <returns></returns>
         public bool FindUser()
         {
-            String query = "SELECT * FROM users WHERE users.user_name = '" + User.Name + "' AND users.password = '" + User.Password + "'";
-            DataTable dt = dataBase.ExecuteCommandWithResults(query);
-            if(dt.Rows.Count != 0)
+            try
             {
-                user.ID = dt.Rows[0].Field<int>(0);
-                return true; 
+                String query = "SELECT * FROM users WHERE users.user_name = '" + User.Name + "' AND users.password = '" + User.Password + "'";
+                DataTable dt = dataBase.ExecuteCommandWithResults(query);
+                if (dt.Rows.Count != 0)
+                {
+                    user.ID = dt.Rows[0].Field<int>(0);
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Data);
             }
 
             return false;
@@ -93,12 +100,20 @@ namespace MusicPlayList.Model
         /// <returns>string query</returns>
         private string getPlaylistString()
         {
-            StringBuilder query = new StringBuilder();
-            query.Append("SELECT idSongs, song_name,year,song_hotness, song_duration, song_tempo, idArtists,artist_name, genre , album_name, idAlbum ");
-            query.Append("from songs join (select Songs_idSongs from songs_in_playlist where Playlist_Users_idUsers = " + user.ID+ ") as play_list ");
-            query.Append("join artists join album ");
-            query.Append("where play_list.Songs_idSongs = idSongs and idArtists = songs.Artists_idArtists and idAlbum = songs.Album_idAlbum GROUP BY idSongs order by idSongs");
-            return query.ToString();
+            try
+            {
+                StringBuilder query = new StringBuilder();
+                query.Append("SELECT idSongs, song_name,year,song_hotness, song_duration, song_tempo, idArtists,artist_name, genre , album_name, idAlbum ");
+                query.Append("from songs join (select Songs_idSongs from songs_in_playlist where Playlist_Users_idUsers = " + user.ID + ") as play_list ");
+                query.Append("join artists join album ");
+                query.Append("where play_list.Songs_idSongs = idSongs and idArtists = songs.Artists_idArtists and idAlbum = songs.Album_idAlbum GROUP BY idSongs order by idSongs");
+                return query.ToString();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Data);
+            }
+            return null;
         }
     }
 }

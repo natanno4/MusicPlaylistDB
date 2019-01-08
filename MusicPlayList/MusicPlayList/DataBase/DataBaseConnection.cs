@@ -1,6 +1,7 @@
 ﻿using MySql.Data;
 using MySql.Data.MySqlClient;
 using System;
+using System.Configuration;
 
 namespace MusicPlayList.DataBase
 {
@@ -17,7 +18,9 @@ namespace MusicPlayList.DataBase
 
         private DataBaseConnection()
         {
-            string connstring = string.Format("Server=localhost;database={0};uid=root;password={1}", "music_area_playlist", "12341234bhr");
+            string settings = ConfigurationManager.AppSettings["parameters"];
+            string[] settingsArray = settings.Split(';');
+            string connstring = string.Format("Server={0};database={2};uid={1};password={3}", settingsArray[3], settingsArray[4], settingsArray[5], settingsArray[6]);
             connection = new MySqlConnection(connstring);
         }
 
@@ -41,10 +44,6 @@ namespace MusicPlayList.DataBase
         /// <returns>true if connect successfully else false</returns>
         public bool connect()
         {
-            if (String.IsNullOrEmpty(databaseName))
-            {
-                //return false;
-            }
             try
             { 
                 connection.Open();
@@ -67,7 +66,7 @@ namespace MusicPlayList.DataBase
                 connection.Close();
             } catch (MySqlException e)
             {
-                // the connection was faild to close
+                Console.WriteLine(e.Data);
             }
         }
 

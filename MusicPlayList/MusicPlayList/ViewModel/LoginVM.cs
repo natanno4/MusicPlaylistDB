@@ -61,6 +61,9 @@ namespace MusicPlayList.ViewModel
             }
         }
 
+        /// <summary>
+        /// check if the username exist with the right password, returns true or false.
+        /// </summary>
         public Boolean Confirm()
         {
            if(!model.FindUser())
@@ -72,7 +75,9 @@ namespace MusicPlayList.ViewModel
             clear();
             return true;
         }
-
+        /// <summary>
+        /// clear the boxes and the error box.
+        /// </summary>
         public void clear()
         {
             Password = "";

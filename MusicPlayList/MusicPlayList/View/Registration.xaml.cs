@@ -20,6 +20,10 @@ namespace MusicPlayList.View
     public partial class Registration : Window
     {
         private ViewModel.IVM registrationVM = ViewModel.BaseVM.GetInstance._RegistrationVM;
+
+        /// <summary>
+        /// registration constructor.
+        /// </summary>
         public Registration()
         {
             InitializeComponent();
@@ -27,6 +31,11 @@ namespace MusicPlayList.View
             this.DataContext = registrationVM;
         }
 
+        /// <summary>
+        /// cancel and move to the login window.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CancelBtn_Click(object sender, RoutedEventArgs e)
         {
             ((ViewModel.RegistrationVM)registrationVM).resetinput();
@@ -36,6 +45,11 @@ namespace MusicPlayList.View
             win.Show();
         }
 
+        /// <summary>
+        /// click event for submiting the user name and password.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SubmitBtn_Click(object sender, RoutedEventArgs e)
         {
             Boolean result = ((ViewModel.RegistrationVM)registrationVM).CheckRegistraion();
@@ -48,6 +62,11 @@ namespace MusicPlayList.View
             }
         }
 
+        /// <summary>
+        /// click event for reseting the text box.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ResetBtn_Click(object sender, RoutedEventArgs e)
         {
             ((ViewModel.RegistrationVM)registrationVM).resetinput();

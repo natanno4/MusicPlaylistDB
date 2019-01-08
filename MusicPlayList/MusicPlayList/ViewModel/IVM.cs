@@ -20,10 +20,21 @@ namespace MusicPlayList.ViewModel
                 this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propname));
             }
         }
+        /// <summary>
+        /// send paramaters to next view model.
+        /// </summary>
         public abstract void SendParameters();
 
+
+        /// <summary>
+        /// convert the params to Jarray and returns it.
+        /// </summary>
         public abstract JArray GetParameters();
 
+        /// <summary>
+        /// get params from previous viewmoedl.
+        /// </summary>
+        /// <param name="arr"></param>
         public abstract void RecivedParameters(JArray arr);
     }
 }

@@ -21,6 +21,9 @@ namespace MusicPlayList.View
     {
         private ViewModel.IVM countryChooserVM = ViewModel.BaseVM.GetInstance._CountryChooserVM;
 
+        /// <summary>
+        /// Country Choose constructor.
+        /// </summary>
         public CountryChooser()
         {
             InitializeComponent();
@@ -28,6 +31,11 @@ namespace MusicPlayList.View
             DataContext = countryChooserVM;
         }
 
+        /// <summary>
+        /// click event for showing the playlist after choosing sons from areas. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ContinueBtn_Click(object sender, RoutedEventArgs e)
         {
             if (((ViewModel.CountryChooserVM)countryChooserVM).chooseCountry())
@@ -38,6 +46,12 @@ namespace MusicPlayList.View
                 playlist.Show();
             }
         }
+
+        /// <summary>
+        /// click event for random songs from random areas. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RandomBtn_click(object sender, RoutedEventArgs e)
         {
             ((ViewModel.CountryChooserVM)countryChooserVM).ChooseRandom();

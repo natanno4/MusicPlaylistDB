@@ -12,10 +12,19 @@ namespace MusicPlayList.Entities
 {
     class QueryInterpreter
     {
-        public enum QueryType { ResolveInitialPlaylist, AreaSongsCount, GetUser};
+        public enum QueryType { ResolveInitialPlaylist, AreaSongsCount};
+
+        /// <summary>
+        /// private constructor - for singelton.
+        /// </summary>
         private QueryInterpreter() { }
         public static QueryInterpreter Instance { get; } = new QueryInterpreter();
-        
+
+        /// <summary>
+        /// returns the right paramaters from the given datatable and query type.
+        /// </summary>
+        /// <param name="q"></param>
+        /// <param name="dt"></param>
         public string getQueryEntitesObject(QueryType q, DataTable dt)
         {
             switch(q)
@@ -28,27 +37,17 @@ namespace MusicPlayList.Entities
                     {
                         return getSongsForPlayList(dt);
                     }
-                case QueryType.GetUser:
-                    {
-                        //obj = getUser(dt);
-                        break;
-                    }
                 default:
                     {
                         return null;
                     }
             }
-            return null;
         }
 
-        private JObject getUser(DataTable dt)
-        {
-            User us = new User();
-            us.ID = dt.Rows[0].Field<int>(0);
-            us.Name = dt.Rows[0].Field<String>(1);
-            us.Password = dt.Rows[0].Field<String>(2);
-            return JObject.FromObject(us);
-        }
+        /// <summary>
+        /// get a map converted to json by string with the areas and number of song in each one.
+        /// </summary>
+        /// <param name="dt"></param>
         private string GetAreaSongsCount(DataTable dt)
         {
             Dictionary<string, int> song_in_area = new Dictionary<string, int>();
@@ -63,6 +62,11 @@ namespace MusicPlayList.Entities
              string json = JsonConvert.SerializeObject(song_in_area, Formatting.Indented);
             return json;
         }
+
+        /// <summary>
+        /// returns playlist as json string from datatable.
+        /// </summary>
+        /// <param name="dt"></param>
         private string getSongsForPlayList(DataTable dt)
         {
             ObservableCollection<string> list = new ObservableCollection<string>();

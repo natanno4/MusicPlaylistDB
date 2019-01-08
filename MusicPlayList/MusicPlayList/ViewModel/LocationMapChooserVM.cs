@@ -36,7 +36,27 @@ namespace MusicPlayList.ViewModel
                     this.PropertyChanged?.Invoke(this, e);
                 };
         }
-        //the function that will do binding when mouse clicked
+
+        public string MapImgPath
+        {
+            get
+            {
+                return "/Resources/greenMap.png";
+            }
+            set
+            {
+                MapImgPath = "/Resources/greenMap.png";
+                NotifyPropertyChanged("MapImgPath");
+            }
+        }
+
+        /// <summary>
+        /// calculate the longitude and latitude and put a circle on the map in the clicked position.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="marginTop"></param>
+        /// <param name="marginLeft"></param>
         public void onChooseSpot(double X, double Y, double marginTop, double marginLeft)
         {
             this.model.CalculateAreaProps(X, Y, marginTop, marginLeft);
@@ -49,6 +69,9 @@ namespace MusicPlayList.ViewModel
             isClicked = true;
         }
 
+        /// <summary>
+        /// returns true if a area was choosen in the map,else false.
+        /// </summary>
         public bool Finish()
         {
             if(!isClicked)

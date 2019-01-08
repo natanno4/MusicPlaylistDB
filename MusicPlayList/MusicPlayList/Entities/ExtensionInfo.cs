@@ -12,6 +12,11 @@ namespace MusicPlayList.Entities
         public bool IsChecked { get; set; }
         public int Count { get; set; }
 
+        /// <summary>
+        /// Extension info constructor for checkbox and list boxes.
+        /// </summary>
+        /// <param name="extension"></param>
+        /// <param name="c"></param>
         public ExtensionInfo(string extension, int c)
         {
             Extension = extension;

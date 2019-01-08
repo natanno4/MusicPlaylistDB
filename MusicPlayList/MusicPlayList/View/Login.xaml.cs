@@ -22,6 +22,9 @@ namespace MusicPlayList.View
 
         private ViewModel.IVM loginVM;
 
+        /// <summary>
+        /// Login constructor.
+        /// </summary>>
         public Login()
         {
             InitializeComponent();
@@ -32,6 +35,11 @@ namespace MusicPlayList.View
             this.DataContext = loginVM;
         }
 
+        /// <summary>
+        /// click event for submit buttn after filling the username and password. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnSubmit_Click(object sender, RoutedEventArgs e)
         {
             Boolean result = ((ViewModel.LoginVM)loginVM).Confirm();
@@ -44,6 +52,11 @@ namespace MusicPlayList.View
             }
         }
 
+        /// <summary>
+        /// click event for moving to registration. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnSignUp_Click(object sender, RoutedEventArgs e)
         {
             ((ViewModel.LoginVM)loginVM).clear();

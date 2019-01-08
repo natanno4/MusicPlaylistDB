@@ -14,9 +14,13 @@ namespace MusicPlayList.Entities
         private int mapWidth;
         private int mapHeight;
         private string mapImagePath;
+
+        /// <summary>
+        /// map constructor, gets info from appconfig.
+        /// </summary>
         public Map()
         {
-            string settings = ConfigurationManager.AppSettings["mapSettings"];
+            string settings = ConfigurationManager.AppSettings["parameters"];
             string[] settingsArray = settings.Split(';');
             mapImagePath = settingsArray[0];
             Int32.TryParse(settingsArray[2], out mapHeight);
@@ -59,12 +63,20 @@ namespace MusicPlayList.Entities
             get; set;
         }
 
+        /// <summary>
+        /// calculates latitude and longtiude from pixels.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void fromPixelToCoordinates(double x, double y)
         {
             CurrentLongitude = x - 180;
             CurrentLatitude = 90 - y;
         }
 
+        /// <summary>
+        /// returns map differnce.
+        /// </summary>
         public double[] getMapSizeDiffernce()
         {
             double[] dif = { MapWidth / mapWidthdef, MapHeight / mapHeightdef };

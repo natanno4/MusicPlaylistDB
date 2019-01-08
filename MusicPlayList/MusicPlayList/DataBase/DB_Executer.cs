@@ -34,7 +34,7 @@ namespace MusicPlayList.DataBase
                     status = command.ExecuteNonQuery(); 
                 } catch (MySqlException e)
                 {
-                    //connactin faild
+                    Console.WriteLine(e.Data);
                     return -1;
                 }
                 this.connection.Close();
@@ -52,7 +52,7 @@ namespace MusicPlayList.DataBase
             }
             catch (MySqlException e)
             {
-                // do smoething
+                Console.WriteLine(e.Data);
             }
             return s; 
         }
@@ -68,42 +68,23 @@ namespace MusicPlayList.DataBase
             if (this.connection.connect())
             try
             {
-                    JArray resultTable = new JArray();
-                  /* MySqlDataReader reader = command.ExecuteReader();
-                    /*
-                   while (reader.Read())
-                   {
-                       JObject row = new JObject();
-                       int numberOfCols = reader.FieldCount;
-                       for (int i = 0; i < numberOfCols; i++)
-                       {                        
-                           row[reader.GetName(i).ToString()] = reader[i].ToString();
-                       }
-                       resultTable.Add(row);
-                       resultTable.Next
-                   }
-                   reader.Close();
-                   this.connection.Close();
-                   return resultTable;*/
-                }
-                catch (MySqlException e)
-                {
-                    // temporary
-                    return null; 
+                MySqlDataReader reader = command.ExecuteReader();
+                DataTable dt = new DataTable();
+                dt.Load(reader);
+                reader.Close();
+                this.connection.Close();
+                return dt;
+            }
+             catch (MySqlException e)
+             {
+                 Console.WriteLine(e.Data);
+                 return null; 
 
-                }
-            MySqlDataReader reader = command.ExecuteReader();
-            DataTable dt = new DataTable();
-            dt.Load(reader);
-            reader.Close();
-            this.connection.Close();
-            return dt;
+             }
+            return null;
         }
-        // function that might be, for now leave it
-        public int ExecuteAgger()
-        {
-            return 0;
-        }
+
+
         /// <summary>
         /// ResolveCommand method.
         /// with a given string represeny SQL query, 

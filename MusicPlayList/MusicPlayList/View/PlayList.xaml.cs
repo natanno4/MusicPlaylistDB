@@ -22,6 +22,11 @@ namespace MusicPlayList.View
 
         private ViewModel.IVM playListVM = ViewModel.BaseVM.GetInstance._PlayListVM;
 
+        /// <summary>
+        ///play list constructor. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public PlayList()
         {
             InitializeComponent();
@@ -29,6 +34,11 @@ namespace MusicPlayList.View
             this.DataContext = playListVM;
         }
 
+        /// <summary>
+        /// click event for editing the playlist.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtmEdit_Click(object sender, RoutedEventArgs e)
         {
             ((ViewModel.PlayListVM)playListVM).SendParameters();
@@ -38,6 +48,12 @@ namespace MusicPlayList.View
             editor.Show();
         }
 
+
+        /// <summary>
+        /// click event for save the database and going back to the welcome window.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtmExit_Click(object sender, RoutedEventArgs e)
         {
             ((ViewModel.PlayListVM)playListVM).SaveAndExit();

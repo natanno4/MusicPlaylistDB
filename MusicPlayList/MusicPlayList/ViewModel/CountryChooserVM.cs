@@ -32,14 +32,18 @@ namespace MusicPlayList.ViewModel
                 NotifyPropertyChanged("Areas_count");
             }
         }
-        // need to make a button that will call this function
+        /// <summary>
+        /// get and send random songs from random country.
+        /// </summary>
         public void ChooseRandom()
         {
             this.countryChooser_model.GetRandomAreas();
             SendParameters();
         }
 
-
+        /// <summary>
+        /// check for checked areas and send the songs in those areas,if not found raise an error.
+        /// </summary>
         public bool chooseCountry()
         {
             bool check = countryChooser_model.CreateInitPlaylist();

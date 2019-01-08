@@ -260,12 +260,12 @@
     <Folder Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="greenMap.png">
+    <Content Include="Resources\musicworld.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="musicworld.jpg">
+    <Resource Include="Resources\greenMap.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

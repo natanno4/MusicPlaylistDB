@@ -37,12 +37,18 @@ namespace MusicPlayList.ViewModel
         public IVM _PlayListVM { get; } = new PlayListVM();
         public IVM _CountryChooserVM { get; } = new CountryChooserVM();
 
+        /// <summary>
+        /// baseVm consturctor.private for singelton.
+        /// </summary>
         private BaseVM()
         {
             createDict();
         }
 
-       
+
+        /// <summary>
+        /// put the viewmodels into the dictionary with enums.
+        /// </summary>
         public void createDict()
         {
             ViewModelToType.Add(ViewModels.Login, _LoginVM);
@@ -53,7 +59,11 @@ namespace MusicPlayList.ViewModel
             ViewModelToType.Add(ViewModels.AreaChooser, _CountryChooserVM);
         }
 
-
+        /// <summary>
+        /// move paramaters from viewmodels,by enums.
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="dst"></param>
         public void SendParam(ViewModels src, ViewModels dst)
         {
             IVM srcVM, dstVM;

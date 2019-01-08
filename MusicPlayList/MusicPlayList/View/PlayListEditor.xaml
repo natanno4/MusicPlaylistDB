@@ -91,7 +91,7 @@
             </Grid>
             <Label Content="Tempo:" HorizontalAlignment="Left" Height="34" Margin="94,175,0,0" VerticalAlignment="Top" Width="60" Foreground="White" RenderTransformOrigin="1.758,0.354"/>
             <Grid HorizontalAlignment="Left" Height="83" Margin="53,233,0,0" VerticalAlignment="Top" Width="156">
-                <ListBox Background="#2e3137"  Foreground="White" ItemsSource="{Binding Vm_TempoList}" Margin="0,-24,0,24" >
+                <ListBox Background="#2e3137"  Foreground="White" SelectionMode="Multiple" ItemsSource="{Binding Vm_TempoList}" Margin="0,-24,0,24" >
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="ListBoxItem">
                             <Setter Property="IsSelected" Value="{Binding IsChecked}"/>

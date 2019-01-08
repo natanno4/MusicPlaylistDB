@@ -8,7 +8,10 @@ namespace MusicPlayList.Entities
 {
     class HotnessConvert
     {
-
+        /// <summary>
+        /// converts from float number to stars as strings.
+        /// </summary>
+        /// <param name="hot"></param>
         public string convert(float hot)
         {
             if (hot == -1)

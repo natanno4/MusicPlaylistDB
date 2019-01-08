@@ -20,6 +20,10 @@ namespace MusicPlayList.View
     public partial class LocationMapChooser : Window
     {
         private ViewModel.IVM locationChooserVM = ViewModel.BaseVM.GetInstance._LocationMapChoosenVM;
+
+        /// <summary>
+        /// Location map chooser constructor.
+        /// </summary>
         public LocationMapChooser()
         {
             InitializeComponent();
@@ -27,6 +31,11 @@ namespace MusicPlayList.View
             this.DataContext = locationChooserVM;
         }
 
+        /// <summary>
+        /// click event for next button after choosing area in the map. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnNext_Click(object sender, RoutedEventArgs e)
         {
             if (((ViewModel.LocationMapChooserVM)locationChooserVM).Finish())
@@ -37,6 +46,12 @@ namespace MusicPlayList.View
                 chooser.Show();
             }
         }
+
+        /// <summary>
+        /// click event for clicking on the map,to save the location and draw circle.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnMapClick(object sender, MouseEventArgs e)
         {
             Point p = e.GetPosition(this);

@@ -12,7 +12,7 @@
             <Separator Height="55" x:Name="separtor" ></Separator>
 
             <Grid x:Name="gridMap">
-                <Image Source="../greenMap.png"  MouseLeftButtonDown="OnMapClick" x:Name="worldMap" Margin="5,5,5,5" Height="360" Width="720"/>
+                <Image  Source="{Binding MapImgPath}"  MouseLeftButtonDown="OnMapClick" x:Name="worldMap" Margin="5,5,5,5" Height="360" Width="720"/>
                 <Ellipse Height="8" Width="8" VerticalAlignment="Top" Margin="{Binding EllipseMargin}"  HorizontalAlignment="Left"  Fill="red" Stroke="Black">
                     <Ellipse.Style>
                         <Style TargetType="{x:Type Ellipse}">

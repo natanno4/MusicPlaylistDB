@@ -9,6 +9,10 @@ namespace MusicPlayList.View
 {
     class WindowLocationSeter
     {
+        /// <summary>
+        /// put the given window in the middle of the screen.
+        /// </summary>
+        /// <param name="win"></param>
         public static void CenterWindowOnScreen(Window win)
         {
             double screenWidth = System.Windows.SystemParameters.PrimaryScreenWidth;

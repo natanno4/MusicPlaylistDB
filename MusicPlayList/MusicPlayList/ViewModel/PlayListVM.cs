@@ -70,6 +70,10 @@ namespace MusicPlayList.ViewModel
         {
             playList_model.ConvertFromJson(arr);
         }
+
+        /// <summary>
+        /// save the playlist to the data base and exit the playlist.
+        /// </summary>
         public void SaveAndExit()
         {
             this.playList_model.savePlaylist();

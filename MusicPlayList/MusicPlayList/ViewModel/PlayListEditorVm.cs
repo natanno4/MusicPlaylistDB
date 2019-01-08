@@ -65,12 +65,17 @@ namespace MusicPlayList.ViewModel
             }
         }
 
+        /// <summary>
+        /// reset the changes in the playlist.
+        /// </summary>
         public void reset()
         {
             model.reset();
         }
 
-
+        /// <summary>
+        /// make the changes on the playlist without saving it.
+        /// </summary>
         public void Filter()
         {
             this.model.Filter();
@@ -86,6 +91,9 @@ namespace MusicPlayList.ViewModel
         public ICommand Remove { get; private set; }
 
 
+        /// <summary>
+        /// remove the choosen song from playlist.
+        /// </summary>
         private void onRemove(object obj)
         {
             model.RemoveSong();

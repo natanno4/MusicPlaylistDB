@@ -128,16 +128,23 @@ namespace MusicPlayList.Model
             query.Append("FROM songs JOIN (SELECT idArtists, artist_name, genre FROM artists WHERE Area_LocationId in (" + str + ") GROUP BY idArtists) AS artists_from_areas ");
             query.Append("join album ");
             query.Append("WHERE songs.Artists_idArtists = artists_from_areas.idArtists and songs.Album_idAlbum = album.idAlbum GROUP BY idSongs order by idSongs");
-            DataTable dt = executer.ExecuteCommandWithResults(query.ToString());
-            ObservableCollection<string> list = JsonConvert.DeserializeObject<ObservableCollection<string>>(QueryInterpreter.Instance.getQueryEntitesObject(QueryInterpreter.QueryType.ResolveInitialPlaylist, dt));
-            ObservableCollection<Song> songs = new ObservableCollection<Song>();
-            foreach (string item in list)
+            try
             {
-                songs.Add(JsonConvert.DeserializeObject<Song>(item));
+                DataTable dt = executer.ExecuteCommandWithResults(query.ToString());
+                ObservableCollection<string> list = JsonConvert.DeserializeObject<ObservableCollection<string>>(QueryInterpreter.Instance.getQueryEntitesObject(QueryInterpreter.QueryType.ResolveInitialPlaylist, dt));
+                ObservableCollection<Song> songs = new ObservableCollection<Song>();
+                foreach (string item in list)
+                {
+                    songs.Add(JsonConvert.DeserializeObject<Song>(item));
+                }
+                model_playlist.Songs = songs;
+                model_playlist.User = User;
+                return true;
+            } catch(Exception ex)
+            {
+                Console.WriteLine(ex.Data);
             }
-            model_playlist.Songs = songs;
-            model_playlist.User = User;
-            return true;
+            return false;
 
         }
         /// <summary>
@@ -185,20 +192,27 @@ namespace MusicPlayList.Model
         /// </summary>
         public void GetRandomAreas()
         {
-            StringBuilder query = new StringBuilder();
-            query.Append("SELECT idSongs,song_name,year,song_hotness,song_duration,song_tempo,artists_from_areas.idArtists,artists_from_areas.artist_name,artists_from_areas.genre,album_name,idAlbum ");
-            query.Append("FROM songs JOIN (SELECT idArtists, artist_name, genre FROM artists WHERE Area_LocationId in " + CheckForRandomAreas() + " GROUP BY idArtists) AS artists_from_areas ");
-            query.Append("join album ");
-            query.Append("WHERE songs.Artists_idArtists = artists_from_areas.idArtists and songs.Album_idAlbum = album.idAlbum GROUP BY idSongs order by idSongs");
-            DataTable dt = executer.ExecuteCommandWithResults(query.ToString());
-            ObservableCollection<string> list = JsonConvert.DeserializeObject<ObservableCollection<string>>(QueryInterpreter.Instance.getQueryEntitesObject(QueryInterpreter.QueryType.ResolveInitialPlaylist, dt));
-            ObservableCollection<Song> songs = new ObservableCollection<Song>();
-            foreach (string item in list)
+            try
             {
-                songs.Add(JsonConvert.DeserializeObject<Song>(item));
+                StringBuilder query = new StringBuilder();
+                query.Append("SELECT idSongs,song_name,year,song_hotness,song_duration,song_tempo,artists_from_areas.idArtists,artists_from_areas.artist_name,artists_from_areas.genre,album_name,idAlbum ");
+                query.Append("FROM songs JOIN (SELECT idArtists, artist_name, genre FROM artists WHERE Area_LocationId in " + CheckForRandomAreas() + " GROUP BY idArtists) AS artists_from_areas ");
+                query.Append("join album ");
+                query.Append("WHERE songs.Artists_idArtists = artists_from_areas.idArtists and songs.Album_idAlbum = album.idAlbum GROUP BY idSongs order by idSongs");
+                DataTable dt = executer.ExecuteCommandWithResults(query.ToString());
+                ObservableCollection<string> list = JsonConvert.DeserializeObject<ObservableCollection<string>>(QueryInterpreter.Instance.getQueryEntitesObject(QueryInterpreter.QueryType.ResolveInitialPlaylist, dt));
+                ObservableCollection<Song> songs = new ObservableCollection<Song>();
+                foreach (string item in list)
+                {
+                    songs.Add(JsonConvert.DeserializeObject<Song>(item));
+                }
+                model_playlist.Songs = songs;
+                model_playlist.User = User;
             }
-            model_playlist.Songs = songs;
-            model_playlist.User = User;
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Data);
+            }
         }
         /// <summary>
         /// CheckForRandomAreas method.
@@ -208,26 +222,35 @@ namespace MusicPlayList.Model
         /// <returns></returns>
         public string CheckForRandomAreas()
         {
-            StringBuilder q = new StringBuilder();
-            q.Append("SELECT LocationId ");
-            q.Append("FROM area WHERE area.longitude = 0 AND area.latitude = 0 order by rand() limit 7");
-            DataTable dt = executer.ExecuteCommandWithResults(q.ToString());
-            StringBuilder areasID= new StringBuilder();
-            bool flag = true;
-            areasID.Append("(");
-            foreach (DataRow d in dt.Rows)
+            try
             {
-                if(!flag)
+                StringBuilder q = new StringBuilder();
+                q.Append("SELECT LocationId ");
+                q.Append("FROM area WHERE area.longitude = 0 AND area.latitude = 0 order by rand() limit 7");
+                DataTable dt = executer.ExecuteCommandWithResults(q.ToString());
+                StringBuilder areasID = new StringBuilder();
+                bool flag = true;
+                areasID.Append("(");
+                foreach (DataRow d in dt.Rows)
                 {
-                    areasID.Append("," + d.Field<int>(0).ToString());
-                } else
-                {
-                    areasID.Append(d.Field<int>(0).ToString());
-                    flag = false;
+                    if (!flag)
+                    {
+                        areasID.Append("," + d.Field<int>(0).ToString());
+                    }
+                    else
+                    {
+                        areasID.Append(d.Field<int>(0).ToString());
+                        flag = false;
+                    }
                 }
+                areasID.Append(")");
+                return areasID.ToString();
             }
-            areasID.Append(")");
-            return areasID.ToString();
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Data);
+            }
+            return null;
         }
     }
 }

@@ -197,6 +197,10 @@ namespace MusicPlayList.Model
             return genres;
         }
 
+        /// <summary>
+        /// returns list of tempoes.
+        /// </summary>
+        /// <returns>list of strings (genres)</returns>
         private List<string> chosenTempo()
         {
             List<string> tempoes = new List<string>();
@@ -289,12 +293,17 @@ namespace MusicPlayList.Model
             }
         }
 
+        /// <summary>
+        /// returns songs tempo type as a string.
+        /// </summary>
+        /// <param name="song">Song</param>
         private string tempoType(Song song)
         {
             string tempo = null;
             if (song.Tempo >= 0 && song.Tempo < 95)
             {
                 tempo = "calm";
+                return tempo;
             }
             if (song.Tempo >= 95 && song.Tempo < 185)
             {
@@ -307,6 +316,10 @@ namespace MusicPlayList.Model
             return tempo;
         }
 
+        /// <summary>
+        /// check what tympo types in the songs the are in the current playList.
+        /// </summary>
+        /// <param name="playList">SongPlaylist</param>
         private void resolveTempo(SongPlaylist playList)
         {
             bool flag = true;
@@ -332,6 +345,9 @@ namespace MusicPlayList.Model
         }
 
 
+        /// <summary>
+        /// remove the choosen song from the playlist.
+        /// </summary>
         public void RemoveSong()
         {
             if(SongRemove != null)

@@ -29,7 +29,11 @@ namespace MusicPlayList
             DataContext = this;
         }
 
-
+        /// <summary>
+        /// click event for move to login window.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SubmitBtn_Click(object sender, RoutedEventArgs e)
         {
             Window login = new Login();

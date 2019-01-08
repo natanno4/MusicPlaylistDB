@@ -29,9 +29,16 @@ namespace MusicPlayList.Model
         /// </summary>
         public void getIDFromTable()
         {
-            String query = "SELECT idUsers FROM users WHERE user_name = '" + Username + "' AND password = '" + Password + "'";
-            DataTable dt = executer.ExecuteCommandWithResults(query);
-            ID = dt.Rows[0].Field<int>(0);
+            try
+            {
+                String query = "SELECT idUsers FROM users WHERE user_name = '" + Username + "' AND password = '" + Password + "'";
+                DataTable dt = executer.ExecuteCommandWithResults(query);
+                ID = dt.Rows[0].Field<int>(0);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Data);
+            }
         }
         /// <summary>
         /// SignUp method.
@@ -41,16 +48,23 @@ namespace MusicPlayList.Model
         /// <returns></returns>
         public Boolean SignUp()
         {
-            String checkIfUserExist = "Select * FROM Users WHERE user_name = '" + Username + "'";
-            if (executer.ExecuteCommandWithResults(checkIfUserExist).Rows.Count != 0)
+            try
             {
-                return false;
+                String checkIfUserExist = "Select * FROM Users WHERE user_name = '" + Username + "'";
+                if (executer.ExecuteCommandWithResults(checkIfUserExist).Rows.Count != 0)
+                {
+                    return false;
+                }
+                String query = "INSERT INTO Users (user_name, password) VALUES ('" + Username + "','" + Password + "')";
+                if (executer.ExecuteCommandWithoutResult(query) != -1)
+                {
+                    getIDFromTable();
+                    return true;
+                }
             }
-            String query = "INSERT INTO Users (user_name, password) VALUES ('" +  Username + "','" + Password + "')";
-            if (executer.ExecuteCommandWithoutResult(query) != -1)
+            catch (Exception ex)
             {
-                getIDFromTable();
-                return true;
+                Console.WriteLine(ex.Data);
             }
             return false;
                 

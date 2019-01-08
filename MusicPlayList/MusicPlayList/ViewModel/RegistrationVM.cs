@@ -44,6 +44,12 @@ namespace MusicPlayList.ViewModel
                 };
         }
 
+
+        /// <summary>
+        /// check if the user name is exist or the user gave both the username and password.
+        /// returns teue if yes else false and shows an error.
+        /// creates the user if true.
+        /// </summary>
         public Boolean CheckRegistraion()
         {
             if (String.IsNullOrEmpty(Username) || String.IsNullOrEmpty(Password))
@@ -63,6 +69,10 @@ namespace MusicPlayList.ViewModel
                 return false;
             }
         }
+
+        /// <summary>
+        /// clear the boxes.
+        /// </summary>
         public void resetinput()
         {
             Username = "";
