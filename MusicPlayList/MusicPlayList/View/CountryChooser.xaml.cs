@@ -42,9 +42,7 @@ namespace MusicPlayList.View
             {
                 Window playlist = new PlayList();
                 WindowLocationSeter.changeWindow(playlist);
-                //App.Current.MainWindow = playlist;
                 this.Close();
-                //playlist.Show();
             }
         }
 
@@ -58,9 +56,7 @@ namespace MusicPlayList.View
             ((ViewModel.CountryChooserVM)countryChooserVM).ChooseRandom();
             Window playlist = new PlayList();
             WindowLocationSeter.changeWindow(playlist);
-            //App.Current.MainWindow = playlist;
             this.Close();
-            //playlist.Show();
         }
     }
     

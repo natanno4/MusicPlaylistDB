@@ -38,8 +38,6 @@ namespace MusicPlayList
         {
             Window login = new Login();
             App.Current.MainWindow = login;
-            //this.Close();
-            //login.Show();
             View.WindowLocationSeter.changeWindow(login);
             System.Threading.Thread.Sleep(300);
             this.Close();

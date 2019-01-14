@@ -41,9 +41,7 @@ namespace MusicPlayList.View
             ((ViewModel.RegistrationVM)registrationVM).resetinput();
             Login win = new Login();
             WindowLocationSeter.changeWindow(win);
-            //App.Current.MainWindow = win;
             this.Close();
-            //win.Show();
         }
 
         /// <summary>
@@ -57,11 +55,9 @@ namespace MusicPlayList.View
             if (result)
             {
                 Window chooser = new LocationMapChooser();
-                //App.Current.MainWindow = chooser;
                 WindowLocationSeter.changeWindow(chooser);
                 System.Threading.Thread.Sleep(300);
                 this.Close();
-                //chooser.Show();
             }
         }
 

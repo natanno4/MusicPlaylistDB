@@ -44,10 +44,7 @@ namespace MusicPlayList.View
             ((ViewModel.PlayListVM)playListVM).SendParameters();
             Window editor = new PlayListEditor();
             WindowLocationSeter.changeWindow(editor);
-
-            //App.Current.MainWindow = editor;
             this.Close();
-            //editor.Show();
         }
 
 
@@ -61,9 +58,7 @@ namespace MusicPlayList.View
             ((ViewModel.PlayListVM)playListVM).SaveAndExit();
             Window mainWin = new MainWindow();
             WindowLocationSeter.changeWindow(mainWin);
-            //App.Current.MainWindow = mainWin;
             this.Close();
-            //mainWin.Show();
         }
     }
 }

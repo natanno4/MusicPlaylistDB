@@ -66,7 +66,7 @@ namespace MusicPlayList.Model
                 subQuery.Append("GROUP BY area.location_name ");
                 subQuery.Append("order by (6371 * acos( cos( radians(area.latitude) ) * cos( radians(" + area.Latitude.ToString() + ")) ");
                 subQuery.Append("* cos( radians(" + Area.Longtitude.ToString() + ") - radians(area.longitude) ) + sin( radians(area.latitude) ) * sin(radians(" + Area.Latitude.ToString() + ")))) Asc ");
-                subQuery.Append("LIMIT 20) AS country ");
+                subQuery.Append("LIMIT 12) AS country ");
                 subQuery.Append("JOIN artists JOIN Songs ");
                 subQuery.Append("WHERE songs.artists_idArtists = artists.idArtists AND artists.Area_LocationId = country.LocationId ");
                 subQuery.Append("GROUP BY location_name order by count(location_name) desc Limit 10");

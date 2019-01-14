@@ -41,10 +41,8 @@ namespace MusicPlayList.View
             if (((ViewModel.LocationMapChooserVM)locationChooserVM).Finish())
             {
                 Window chooser = new CountryChooser();
-                //App.Current.MainWindow = chooser;
                 WindowLocationSeter.changeWindow(chooser);
                 this.Close();
-                //chooser.Show();
             }
         }
 
