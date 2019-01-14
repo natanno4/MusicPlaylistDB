@@ -20,5 +20,15 @@
                 </TransformGroup>
             </Button.RenderTransform>
         </Button>
+        <Button Content="Exit" Background="CadetBlue" Height="19" HorizontalAlignment="Left" Margin="427,290,0,0" Name="btnExit" VerticalAlignment="Top" Width="75" Click="ExitBtn_Click" RenderTransformOrigin="0.586,-0.043" >
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.431"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
     </Grid>
 </Window>

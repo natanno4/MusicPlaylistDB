@@ -22,5 +22,23 @@ namespace MusicPlayList.View
             win.Left = (screenWidth / 2) - (windowWidth / 2);
             win.Top = (screenHeight / 2) - (windowHeight / 2);
         }
+
+        public static void changeWindow(Window win)
+        {
+            if (!win.IsVisible)
+            {
+                win.Show();
+            }
+
+            if (win.WindowState == WindowState.Minimized)
+            {
+                win.WindowState = WindowState.Normal;
+            }
+
+            win.Activate();
+            win.Topmost = true;
+            win.Topmost = false; 
+            win.Focus();
+        }
     }
 }

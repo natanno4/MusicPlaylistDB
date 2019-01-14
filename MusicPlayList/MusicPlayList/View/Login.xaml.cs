@@ -46,9 +46,10 @@ namespace MusicPlayList.View
             if (result)
             {
                 Window playList = new PlayList();
-                App.Current.MainWindow = playList;
+                //App.Current.MainWindow = playList;
+                WindowLocationSeter.changeWindow(playList);
                 this.Close();
-                playList.Show();
+                //playList.Show();
             }
         }
 
@@ -61,9 +62,11 @@ namespace MusicPlayList.View
         {
             ((ViewModel.LoginVM)loginVM).clear();
             Window reg = new Registration();
-            App.Current.MainWindow = reg;
+            //App.Current.MainWindow = reg;
+            WindowLocationSeter.changeWindow(reg);
+            System.Threading.Thread.Sleep(300);
             this.Close();
-            reg.ShowDialog();
+            //reg.ShowDialog();
 
         }
 

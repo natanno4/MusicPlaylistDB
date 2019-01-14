@@ -42,9 +42,10 @@ namespace MusicPlayList.View
         {
             editorVM.SendParameters();
             Window playList = new PlayList();
-            App.Current.MainWindow = playList;
+            WindowLocationSeter.changeWindow(playList);
+            //App.Current.MainWindow = playList;
             this.Close();
-            playList.Show();
+            //playList.Show();
         }
 
         /// <summary>
